@@ -1,0 +1,87 @@
+"""Official FGDR sources ( scraped from fgdr.ru/contacts, 2026-11 ).
+
+Federal tier: official FGDR channels.
+Regional tier: regional branches (telegram handles are collected WITHOUT tokens
+via t.me/s web preview from non-RF hosting; vk waits for a service token).
+"""
+FEDERAL_SOURCES = [
+    {"platform": "telegram_web", "external_id": "droneracingfederation", "title": "ФГДР — официальный канал", "url": "https://t.me/droneracingfederation", "tier": "federal", "region": None},
+    {"platform": "web", "external_id": "fgdr_announcement", "title": "ФГДР — сайт, лента «Анонсы»", "url": "https://fgdr.ru/news/announcement", "tier": "federal", "region": None},
+]
+
+REGIONAL_SOURCES = [
+    ("Белгородская область", "fgdbel", None),
+    ("Брянская область", "droneracing_32", None),
+    ("Владимирская область", "fgdr_vladimir", None),
+    ("Воронежская область", "fgdr_vrn", "fgdr_vrn"),
+    ("Калужская область", "fgdrobn", "fgdrobn"),
+    ("Липецкая область", "fgd48", None),
+    ("Московская область", "fgdrmo", "fgdrmochat"),
+    ("Орловская область", "droneracing_57", None),
+    ("Рязанская область", "dronrzn62", None),
+    ("Смоленская область", "fgdr67", "fgdr67"),
+    ("Тамбовская область", "fgdtambov", "fgd_to"),
+    ("Ярославская область", "fgdyar", None),
+    ("Архангельская область", "pilotdrona29", None),
+    ("Вологодская область", "fgdr35", None),
+    ("Калининградская область", "fgdr39", "fgdr39"),
+    ("Ленинградская область", "fgdlenobl", "fgdlenobl"),
+    ("Ненецкий АО", "club232136192", None),
+    ("Псковская область", "fgdpskov", "digital_sports_60"),
+    ("Республика Карелия", "fgdrus10", "ptz_fpv"),
+    ("Санкт-Петербург", "fgdspb", "fgdSPb"),
+    ("Республика Коми", "droneracing11", None),
+    ("Кировская область", "fgdr43", "fgdko"),
+    ("Нижегородская область", None, "FGDR52"),
+    ("Оренбургская область", "rusnebo", "nebo056"),
+    ("Пензенская область", "fgdrpenza", "fgdrpenza"),
+    ("Пермский край", "fgd59", "fgd59"),
+    ("Республика Башкортостан", "club223517647", None),
+    ("Республика Мордовия", "fgdrrm", "fgdrrm"),
+    ("Республика Татарстан", "club225210731", "FDRT116"),
+    ("Самарская область", "fgd_smr", "fgd_smr"),
+    ("Саратовская область", "fgdr64", None),
+    ("Ульяновская область", "fgdr73", None),
+    ("Астраханская область", "fgdrus30", "fgdr30"),
+    ("Волгоградская область", "fgdr_vlg", None),
+    ("Донецкая Народная Республика", None, "fgdrdpr"),
+    ("Краснодарский край", "fgd_krd", "fgd_krd"),
+    ("Луганская Народная Республика", "fgdr_lugansk", "rfcoolnr"),
+    ("Республика Адыгея", "fgd01", "fgd_01"),
+    ("Республика Крым", "fgdrrk", "fgdr_rk"),
+    ("Ростовская область", "fgdrostov", "fgdrrostov"),
+    ("Севастополь", "club224762166", None),
+    ("Кабардино-Балкарская Республика", "07rofgdrkbr", "rofgdrkbr"),
+    ("Республика Дагестан", "fgdrrd05", "gonkiRD"),
+    ("Ставропольский край", None, "fgdrsk26"),
+    ("Чеченская Республика", "grozdron", "grozdron"),
+    ("Курганская область", "gonki_dronov_45", None),
+    ("Свердловская область", "fgdr_ekb", "fgdrso"),
+    ("Тюменская область", "fgdr72", None),
+    ("Ханты-Мансийский АО", "fgdr_hmao", None),
+    ("Челябинская область", "fgdrus74", "fgd174"),
+    ("Ямало-Ненецкий АО", "fgdr_yanao", None),
+    ("Алтайский край", "fgdraltay", "fgdraltay"),
+    ("Иркутская область", "fgdirkutsk", None),
+    ("Кемеровская область", "fgd42", "fgd42"),
+    ("Красноярский край", "club222343619", None),
+    ("Новосибирская область", "fgdnso", "fgdnso"),
+    ("Омская область", "fgdomsk", None),
+    ("Республика Хакасия", "fgdr_rh_19", None),
+    ("Томская область", "fgdr70", "fgdrto"),
+    ("Амурская область", "fgdr28", "fgdr28"),
+    ("Камчатский край", "fgdr41", None),
+    ("Республика Саха (Якутия)", "fgdrus14", "fgd_sakha14"),
+    ("Сахалинская область", None, "fgd_fas_sakh"),
+    ("Хабаровский край", "fgdr27", None),
+]
+
+# Особые источники: проекты Народного фронта с соревнованиями по дрон-рейсингу
+# («На высоте!», 2026/27) и региональный чат MAX Краснодарского края.
+EXTRA_SOURCES = [
+    {"platform": "vk_web", "external_id": "nffront", "title": "Народный фронт (VK)", "url": "https://vk.com/nffront", "tier": "federal", "region": None},
+    {"platform": "telegram_web", "external_id": "onf_front", "title": "Народный фронт — Telegram", "url": "https://t.me/onf_front", "tier": "federal", "region": None},
+    {"platform": "max_web", "external_id": "nf_front", "title": "Народный фронт — MAX", "url": "https://max.ru/nf_front", "tier": "federal", "region": None},
+    {"platform": "web", "external_id": "onf_tournament", "title": "На высоте! — сайт соревнований", "url": "https://onf.ru/tournament", "tier": "federal", "region": None},
+    {"platform": "max_web", "external_id": "-73536285583430", "title": "ФГД Краснодарского края — чат MAX", "url": "https://web.max.ru/-73536285583430", "tier": "regional", "region": "Краснодарский край"},
+]
