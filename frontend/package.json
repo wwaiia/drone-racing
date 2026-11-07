@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "magic-string": "0.30.5"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
