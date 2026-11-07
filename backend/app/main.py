@@ -8,13 +8,61 @@ app = FastAPI(title="Drone Racing Aggregator API", version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://drone-racing-frontend.onrender.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 app.include_router(router)
+
+
+def _bootstrap_data() -> None:
+    """Эфемерный диск Render: при пустой базе самозаполняемся фидом ФГДР."""
+    import threading
+    from datetime import datetime, timedelta, timezone
+
+    from .database import SessionLocal
+    from .models import Event, RawPost
+
+    with SessionLocal() as s:
+        empty = s.query(Event).count() == 0 and s.query(RawPost).count() == 0
+    if not empty:
+        return
+
+    def run():
+        try:
+            from .collectors import fgdr_web
+            fgdr_web.run(limit=40)
+        except Exception as exc:
+            print(f"BOOTSTRAP fgdr: {exc}")
+        try:
+            text = (
+                'Всероссийские спортивные соревнования пилотов «На высоте!» — онлайн-отбор в игре '
+                'Split FPV и симуляторе Квадросим. Регистрация открыта на onf.ru/tournament. Отбор '
+                'стартует 7 ноября, далее очные межрегиональные этапы и гранд-финал в июле. '
+                'Организатор — Общероссийский народный фронт.'
+            )
+            from .importer import ingest_post
+            with SessionLocal() as s:
+                ev = ingest_post(
+                    s, text=text, platform="vk_web", source_title="Народный фронт (VK)",
+                    source_url="https://onf.ru/tournament", external_post_id="onf-navyshote",
+                    posted_at=datetime.now(timezone.utc) - timedelta(days=1), force_approve=True,
+                )
+                if ev:
+                    ev.prize_fund_note = 'Призовой фонд — миллионы рублей (гранд-финал — июль 2027)'
+                    ev.prize_fund_visibility = "tbd"
+                    s.commit()
+        except Exception as exc:
+            print(f"BOOTSTRAP onf: {exc}")
+        print("BOOTSTRAP done")
+
+    threading.Thread(target=run, daemon=True).start()
 
 
 @app.on_event("startup")
@@ -25,6 +73,7 @@ def startup() -> None:
         seed_main()
     except Exception as exc:
         print(f"SEED WARNING: {exc}")
+    _bootstrap_data()
 
 
 @app.get("/api/health")
