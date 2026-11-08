@@ -54,6 +54,19 @@ def seed_sources(session: Session) -> tuple[int, int]:
     created = updated = 0
     region_by_name = {r.name: r for r in session.query(Region).all()}
 
+    # миграция старых источников: API-платформы -> web-варианты (работают без токенов)
+    for old, new in (("vk", "vk_web"), ("telegram", "telegram_web")):
+        moved = session.query(Source).filter(Source.platform == old).all()
+        for src in moved:
+            twin = session.query(Source).filter(
+                Source.platform == new, Source.external_id == src.external_id
+            ).first()
+            if twin is None:
+                src.platform = new
+            else:
+                session.delete(src)
+        session.commit()
+
     specs = [(s["platform"], s["external_id"], s["title"], s["url"], s["tier"], None)
              for s in FEDERAL_SOURCES]
     for region_name, vk_id, tg_id in REGIONAL_SOURCES:
@@ -61,7 +74,7 @@ def seed_sources(session: Session) -> tuple[int, int]:
         if tg_id:
             specs.append(("telegram_web", tg_id, f"ФГДР {region_name}", f"https://t.me/{tg_id}", "regional", region.id if region else None))
         if vk_id:
-            specs.append(("vk", vk_id, f"ФГДР {region_name} (VK)", f"https://vk.com/{vk_id}", "regional", region.id if region else None))
+            specs.append(("vk_web", vk_id, f"ФГДР {region_name} (VK)", f"https://vk.com/{vk_id}", "regional", region.id if region else None))
     for s in EXTRA_SOURCES:
         region = region_by_name.get(s.get("region")) if s.get("region") else None
         specs.append((s["platform"], s["external_id"], s["title"], s["url"], s["tier"], region.id if region else None))

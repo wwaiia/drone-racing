@@ -1,4 +1,5 @@
 from datetime import date
+import time
 
 from fastapi import APIRouter, Depends, HTTPException, Header, Query
 from sqlalchemy import func, select, or_
@@ -10,6 +11,9 @@ from ..schemas import EventOut, EventPage, RegionOut, StatsOut
 from ..config import settings
 
 router = APIRouter(prefix="/api/v1")
+
+# состояние фонового сбора (одного экземпляра достаточно)
+COLLECT_STATE: dict = {}
 
 
 def auto_recompute_status(db: Session) -> None:
@@ -182,21 +186,44 @@ def run_collect(
     limit: int = Query(40, le=200),
     x_admin_token: str = Header(""),
 ):
-    """Collect all configured sources. Runs on cron ping; safe to call anytime."""
+    """Collect all configured sources asynchronously; poll /admin/collect_status."""
     if x_admin_token != settings.admin_token:
         raise HTTPException(401, "Invalid admin token")
 
-    from ..config import settings as cfg
+    import threading
     from ..collectors.runner import run_all
 
-    report = run_all(db, limit=limit)
-    tg_channels_count = sum(1 for r in report if r.get("source", "").startswith("tg:"))
-    return {"channels": tg_channels_count, "groups": 1, "report": report}
+    COLLECT_STATE.clear()
+    COLLECT_STATE.update({"running": True, "started": time.time()})
+
+    def _job() -> None:
+        from ..database import SessionLocal
+        with SessionLocal() as session:
+            try:
+                rep = run_all(session, limit=limit)
+                COLLECT_STATE["report"] = rep
+            except Exception as exc:  # noqa: BLE001
+                COLLECT_STATE["report"] = [{"source": "runner", "posts": 0, "imported": 0,
+                                            "error": str(exc)[:200]}]
+            finally:
+                COLLECT_STATE["running"] = False
+
+    threading.Thread(target=_job, daemon=True).start()
+    return {"started": True, "status_url": "/api/v1/admin/collect_status"}
+
+
+@router.get("/admin/collect_status")
+def collect_status(x_admin_token: str = Header("")):
+    if x_admin_token != settings.admin_token:
+        raise HTTPException(401, "Invalid admin token")
+    return {"running": COLLECT_STATE.get("running", False),
+            "report": COLLECT_STATE.get("report"),
+            "elapsed_sec": round(time.time() - COLLECT_STATE.get("started", time.time()))}
 
 
 @router.post("/admin/sources")
 def admin_add_source(
-    platform: str = Query(..., pattern="^(telegram_web|telegram|vk|web)$"),
+    platform: str = Query(..., pattern="^(telegram_web|telegram|vk|vk_web|web|max_web)$"),
     external_id: str = "",
     title: str = "",
     url: str = "",

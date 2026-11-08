@@ -7,3 +7,4 @@ apscheduler>=3.11.0
 telethon>=1.40.0
 vk-api>=11.9.0
 beautifulsoup4>=4.13.0
+playwright>=1.42.0

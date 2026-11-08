@@ -118,7 +118,8 @@ function draw(){
       `<div class="empty">Пока ничего не найдено. Попробуйте другой регион или статус.</div>`;
 }
 function card(e){
-  const st = STATUS_LABEL[e.status] ? `<span class="status st-${e.status.replace('registration_','reg-').replace('_open','open').replace('_closed','closed').replace('registration_open','open')}">${STATUS_LABEL[e.status]}</span>` : "";
+  const stCls = { registration_open:"st-open", ongoing:"st-ongoing", anons:"st-anons" };
+  const st = STATUS_LABEL[e.status] ? `<span class="status ${stCls[e.status] || "st-closed"}">${STATUS_LABEL[e.status]}</span>` : "";
   const prize = e.prize_fund_amount ? `<span class="prize">🏆 Призовой фонд ${fmtPrize(e.prize_fund_amount)}</span>`
       : (e.prize_fund_note && e.prize_fund_visibility==="tbd" ? `<span class="prize">🏆 ${e.prize_fund_note}</span>` : "");
   const reg = e.registration_url ? `<a class="a-reg" href="${e.registration_url}" target="_blank" rel="noreferrer">Зарегистрироваться</a>` : "";
@@ -144,34 +145,57 @@ statuses.forEach(s=>{
 $("region").addEventListener("change", e => { REGION = e.target.value; draw(); });
 
 (async () => {
-  let live = null, base = "https://drone-racing-backend.onrender.com/api/v1";
-  try {
+  const base = "https://drone-racing-backend.onrender.com/api/v1";
+  const use = (data, isLive, msg) => {
+    DATA = data;
+    const rg = DATA.regions || [];
+    $("region").innerHTML = '<option value="">— все регионы (' + DATA.events.length + ') —</option>' +
+        rg.slice().sort((a,b)=>b.upcoming_events-a.upcoming_events)
+          .map(r=>`<option value="${r.id}">${r.name} (${r.upcoming_events})</option>`).join("");
+    $("sub").innerHTML = (DATA.stats && DATA.stats.upcoming_total)
+        ? `Сейчас в базе: <b>${DATA.stats.upcoming_total}</b> предстоящих стартов в <b>${DATA.stats.regions_with_events||0}</b> регионах${isLive ? "" : " (локальный снимок)"}.`
+        : "Данные локального снимка.";
+    $("note").style.display = isLive ? "none" : "block";
+    if (!isLive && msg) $("note").textContent = msg;
+    $("gen").textContent = DATA.generated || "";
+    draw();
+  };
+  const fetchLive = async () => {
     const [ev, rg, st] = await Promise.all([
       fetch(base + "/events?mode=all&only_upcoming=true&limit=100", {cache:"no-store"}),
       fetch(base + "/regions?only_with_events=true", {cache:"no-store"}),
       fetch(base + "/stats", {cache:"no-store"}),
     ]);
-    if (ev.ok && rg.ok) {
-      live = {
-        generated: new Date().toISOString().slice(0,10),
-        events: (await ev.json()).items,
-        regions: await rg.json(),
-        stats: st.ok ? await st.json() : {},
-      };
+    if (!(ev.ok && rg.ok)) return null;
+    return {
+      generated: new Date().toISOString().slice(0,10),
+      events: (await ev.json()).items,
+      regions: await rg.json(),
+      stats: st.ok ? await st.json() : {},
+    };
+  };
+  // сначала мгновенно показываем снимок — картинка на экране всегда есть
+  use(FALLBACK, false, "Загружаются актуальные данные с сервера…");
+  try {
+    const live = await fetchLive();
+    if (live && live.events.length > 0 && live.regions.length > 0) {
+      use(live, true);   // живые данные есть — показываем их
+    } else {
+      // сервер проснулся с пустой БД (обычная повторная сборка) — пробуем ещё раз через 30 сек
+      $("note").textContent = "Сервер обновляет базу данных, показан локальный снимок. Данные подтянутся автоматически…";
+      setTimeout(async () => {
+        try {
+          const live2 = await fetchLive();
+          if (live2 && live2.events.length > 0 && live2.regions.length > 0) use(live2, true);
+          else use(FALLBACK, false, "Облачный сервер временно недоступен — показан локальный снимок базы из последнего сбора.");
+        } catch (e) {
+          use(FALLBACK, false, "Облачный сервер временно недоступен — показан локальный снимок базы из последнего сбора.");
+        }
+      }, 30000);
     }
-  } catch (e) {}
-  DATA = live || FALLBACK;
-  const rg = DATA.regions || [];
-  $("region").innerHTML = '<option value="">— все регионы (' + DATA.events.length + ') —</option>' +
-      rg.slice().sort((a,b)=>b.upcoming_events-a.upcoming_events)
-        .map(r=>`<option value="${r.id}">${r.name} (${r.upcoming_events})</option>`).join("");
-  $("sub").innerHTML = (DATA.stats && DATA.stats.upcoming_total)
-      ? `Сейчас в базе: <b>${DATA.stats.upcoming_total}</b> предстоящих стартов в <b>${DATA.stats.regions_with_events||0}</b> регионах${live ? "" : " (офлайн-снимок, обновится при доступе к облаку)"}.`
-      : "Данные офлайн-снимка.";
-  $("note").style.display = live ? "none" : "block";
-  if (!live) $("note").textContent = "Облачный сервер временно недоступен — показан локальный снимок базы. Данные обновятся при следующем открытии.";
-  $("gen").textContent = DATA.generated || "";
-  draw();
+  } catch (e) {
+    use(FALLBACK, false, "Облачный сервер временно недоступен — показан локальный снимок базы из последнего сбора.");
+  }
 })();
 </script>
 </body>
