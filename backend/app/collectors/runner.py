@@ -6,8 +6,8 @@ from __future__ import annotations
 
 from sqlalchemy.orm import Session
 
-from .config import settings
-from .models import Event, Source
+from ..config import settings
+from ..models import Event, Source
 
 
 def run_all(db: Session, limit: int = 40) -> list[dict]:
