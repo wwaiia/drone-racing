@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Гонки дронов — ближайшие старты</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Segoe UI", system-ui, sans-serif; background:#101012; color:#f4f4f5; }
+  main { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
+  .kicker { color:#FFC113; font-size:11px; letter-spacing:.25em; text-transform:uppercase; font-weight:700; }
+  h1 { font-size:30px; margin:6px 0 10px; }
+  .sub { color:#a1a1aa; font-size:14px; max-width:640px; }
+  .sub b { color:#FFC113; }
+  nav { display:inline-flex; border:1px solid #27272a; background:#1b1b1f; border-radius:16px; padding:4px; margin-top:18px; }
+  nav button { border:0; background:transparent; color:#71717a; font-weight:700; font-size:14px; padding:10px 20px; border-radius:12px; cursor:pointer; }
+  nav button.on { background:#FFC113; color:#000; }
+  .filters { display:grid; grid-template-columns:1fr; gap:14px; border:1px solid #27272a; background:#1b1b1f; border-radius:16px; padding:18px; margin-top:16px; }
+  @media(min-width:640px){ .filters{ grid-template-columns:1fr 1fr; } }
+  label.big { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:#71717a; font-weight:700; display:block; margin-bottom:8px; }
+  select { width:100%; background:#101012; color:#f4f4f5; border:1px solid #3f3f46; border-radius:10px; padding:10px 12px; font-size:14px; }
+  .chips button { margin:0 8px 8px 0; background:#101012; border:1px solid #3f3f46; color:#a1a1aa; border-radius:10px; padding:8px 14px; font-size:12px; font-weight:600; cursor:pointer; }
+  .chips button.on { border-color:rgba(255,193,17,.6); color:#FFC113; background:rgba(255,193,17,.08); }
+  .count { display:flex; justify-content:space-between; align-items:baseline; margin:26px 0 12px; }
+  .count h2 { font-size:18px; margin:0; }
+  .count span { color:#71717a; font-size:13px; }
+  .card { border:1px solid #27272a; background:#1b1b1f; border-radius:16px; padding:16px 18px; margin-bottom:12px; border-left:4px solid #FFC113; }
+  .card .top { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .date { color:#FFC113; font-weight:800; font-size:14px; white-space:nowrap; }
+  .status { font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; border:1px solid; }
+  .st-open { color:#4ade80; border-color:rgba(74,222,128,.4); }
+  .st-anons { color:#60a5fa; border-color:rgba(96,165,250,.4); }
+  .st-ongoing { color:#FFC113; border-color:rgba(255,193,17,.5); }
+  .st-closed { color:#a1a1aa; border-color:#3f3f46; }
+  .card h3 { font-size:16px; margin:8px 0 4px; line-height:1.35; }
+  .meta { color:#a1a1aa; font-size:13px; }
+  .prize { display:inline-block; margin-top:10px; background:rgba(255,193,17,.12); color:#FFC113; font-weight:700; font-size:13px; border-radius:10px; padding:4px 10px; }
+  .actions { margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+  .actions a { text-decoration:none; font-size:13px; font-weight:700; border-radius:10px; padding:8px 14px; }
+  .a-reg { background:#FFC113; color:#000; }
+  .a-src { border:1px solid #3f3f46; color:#d4d4d8; }
+  .empty { border:1px dashed #3f3f46; border-radius:16px; padding:36px; text-align:center; color:#71717a; font-size:14px; }
+  .note { border:1px solid #3f3f46; background:#1b1b1f; color:#d4d4d8; border-radius:14px; padding:12px 16px; font-size:13px; margin-top:16px; }
+  footer { color:#52525b; font-size:12px; border-top:1px solid #27272a; margin-top:36px; padding-top:16px; }
+  .chip { display:inline-block; margin-left:8px; color:#52525b; font-size:11px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="kicker">Drone Racing Events · автономная версия</p>
+    <h1>Гонки дронов — ближайшие старты</h1>
+    <p class="sub" id="sub">Агрегатор соревнований из ФГДР и региональных сообществ.</p>
+  </header>
+
+  <nav>
+    <button id="tab-reg" class="on" onclick="setMode('by_region')">По регионам</button>
+    <button id="tab-nat" onclick="setMode('national')">Общие соревнования</button>
+  </nav>
+
+  <section class="filters">
+    <div>
+      <label class="big">Область / регион</label>
+      <select id="region" onchange="draw()"><option value="">— все регионы —</option></select>
+    </div>
+    <div>
+      <label class="big">Статус</label>
+      <div class="chips" id="status"></div>
+    </div>
+  </section>
+
+  <div class="count"><h2 id="title">Все регионы</h2><span id="found"></span></div>
+  <div id="list"></div>
+
+  <div class="note" id="note" style="display:none"></div>
+
+  <footer>
+    Информация собирается автоматически из открытых источников (ФГДР, Telegram, VK). Снимок данных:
+    <span id="gen"></span>. Живая версия: <a style="color:#FFC113" href="https://drone-racing-frontend.onrender.com">drone-racing-frontend.onrender.com</a>
+  </footer>
+</main>
+
+<script>
+const FALLBACK = /*FALLBACK_JSON*/{"generated": "2026-11-08", "stats": {"upcoming_total": 22, "upcoming_regional": 13, "upcoming_national": 9, "regions_with_events": 10, "with_prize": 3}, "regions": [{"id": 43, "name": "Алтайский край", "upcoming_events": 4}, {"id": 12, "name": "Санкт-Петербург", "upcoming_events": 2}, {"id": 19, "name": "Краснодарский край", "upcoming_events": 2}, {"id": 28, "name": "Пермский край", "upcoming_events": 2}, {"id": 14, "name": "Калининградская область", "upcoming_events": 1}, {"id": 18, "name": "Ростовская область", "upcoming_events": 1}, {"id": 22, "name": "Астраханская область", "upcoming_events": 1}, {"id": 45, "name": "Челябинская область", "upcoming_events": 1}, {"id": 72, "name": "Чеченская Республика", "upcoming_events": 1}, {"id": 76, "name": "Забайкальский край", "upcoming_events": 1}], "events": [{"id": 68, "title": "ВНИМАНИЕ участникам, успешно сдавшим зачет на открытых судейских семинарах на судей 3-й и 2-й категории от региона Санкт-Петербург", "organizer": null, "event_date": "2026-11-12", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 12, "region_name": "Санкт-Петербург", "city": "Санкт-Петербург", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://cloud.mail.ru/public/roUe/ndd2yPZ4a", "source_url": "https://cloud.mail.ru/public/roUe/ndd2yPZ4a", "confidence": 0.55, "moderation": "approved"}, {"id": 67, "title": "Участвуйте в захватывающих гонках дронах в двух дисциплинах! 14 ноября 2026 года на площадке ЦЦО «ИнфинITи» Школы №31", "organizer": null, "event_date": "2026-11-14", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 12, "region_name": "Санкт-Петербург", "city": "Санкт-Петербург", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdSPb/1097", "confidence": 0.55, "moderation": "approved"}, {"id": 72, "title": "🔥 14 ноября состоится фестиваль интеллектуально-инновационных видов спорта, посвященный Году единства народов России", "organizer": null, "event_date": "2026-11-14", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 19, "region_name": "Краснодарский край", "city": "Краснодар", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://taplink.cc/igrintellekt", "source_url": "https://taplink.cc/igrintellekt", "confidence": 0.55, "moderation": "approved"}, {"id": 93, "title": "КИБЕРДРОМ 2026! 25-26 ноября 2026 г", "organizer": null, "event_date": "2026-11-25", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 14, "region_name": "Калининградская область", "city": "Калининград", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6ae9b8672c4f896ebeedb6c3/", "source_url": "https://forms.yandex.ru/u/6ae9b8672c4f896ebeedb6c3/", "confidence": 0.65, "moderation": "approved"}, {"id": 53, "title": "«На высоте» — проект для тех, кто хочет покорять новые высоты 🚀 Вместе с Народным фронтом мы запустили масштабный", "organizer": null, "event_date": "2027-01-01", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "registration_open", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": 10.0, "prize_fund_visibility": "amount", "prize_fund_note": "нах. Ставки высоки: призовой фонд — 10 миллионов рублей, а победителей ждут ещё", "registration_url": null, "source_url": "https://t.me/droneracingfederation/5833", "confidence": 0.75, "moderation": "approved"}, {"id": 88, "title": "🌟 Мы искренне гордимся нашими юными спортсменами! 🏅 12 июля прошло первенство и чемпионат СКФО и ЮФО в дисциплине", "organizer": null, "event_date": "2027-07-12", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 72, "region_name": "Чеченская Республика", "city": "Грозный", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/fgdrus30", "source_url": "https://vk.com/fgdrus30", "confidence": 0.55, "moderation": "approved"}, {"id": 114, "title": "Федерация гонок дронов (беспилотных воздушных судов) Ростовской области pinned « 📢 Друзья, напоминаем о наших", "organizer": null, "event_date": "2027-07-14", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "postponed", "region_id": 18, "region_name": "Ростовская область", "city": "Ростов-на-Дону", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdrrostov/774", "confidence": 0.55, "moderation": "approved"}, {"id": 58, "title": "Друзья! Уже менее чем через месяц состоятся очередные соревнования по гонкам дронов - Кубок Пермского края, в классах", "organizer": null, "event_date": "2027-07-19", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 28, "region_name": "Пермский край", "city": "Пермь", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52", "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52", "confidence": 0.55, "moderation": "approved"}, {"id": 56, "title": "🔥 Лучшие пилоты России поборются за место в команде Phoenix Racing! Уже в эти выходные состоится Phoenix Racing Draft —", "organizer": null, "event_date": "2027-08-29", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 45, "region_name": "Челябинская область", "city": "Челябинск", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://yandex.ru/maps?text=55.215111,61.185111&si=zx0dgzan3dwhvwawtztf4f56m0", "source_url": "https://yandex.ru/maps?text=55.215111,61.185111&si=zx0dgzan3dwhvwawtztf4f56m0", "confidence": 0.55, "moderation": "approved"}, {"id": 77, "title": "Фестиваль небесных видов спорта и высоких технологий, прошедший на нашем аэродроме 4 октября, запомнился многочисленным", "organizer": null, "event_date": "2027-10-04", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/aeroclub43", "source_url": "https://vk.com/aeroclub43", "confidence": 0.55, "moderation": "approved"}, {"id": 97, "title": "🚀 Приглашаем на гонки дронов «АэроДрайв» в рамках ИТ-форума! 9 октября в Барнауле пройдут открытые соревнования по", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "registration_open", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://dpo.edu.asu.ru/course/view.php?id=1878", "source_url": "https://dpo.edu.asu.ru/course/view.php?id=1878", "confidence": 0.65, "moderation": "approved"}, {"id": 98, "title": "🏆 Гонки дронов «АэроДрайв»: благодарим партнёров и ждём вас! Напоминаем, что 9 октября в Барнауле в рамках  IT-форума", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "registration_open", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdraltay/63", "confidence": 0.55, "moderation": "approved"}, {"id": 75, "title": "\"Я познакомился с молодыми инструкторами БПЛА", "organizer": null, "event_date": "2027-10-25", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": 10.0, "prize_fund_visibility": "amount", "prize_fund_note": "БУДУЩЕЕ УЖЕ ЗДЕСЬ. Призовой фонд – 10 миллионов рублей и 2 автомобиля. А для ф", "registration_url": null, "source_url": "https://t.me/fgd_to/983", "confidence": 0.55, "moderation": "approved"}, {"id": 73, "title": "🏆 8 ноября стартует третий онлайн этап соревнований по гонкам дронов/компьютерному спорту на призы Федерации гонок", "organizer": null, "event_date": "2026-11-08", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "ongoing", "region_id": 19, "region_name": "Краснодарский край", "city": "Краснодар", "venue": null, "prize_fund_amount": 31500.0, "prize_fund_visibility": "amount", "prize_fund_note": "01 г.р. и старше. 🔥 Призовой фонд первого этапа составит 31500 рублей 🚀 В каждой категории: 👦🏻 Мужские при", "registration_url": "http://fgdkrd.ru/racebot/mycab/event_register.php?token=8a965ed12ecd5628caf6a11571f74097b8df876e825162f1f7fa1ea482da10af", "source_url": "http://fgdkrd.ru/racebot/mycab/event_register.php?token=8a965ed12ecd5628caf6a11571f74097b8df876e825162f1f7fa1ea482da10af", "confidence": 0.65, "moderation": "approved"}, {"id": 87, "title": "🏁 ✨ 30 марта в Астраханской области прошел 2 этап региональных соревнований гонок дронов! Организатором выступила", "organizer": null, "event_date": "2027-03-30", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": 22, "region_name": "Астраханская область", "city": "Астрахань", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/fgdrus30", "source_url": "https://vk.com/fgdrus30", "confidence": 0.55, "moderation": "approved"}, {"id": 106, "title": "➡️ Судейские вебинары продолжаются ⬅️ Хочешь стать спортивным судьей по гонкам дронов или повысить свою категорию?", "organizer": null, "event_date": "2027-05-23", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/fgdreferee", "source_url": "https://vk.com/fgdreferee", "confidence": 0.55, "moderation": "approved"}, {"id": 62, "title": "Друзья! Обязательно читайте регламенты! Перед участием в Кубке Пермского края каждый пилот обязан ознакомиться с", "organizer": null, "event_date": "2027-07-19", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": 76, "region_name": "Забайкальский край", "city": "Чита", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52/", "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52/", "confidence": 0.55, "moderation": "approved"}, {"id": 64, "title": "ОТКРЫТА РЕГИСТРАЦИЯ НА ТЕХНИЧЕСКИЙ СИМУЛЯТОР! 🖥 🚁 Друзья! Напоминаем, что в рамках Чемпионата Пермского края по гонкам", "organizer": null, "event_date": "2027-08-04", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "registration_open", "region_id": 28, "region_name": "Пермский край", "city": "Пермь", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6a705bda49af47070fd5fed0/", "source_url": "https://forms.yandex.ru/u/6a705bda49af47070fd5fed0/", "confidence": 0.65, "moderation": "approved"}, {"id": 100, "title": "🏆 Федерация гонок дронов Алтайского края подводит итоги соревнований «АэроДрайв» 9 октября в Барнауле в рамках", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "finished", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdraltay/66", "confidence": 0.55, "moderation": "approved"}, {"id": 102, "title": "🎬 Смотрите, как это было! Видеоотчёт с гонок дронов «АэроДрайв» Друзья, МедиаHub АлтГУ подготовил для вас видеоотчёт с", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/", "source_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/", "confidence": 0.55, "moderation": "approved"}, {"id": 70, "title": "🚁 Определилась пятёрка сильнейших пилотов регионального этапа проекта «Пилоты Будущего»! 23 октября на площадке", "organizer": null, "event_date": "2027-10-23", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "finished", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgd_fas_sakh/161", "confidence": 0.55, "moderation": "approved"}, {"id": 110, "title": "Смотрите чемпионат России по гонкам дронов 🏆 🏁 25 октября Финал главного турнира года в Сириусе! Восемь сильнейших", "organizer": null, "event_date": "2027-10-25", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "registration_open", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdrrm/115", "confidence": 0.55, "moderation": "approved"}]}/*END*/;
+const statuses = [
+  { v:"", l:"Все статусы" },
+  { v:"registration_open", l:"Регистрация открыта" },
+  { v:"anons", l:"Анонс" },
+  { v:"ongoing", l:"Идёт сейчас" },
+];
+let MODE = "by_region", REGION = "", STATUS = "", DATA = null;
+
+const $ = id => document.getElementById(id);
+function fmtDate(s){ if(!s) return ""; const [y,m,d] = s.split("-"); return `${d}.${m}.${y}`; }
+function fmtPrize(p){ return p == null ? "" : new Intl.NumberFormat("ru-RU").format(p) + " ₽"; }
+const STATUS_LABEL = { registration_open:"Регистрация открыта", anons:"Анонс", ongoing:"Идёт сейчас", registration_closed:"Регистрация закрыта", finished:"Прошло", postponed:"Перенесено" };
+
+function setMode(m){
+  MODE = m;
+  $("tab-reg").classList.toggle("on", m==="by_region");
+  $("tab-nat").classList.toggle("on", m==="national");
+  draw();
+}
+function draw(){
+  const events = (DATA.events||[])
+    .filter(e => MODE==="national" ? e.event_type!=="regional" : e.event_type==="regional")
+    .filter(e => !REGION || e.region_id == REGION)
+    .filter(e => !STATUS || e.status===STATUS)
+    .sort((a,b)=>a.event_date<b.event_date?-1:1);
+  const names = {};
+  (DATA.regions||[]).forEach(r => names[r.id]=r.name);
+  $("title").textContent = MODE==="national" ? "Все крупные и всероссийские старты"
+      : (REGION ? names[REGION] || "Регион" : "Все регионы");
+  $("found").textContent = "Найдено: " + events.length;
+  STATUS_LABEL.static = null;
+  $("list").innerHTML = events.length ? events.map(card).join("") :
+      `<div class="empty">Пока ничего не найдено. Попробуйте другой регион или статус.</div>`;
+}
+function card(e){
+  const st = STATUS_LABEL[e.status] ? `<span class="status st-${e.status.replace('registration_','reg-').replace('_open','open').replace('_closed','closed').replace('registration_open','open')}">${STATUS_LABEL[e.status]}</span>` : "";
+  const prize = e.prize_fund_amount ? `<span class="prize">🏆 Призовой фонд ${fmtPrize(e.prize_fund_amount)}</span>`
+      : (e.prize_fund_note && e.prize_fund_visibility==="tbd" ? `<span class="prize">🏆 ${e.prize_fund_note}</span>` : "");
+  const reg = e.registration_url ? `<a class="a-reg" href="${e.registration_url}" target="_blank" rel="noreferrer">Зарегистрироваться</a>` : "";
+  const src = e.source_url ? `<a class="a-src" href="${e.source_url}" target="_blank" rel="noreferrer">Первоисточник ↗</a>` : "";
+  return `<div class="card">
+    <div class="top"><span class="date">${fmtDate(e.event_date)}${e.event_time ? " · " + e.event_time : ""}</span>${st}</div>
+    <h3>${(e.title||"").split("\\n")[0]}</h3>
+    <div class="meta">${e.region_name || "Россия"}${e.city ? " · " + e.city : ""}
+      <span class="chip">уверенность ${Math.round((e.confidence||0)*100)}%</span></div>
+    ${prize}
+    ${(reg||src) ? `<div class="actions">${reg}${src}</div>` : ""}
+  </div>`;
+}
+// init
+statuses.forEach(s=>{
+  const b = document.createElement("button");
+  b.textContent = s.l; b.onclick = () => { STATUS = s.v;
+    document.querySelectorAll("#status button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on"); draw(); };
+  if(!s.v) b.classList.add("on");
+  $("status").appendChild(b);
+});
+$("region").addEventListener("change", e => { REGION = e.target.value; draw(); });
+
+(async () => {
+  let live = null, base = "https://drone-racing-backend.onrender.com/api/v1";
+  try {
+    const [ev, rg, st] = await Promise.all([
+      fetch(base + "/events?mode=all&only_upcoming=true&limit=100", {cache:"no-store"}),
+      fetch(base + "/regions?only_with_events=true", {cache:"no-store"}),
+      fetch(base + "/stats", {cache:"no-store"}),
+    ]);
+    if (ev.ok && rg.ok) {
+      live = {
+        generated: new Date().toISOString().slice(0,10),
+        events: (await ev.json()).items,
+        regions: await rg.json(),
+        stats: st.ok ? await st.json() : {},
+      };
+    }
+  } catch (e) {}
+  DATA = live || FALLBACK;
+  const rg = DATA.regions || [];
+  $("region").innerHTML = '<option value="">— все регионы (' + DATA.events.length + ') —</option>' +
+      rg.slice().sort((a,b)=>b.upcoming_events-a.upcoming_events)
+        .map(r=>`<option value="${r.id}">${r.name} (${r.upcoming_events})</option>`).join("");
+  $("sub").innerHTML = (DATA.stats && DATA.stats.upcoming_total)
+      ? `Сейчас в базе: <b>${DATA.stats.upcoming_total}</b> предстоящих стартов в <b>${DATA.stats.regions_with_events||0}</b> регионах${live ? "" : " (офлайн-снимок, обновится при доступе к облаку)"}.`
+      : "Данные офлайн-снимка.";
+  $("note").style.display = live ? "none" : "block";
+  if (!live) $("note").textContent = "Облачный сервер временно недоступен — показан локальный снимок базы. Данные обновятся при следующем открытии.";
+  $("gen").textContent = DATA.generated || "";
+  draw();
+})();
+</script>
+</body>
+</html>
