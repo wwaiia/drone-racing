@@ -11,7 +11,7 @@ from ..models import Event, Source
 
 
 def run_all(db: Session, limit: int = 40) -> list[dict]:
-    from .collectors import fgdr_web, telegram_web
+    from . import fgdr_web, telegram_web
 
     report: list[dict] = []
 
