@@ -37,9 +37,10 @@ def _bootstrap_data() -> None:
     def run():
         try:
             from .collectors import fgdr_web
-            fgdr_web.run(limit=40)
+            res = fgdr_web.run(limit=40)
+            print(f"BOOTSTRAP fgdr: {res}", flush=True)
         except Exception as exc:
-            print(f"BOOTSTRAP fgdr: {exc}")
+            print(f"BOOTSTRAP fgdr FAILED: {exc}", flush=True)
         try:
             text = (
                 'Всероссийские спортивные соревнования пилотов «На высоте!» — онлайн-отбор в игре '
@@ -58,9 +59,13 @@ def _bootstrap_data() -> None:
                     ev.prize_fund_note = 'Призовой фонд — миллионы рублей (гранд-финал — июль 2027)'
                     ev.prize_fund_visibility = "tbd"
                     s.commit()
+                print("BOOTSTRAP onf event:", ev.id if ev else None, flush=True)
         except Exception as exc:
-            print(f"BOOTSTRAP onf: {exc}")
-        print("BOOTSTRAP done")
+            print(f"BOOTSTRAP onf FAILED: {exc}", flush=True)
+        with SessionLocal() as s:
+            from .models import Event, RawPost
+            print(f"BOOTSTRAP final: events={s.query(Event).count()} raw={s.query(RawPost).count()}", flush=True)
+        print("BOOTSTRAP done", flush=True)
 
     threading.Thread(target=run, daemon=True).start()
 
