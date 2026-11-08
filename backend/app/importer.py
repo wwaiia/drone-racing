@@ -6,6 +6,7 @@ import unicodedata
 from datetime import date, datetime, timezone
 
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from .extract import extract
@@ -124,5 +125,10 @@ def ingest_post(
 
     evs = EventSource(event_id=evt.id, source_id=source.id if source else None, external_post_id=src_ext_id)
     session.add(evs)
-    session.commit()
+    try:
+        session.commit()
+    except IntegrityError:
+        # гонка параллельных сборов за один и тот же пост — дубль, тихо выходим
+        session.rollback()
+        return None
     return evt
