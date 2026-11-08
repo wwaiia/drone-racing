@@ -36,11 +36,14 @@ def _bootstrap_data() -> None:
 
     def run():
         try:
-            from .collectors import fgdr_web
-            res = fgdr_web.run(limit=40)
-            print(f"BOOTSTRAP fgdr: {res}", flush=True)
+            from .database import SessionLocal as S2
+            from .collectors.runner import run_all
+            with S2() as s2:
+                report = run_all(s2, limit=40)
+            print(f"BOOTSTRAP collect: fgdr={report[0] if report else None} "
+                  f"tg_channels={sum(1 for r in report if r.get('source','').startswith('tg:'))}", flush=True)
         except Exception as exc:
-            print(f"BOOTSTRAP fgdr FAILED: {exc}", flush=True)
+            print(f"BOOTSTRAP collect FAILED: {exc}", flush=True)
         try:
             text = (
                 'Всероссийские спортивные соревнования пилотов «На высоте!» — онлайн-отбор в игре '
