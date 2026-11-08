@@ -6,6 +6,7 @@ Each post is followed to its tpost page to get full text.
 from __future__ import annotations
 
 import re
+import time
 from datetime import datetime, timezone
 
 import httpx
@@ -36,9 +37,21 @@ def fetch_post_text(post_url: str) -> str:
     return text[:4000]
 
 
+def _retry(fn, attempts: int = 3, base_delay: float = 2.0):
+    """Tildacdn from some datacenter IPs can drop chunked responses — retry."""
+    last_exc = None
+    for i in range(attempts):
+        try:
+            return fn()
+        except Exception as exc:
+            last_exc = exc
+            time.sleep(base_delay * (i + 1))
+    raise last_exc
+
+
 def fetch_feed_posts(limit: int = 40) -> list[dict]:
     params = {"recid": FEED_RECID, "feeduid": FEED_UID, "start": 1, "amountofposts": limit}
-    r = httpx.get(FEED_URL, params=params, headers={"User-Agent": UA}, timeout=20)
+    r = _retry(lambda: httpx.get(FEED_URL, params=params, headers={"User-Agent": UA}, timeout=20))
     r.raise_for_status()
     data = r.json()
     posts = []
@@ -69,7 +82,10 @@ def run(limit: int = 40) -> dict:
 
     with SessionLocal() as session:
         for p in posts:
-            text = fetch_post_text(p["url"])
+            try:
+                text = _retry(lambda: fetch_post_text(p["url"]), attempts=2)
+            except Exception:
+                text = ""
             text = re.sub(r"(?i)^(?:\s*(?:АНОНСЫ|Анонсы|Анонс)\b[,\s—-]*)+", " ", text)
             body = text if len(text) > 80 else f"{p['title']}.\nПодробнее: {p['url']}\nИсточник: https://fgdr.ru/news/announcement"
             posted_at = None

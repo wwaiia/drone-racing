@@ -66,7 +66,7 @@ def run(channel: str, limit: int = 40) -> dict:
                 source_title=f"tg:{channel}",
                 source_url=p["url"],
                 external_post_id=p["id"],
-                auto_approve=False,
+                auto_approve=True,
             )
             if evt:
                 imported += 1

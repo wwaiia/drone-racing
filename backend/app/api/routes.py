@@ -215,6 +215,13 @@ def run_collect(
                 db.commit()
         report.append(res)
 
+    # Auto-moderation: confident events are published without a manager
+    db.query(Event).filter(
+        Event.moderation == "pending",
+        Event.confidence >= 0.55,
+    ).update({"moderation": "approved"}, synchronize_session=False)
+    db.commit()
+
     if cfg.vk_service_token:
         from ..collectors import vk_collector
         groups = set(s.external_id for s in active if s.platform == "vk" and s.external_id)
