@@ -4,6 +4,8 @@ No Telegram account, no API keys — works from any worldwide hosting.
 """
 from __future__ import annotations
 
+from datetime import datetime
+
 import httpx
 from bs4 import BeautifulSoup  # type: ignore
 
@@ -59,13 +61,20 @@ def run(channel: str, limit: int = 40) -> dict:
 
     with SessionLocal() as session:
         for p in posts:
+            posted_at = None
+            if p.get("date"):
+                try:
+                    posted_at = datetime.fromisoformat(p["date"])
+                except ValueError:
+                    posted_at = None
             evt = ingest_post(
                 session,
                 text=p["text"],
-                platform="telegram",
+                platform="telegram_web",
                 source_title=f"tg:{channel}",
                 source_url=p["url"],
                 external_post_id=p["id"],
+                posted_at=posted_at,
                 auto_approve=True,
             )
             if evt:
