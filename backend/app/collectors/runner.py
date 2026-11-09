@@ -11,7 +11,7 @@ from ..models import Event, Source
 
 
 def run_all(db: Session, limit: int = 40) -> list[dict]:
-    from . import fgdr_web, telegram_web, vk_web
+    from . import fgdr_web, telegram_web
 
     report: list[dict] = []
 
@@ -39,22 +39,8 @@ def run_all(db: Session, limit: int = 40) -> list[dict]:
                 db.commit()
         report.append(res)
 
-    # VK-стены через Playwright (голосовое чтение m.vk.com)
-    vk_groups = [
-        (s.external_id or "")
-        for s in active
-        if s.platform == "vk_web" and s.external_id and (s.fail_count or 0) < 3
-    ]
-    for grp in sorted(set(vk_groups)):
-        res = vk_web.run(grp)
-        if res.get("error"):
-            src = db.query(Source).filter(
-                Source.platform == "vk_web", Source.external_id == grp
-            ).first()
-            if src:
-                src.fail_count = (src.fail_count or 0) + 1
-                db.commit()
-        report.append(res)
+    # VK-стены собираются отдельно в GitHub Actions (backend/scripts/vk_collect.py):
+    # бесплатный инстанс Render не тянет Chromium по памяти (OOM 512 МБ).
 
     # Автомодерация: уверенные события публикуются сразу
     db.query(Event).filter(

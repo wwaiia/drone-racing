@@ -261,13 +261,21 @@ def admin_raw_post(
     db: Session = Depends(get_db),
     platform: str = "telegram",
     source_title: str = "manual",
+    external_post_id: str | None = None,
+    source_url: str | None = None,
     x_admin_token: str = Header(""),
     auto_approve: bool = False,
 ):
     if x_admin_token != settings.admin_token:
         raise HTTPException(401, "Invalid admin token")
+    from datetime import datetime as _dt
     from ..importer import ingest_post
-    evt = ingest_post(db, text=text, platform=platform, source_title=source_title, auto_approve=auto_approve)
+    posted_at = None
+    if external_post_id:
+        posted_at = _dt.now()
+    evt = ingest_post(db, text=text, platform=platform, source_title=source_title,
+                      source_url=source_url, external_post_id=external_post_id,
+                      posted_at=posted_at, auto_approve=auto_approve)
     if evt:
         return {"created_event_id": evt.id, "title": evt.title, "date": evt.event_date.isoformat(), "confidence": evt.confidence}
     return {"created_event_id": None}

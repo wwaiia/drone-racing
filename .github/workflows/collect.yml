@@ -8,8 +8,30 @@ on:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
-      - name: Trigger backend collection
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps (playwright + chromium)
+        run: |
+          python -m pip install --upgrade pip
+          pip install httpx playwright beautifulsoup4
+          python -m playwright install --with-deps chromium
+
+      - name: Collect VK walls -> cloud
+        env:
+          API_BASE: https://drone-racing-backend.onrender.com
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: |
+          python backend/scripts/vk_collect.py --limit 8
+
+      - name: Trigger backend TG/FGDR collection
         run: |
           curl -sS -X POST \
             "https://drone-racing-backend.onrender.com/api/v1/admin/run_collect" \
