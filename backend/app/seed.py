@@ -67,6 +67,16 @@ def seed_sources(session: Session) -> tuple[int, int]:
                 session.delete(src)
         session.commit()
 
+    # дедуп источников (могли задвоиться при параллельном холодном старте)
+    seen_keys: dict[tuple[str, str], int] = {}
+    for src in session.query(Source).order_by(Source.id).all():
+        key = (src.platform, src.external_id or "")
+        if key in seen_keys:
+            session.delete(src)
+        else:
+            seen_keys[key] = src.id
+    session.commit()
+
     specs = [(s["platform"], s["external_id"], s["title"], s["url"], s["tier"], None)
              for s in FEDERAL_SOURCES]
     for region_name, vk_id, tg_id in REGIONAL_SOURCES:

@@ -50,7 +50,7 @@ def ingest_post(
     src_ext_id = external_post_id or hashlib.sha256((source_title + text[:120]).encode()).hexdigest()[:16]
     h = post_hash(platform, source_title or platform, src_ext_id)
 
-    existing = session.execute(select(RawPost).where(RawPost.hash == h)).scalar_one_or_none()
+    existing = session.execute(select(RawPost).where(RawPost.hash == h)).scalars().first()
     if existing:
         return None
 
@@ -58,7 +58,7 @@ def ingest_post(
     if source_title:
         source = session.execute(
             select(Source).where(Source.title == source_title, Source.platform == platform)
-        ).scalar_one_or_none()
+        ).scalars().first()
         if source is None:
             source = Source(platform=platform, external_id=source_title, title=source_title, url=source_url)
             session.add(source)
@@ -100,7 +100,7 @@ def ingest_post(
             Event.event_date == ex.event_date,
             Event.region_id == region.id if region else Event.region_id.is_(None),
         )
-    ).scalar_one_or_none()
+    ).scalars().first()
 
     if evt is None:
         evt = Event(
