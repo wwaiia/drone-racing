@@ -8,8 +8,6 @@ from __future__ import annotations
 import re
 from datetime import datetime, timezone
 
-from ..database import SessionLocal
-
 UA = ("Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36")
 
@@ -102,6 +100,8 @@ def run(domain: str, count: int = 12) -> dict:
         posts = fetch_group_posts(domain, limit=count)
     except Exception as exc:  # noqa: BLE001
         return {"source": f"vk_web:{domain}", "posts": 0, "imported": 0, "error": str(exc)[:160]}
+    from ..database import SessionLocal
+
     with SessionLocal() as session:
         from ..importer import ingest_post
         for p_ in posts:
