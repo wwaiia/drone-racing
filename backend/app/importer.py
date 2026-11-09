@@ -65,7 +65,7 @@ def ingest_post(
             session.flush()
 
     ex = extract(text, now=posted_at.date() if posted_at else None)
-    if ex.event_date and ex.date_has_year is False and ex.date_bumped and PAST_TENSE.search(text):
+    if ex.event_date and ex.date_has_year is False and ex.date_bumped and PAST_TENSE_RE.search(text):
         # Пост в прошедшем времени («состоялся», «прошёл») — это архив, а не
         # анонс. Не поднимаем год, оставляем в году поста/текущем и закрываем.
         try:
