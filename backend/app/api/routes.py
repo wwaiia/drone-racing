@@ -331,3 +331,33 @@ def admin_fix_past_tense(db: Session = Depends(get_db), x_admin_token: str = Hea
         changed += 1
     db.commit()
     return {"changed": changed}
+
+
+@router.post("/admin/drop_far_vk")
+def admin_drop_far_vk(
+    days: int = 90,
+    db: Session = Depends(get_db),
+    x_admin_token: str = Header(""),
+):
+    """Delete VK-sourced events dated too far ahead (old archive posts whose
+    year got bumped because VK hides post dates from anonymous visitors)."""
+    if x_admin_token != settings.admin_token:
+        raise HTTPException(401, "Invalid admin token")
+    from datetime import timedelta
+    from ..models import EventSource
+
+    cutoff = date.today() + timedelta(days=days)
+    ids = [
+        row[0]
+        for row in db.query(Event.id)
+        .join(EventSource, EventSource.event_id == Event.id)
+        .join(Source, Source.id == EventSource.source_id)
+        .filter(Source.platform == "vk_web", Event.event_date > cutoff)
+        .distinct()
+        .all()
+    ]
+    if ids:
+        db.query(EventSource).filter(EventSource.event_id.in_(ids)).delete(synchronize_session=False)
+        db.query(Event).filter(Event.id.in_(ids)).delete(synchronize_session=False)
+        db.commit()
+    return {"dropped": len(ids)}

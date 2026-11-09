@@ -75,6 +75,16 @@ def ingest_post(
         except ValueError:
             pass
         ex.status = "finished"
+    if (
+        platform in ("vk_web", "vk")
+        and ex.event_date
+        and ex.date_has_year is False
+        and ex.date_bumped
+        and (ex.event_date - date.today()).days > 60
+    ):
+        # VK не отдаёт дату поста анониму: дата без года, уехавшая далеко
+        # вперёд, — почти наверняка старый архивный пост. Не тащим в будущее.
+        return None
     if posted_at and ex.event_date and ex.date_has_year is False and ex.date_bumped:
         # Дата без года «уехала» на следующий год: скорее всего это архив о
         # прошедшем старте. Возвращаем событие в год поста и помечаем как
