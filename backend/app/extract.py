@@ -48,6 +48,11 @@ FINISHED_RE = re.compile(
 )
 CANCELLED_RE = re.compile(r"отмен[яе]н|перенес[яе]н", re.IGNORECASE)
 
+PAST_TENSE_RE = re.compile(
+    r"(?i)\b(?:прош[её]л|прошла|прошло|прошли|состоял(?:ся|ась|ись)|"
+    r"завершил(?:ся|ась|ись)|отгремел|итоги)\b"
+)
+
 DISCIPLINE_SIM_RE = re.compile(
     r"симулятор|simulator|\bdcl\b|velocidrone|liftoff|uncrashed",
     re.IGNORECASE,

@@ -1,4 +1,5 @@
 from datetime import date
+import re
 import time
 
 from fastapi import APIRouter, Depends, HTTPException, Header, Query
@@ -9,6 +10,7 @@ from ..database import get_db
 from ..models import Event, Region, Source
 from ..schemas import EventOut, EventPage, RegionOut, StatsOut
 from ..config import settings
+from ..extract import PAST_TENSE_RE
 
 router = APIRouter(prefix="/api/v1")
 
@@ -305,6 +307,27 @@ def admin_clean_titles(db: Session = Depends(get_db), x_admin_token: str = Heade
             continue
         evt.title = nt
         evt.norm_title = norm
+        changed += 1
+    db.commit()
+    return {"changed": changed}
+
+
+@router.post("/admin/fix_past_tense")
+def admin_fix_past_tense(db: Session = Depends(get_db), x_admin_token: str = Header("")):
+    """Events dated in the future but described in past tense are archive posts
+    that got their year bumped by the extractor. Pull them back to this year."""
+    if x_admin_token != settings.admin_token:
+        raise HTTPException(401, "Invalid admin token")
+    today = date.today()
+    changed = 0
+    for evt in db.query(Event).filter(Event.event_date >= today).all():
+        if not PAST_TENSE_RE.search(evt.title or ""):
+            continue
+        try:
+            evt.event_date = evt.event_date.replace(year=today.year)
+        except ValueError:
+            continue
+        evt.status = "finished"
         changed += 1
     db.commit()
     return {"changed": changed}

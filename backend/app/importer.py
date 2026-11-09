@@ -9,7 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from .extract import extract
+from .extract import PAST_TENSE_RE, extract
 from .models import Event, EventSource, RawPost, Region, Source
 
 GENERIC_HEADERS = (
@@ -65,6 +65,16 @@ def ingest_post(
             session.flush()
 
     ex = extract(text, now=posted_at.date() if posted_at else None)
+    if ex.event_date and ex.date_has_year is False and ex.date_bumped and PAST_TENSE.search(text):
+        # Пост в прошедшем времени («состоялся», «прошёл») — это архив, а не
+        # анонс. Не поднимаем год, оставляем в году поста/текущем и закрываем.
+        try:
+            ex.event_date = ex.event_date.replace(
+                year=posted_at.date().year if posted_at else date.today().year
+            )
+        except ValueError:
+            pass
+        ex.status = "finished"
     if posted_at and ex.event_date and ex.date_has_year is False and ex.date_bumped:
         # Дата без года «уехала» на следующий год: скорее всего это архив о
         # прошедшем старте. Возвращаем событие в год поста и помечаем как
