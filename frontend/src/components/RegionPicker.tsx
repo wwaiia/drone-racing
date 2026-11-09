@@ -18,15 +18,11 @@ export default function RegionPicker({ regions, value, onChange }: Props) {
     <select
       value={value ?? ""}
       onChange={(e) => onChange(e.target.value ? Number(e.target.value) : null)}
-      className="w-full rounded-xl border border-zinc-700 bg-[#1b1b1f] px-4 py-2.5 text-sm text-zinc-200
-                 outline-none transition focus:border-amber-400/60"
+      className="h-9 w-full min-w-[180px] rounded-[4px] border border-[#2e2e33] bg-[#0f0f11] px-3 text-[12px] font-semibold uppercase tracking-wide text-[#d6d6da] outline-none transition hover:border-[#3d3d44] focus:border-[#ff4d1c]/70"
     >
-      <option value="">Все регионы</option>
+      <option value="">— все регионы —</option>
       {Object.entries(groups).map(([district, items]) => (
-        <optgroup
-          key={district}
-          label={`${district} — всего ${items.reduce((s, r) => s + r.upcoming_events, 0)}`}
-        >
+        <optgroup key={district} label={district}>
           {items.map((r) => (
             <option key={r.id} value={r.id}>
               {r.name} ({r.upcoming_events})

@@ -279,3 +279,32 @@ def admin_raw_post(
     if evt:
         return {"created_event_id": evt.id, "title": evt.title, "date": evt.event_date.isoformat(), "confidence": evt.confidence}
     return {"created_event_id": None}
+
+
+@router.post("/admin/clean_titles")
+def admin_clean_titles(db: Session = Depends(get_db), x_admin_token: str = Header("")):
+    """Re-run title noise cleanup over stored events (safe: skips duplicates)."""
+    if x_admin_token != settings.admin_token:
+        raise HTTPException(401, "Invalid admin token")
+    from ..extract import _clean_title_line
+    from ..importer import norm_title
+
+    changed = 0
+    for evt in db.query(Event).all():
+        nt = _clean_title_line(evt.title).rstrip(".!?:")
+        if not nt or nt == evt.title or len(nt) < 5:
+            continue
+        norm = norm_title(nt)
+        dup = db.query(Event).filter(
+            Event.norm_title == norm,
+            Event.event_date == evt.event_date,
+            Event.region_id == evt.region_id,
+            Event.id != evt.id,
+        ).first()
+        if dup:
+            continue
+        evt.title = nt
+        evt.norm_title = norm
+        changed += 1
+    db.commit()
+    return {"changed": changed}

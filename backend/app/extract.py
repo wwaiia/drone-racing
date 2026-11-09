@@ -206,11 +206,36 @@ def extract_type(text: str) -> str:
     return "national" if NATIONAL_RE.search(text) else "regional"
 
 
+_TITLE_NOISE_RE = [
+    re.compile(r"(?i)^\W*официальн\w*\s+(?:сообщество|группа|паблик|страница|канал)\s*[:\-—–]?\s*"),
+    re.compile(r"(?i)^.*?официальн\w*\s+(?:сообщество|группа|паблик)\s*"),
+    re.compile(r"^\W*(?:[А-ЯA-Z]{2,6}\s+){1,3}«[^»]{0,90}»\s*"),
+    re.compile(r"(?i)^\W*(?:анонс|анонсы|новости|афиша)\b[\s,.:—–-]*"),
+]
+_TITLE_HASH_RE = re.compile(r"^\W*(?:#\S+\s*){1,5}")
+
+
+def _clean_title_line(line: str) -> str:
+    line = re.sub(r"\s+", " ", line).strip()
+    for rx in _TITLE_NOISE_RE:
+        line = rx.sub("", line)
+    line = _TITLE_HASH_RE.sub("", line)
+    line = line.lstrip(" \t—–-·•|,.:;!»\"'“”")
+    return line.strip()
+
+
 def guess_title(text: str) -> str | None:
     text = text.strip()
     if not text:
         return None
-    line = text.splitlines()[0].strip().rstrip(".!?:")
+    line = _clean_title_line(text.splitlines()[0])
+    if len(line) < 5:
+        for ln in text.splitlines()[1:4]:
+            cand = _clean_title_line(ln)
+            if len(cand) >= 12:
+                line = cand
+                break
+    line = line.rstrip(".!?:")
     if len(line) > 140:
         cut = line.replace(". ", ".").split(".")[0].strip()
         line = cut if 10 <= len(cut) <= 140 else line[:120].rsplit(" ", 1)[0]
