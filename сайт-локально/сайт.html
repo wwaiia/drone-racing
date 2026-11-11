@@ -1,202 +1,3928 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Гонки дронов — ближайшие старты</title>
+<title>Дрон Рейсинг — мероприятия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: dark; }
-  * { box-sizing: border-box; }
-  body { margin:0; font-family: "Segoe UI", system-ui, sans-serif; background:#101012; color:#f4f4f5; }
-  main { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
-  .kicker { color:#FFC113; font-size:11px; letter-spacing:.25em; text-transform:uppercase; font-weight:700; }
-  h1 { font-size:30px; margin:6px 0 10px; }
-  .sub { color:#a1a1aa; font-size:14px; max-width:640px; }
-  .sub b { color:#FFC113; }
-  nav { display:inline-flex; border:1px solid #27272a; background:#1b1b1f; border-radius:16px; padding:4px; margin-top:18px; }
-  nav button { border:0; background:transparent; color:#71717a; font-weight:700; font-size:14px; padding:10px 20px; border-radius:12px; cursor:pointer; }
-  nav button.on { background:#FFC113; color:#000; }
-  .filters { display:grid; grid-template-columns:1fr; gap:14px; border:1px solid #27272a; background:#1b1b1f; border-radius:16px; padding:18px; margin-top:16px; }
-  @media(min-width:640px){ .filters{ grid-template-columns:1fr 1fr; } }
-  label.big { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:#71717a; font-weight:700; display:block; margin-bottom:8px; }
-  select { width:100%; background:#101012; color:#f4f4f5; border:1px solid #3f3f46; border-radius:10px; padding:10px 12px; font-size:14px; }
-  .chips button { margin:0 8px 8px 0; background:#101012; border:1px solid #3f3f46; color:#a1a1aa; border-radius:10px; padding:8px 14px; font-size:12px; font-weight:600; cursor:pointer; }
-  .chips button.on { border-color:rgba(255,193,17,.6); color:#FFC113; background:rgba(255,193,17,.08); }
-  .count { display:flex; justify-content:space-between; align-items:baseline; margin:26px 0 12px; }
-  .count h2 { font-size:18px; margin:0; }
-  .count span { color:#71717a; font-size:13px; }
-  .card { border:1px solid #27272a; background:#1b1b1f; border-radius:16px; padding:16px 18px; margin-bottom:12px; border-left:4px solid #FFC113; }
-  .card .top { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-  .date { color:#FFC113; font-weight:800; font-size:14px; white-space:nowrap; }
-  .status { font-size:11px; font-weight:700; padding:3px 10px; border-radius:999px; border:1px solid; }
-  .st-open { color:#4ade80; border-color:rgba(74,222,128,.4); }
-  .st-anons { color:#60a5fa; border-color:rgba(96,165,250,.4); }
-  .st-ongoing { color:#FFC113; border-color:rgba(255,193,17,.5); }
-  .st-closed { color:#a1a1aa; border-color:#3f3f46; }
-  .card h3 { font-size:16px; margin:8px 0 4px; line-height:1.35; }
-  .meta { color:#a1a1aa; font-size:13px; }
-  .prize { display:inline-block; margin-top:10px; background:rgba(255,193,17,.12); color:#FFC113; font-weight:700; font-size:13px; border-radius:10px; padding:4px 10px; }
-  .actions { margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
-  .actions a { text-decoration:none; font-size:13px; font-weight:700; border-radius:10px; padding:8px 14px; }
-  .a-reg { background:#FFC113; color:#000; }
-  .a-src { border:1px solid #3f3f46; color:#d4d4d8; }
-  .empty { border:1px dashed #3f3f46; border-radius:16px; padding:36px; text-align:center; color:#71717a; font-size:14px; }
-  .note { border:1px solid #3f3f46; background:#1b1b1f; color:#d4d4d8; border-radius:14px; padding:12px 16px; font-size:13px; margin-top:16px; }
-  footer { color:#52525b; font-size:12px; border-top:1px solid #27272a; margin-top:36px; padding-top:16px; }
-  .chip { display:inline-block; margin-left:8px; color:#52525b; font-size:11px; }
+:root{--bg:#0a0a0b;--panel:#121214;--line:#232326;--line2:#2e2e33;--txt:#f2f2f3;--muted:#8b8b90;--dim:#5a5a60;--acc:#ff4d1c;--acc2:#ff7a4d}
+*{box-sizing:border-box;margin:0;padding:0}
+html{color-scheme:dark}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+select{appearance:none}
+::selection{background:rgba(255,77,28,.35)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+.wrap{display:flex;min-height:100vh}
+.side{position:fixed;inset:0 auto 0 0;width:260px;background:#0d0d0f;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:20}
+.side .logo{display:flex;align-items:center;gap:8px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.side .logo b{font-family:Oswald,Impact,sans-serif;font-style:italic;font-size:22px;letter-spacing:-.02em;text-transform:uppercase}
+.side .logo span{background:var(--acc);color:#000;border-radius:3px;padding:2px 6px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.nav{flex:1;overflow-y:auto;padding:16px 12px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.nav p{color:var(--dim);font-size:10px;letter-spacing:.2em;padding:0 8px 8px}
+.nav button,.nav a{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:8px 12px;margin-bottom:4px;border-left:2px solid transparent;color:var(--muted);transition:color .15s}
+.nav button:hover,.nav a:hover{color:#fff}
+.nav .active{border-left-color:var(--acc);background:#1a1210;color:var(--acc2)}
+.side .ver{padding:12px 20px;border-top:1px solid var(--line);color:var(--dim);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.main{flex:1;min-width:0;padding-left:260px}
+.top{height:56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 32px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.crumbs{display:flex;gap:8px;align-items:center}
+.crumbs .sep{color:#3d3d44}
+.crumbs .cur{color:var(--acc2)}
+.crumbs .root{color:rgba(255,255,255,.85)}
+.content{max-width:1240px;margin:0 auto;padding:32px 32px 80px}
+h1{font-family:Oswald,Impact,sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:56px;line-height:1;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13px;margin-top:12px}
+.sub b{color:rgba(255,255,255,.9)}
+.tabs{display:flex;gap:28px;margin-top:28px;border-bottom:1px solid var(--line)}
+.tab{padding-bottom:12px;margin-bottom:-1px;border-bottom:2px solid transparent;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:color .15s}
+.tab:hover{color:#fff}
+.tab.active{border-bottom-color:var(--acc);color:var(--acc2)}
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
+.modes{display:flex;gap:20px;flex-wrap:wrap}
+.mode{border-bottom:2px solid transparent;padding-bottom:6px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:color .15s}
+.mode:hover{color:#fff}
+.mode.active{border-bottom-color:var(--acc);color:var(--acc2)}
+.controls{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.sel{height:36px;min-width:180px;border:1px solid var(--line2);background:#0f0f11;color:#d6d6da;border-radius:4px;padding:0 12px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;outline:none}
+.sel:hover{border-color:#3d3d44}
+.sel:focus{border-color:rgba(255,77,28,.7)}
+.section{margin-top:36px}
+.sec-head{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px;margin-bottom:16px}
+.sec-head h2{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.sec-head span{font-size:11px;font-weight:700;color:var(--dim)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.side{display:none}.main{padding-left:0}.content{padding:20px}}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .15s}
+.card:hover{border-color:#3a3a40}
+.card .art{position:relative;height:96px;overflow:hidden;background:radial-gradient(120% 140% at 85% -20%,rgba(255,77,28,.28),transparent 60%),linear-gradient(160deg,#1b1b1f,#101012)}
+.card .art:after{content:"";position:absolute;inset:0;opacity:.14;background-image:repeating-linear-gradient(115deg,transparent 0 22px,#fff 22px 23px)}
+.badge{position:absolute;left:12px;top:12px;border-radius:3px;padding:2px 8px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;z-index:1}
+.b-ongoing{background:var(--acc);color:#000}
+.b-reg{background:var(--acc);color:#000}
+.b-anons{border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);background:rgba(0,0,0,.4)}
+.b-finished{background:#2a2a2e;color:rgba(255,255,255,.55)}
+.b-postponed{background:#3a2a10;color:#ffb02e}
+.b-cancelled{background:#3a1414;color:#ff6b6b}
+.tag-nat{position:absolute;right:12px;top:12px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.4);color:rgba(255,255,255,.7);border-radius:3px;padding:2px 8px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;z-index:1}
+.card .body{display:flex;flex-direction:column;flex:1;padding:16px}
+.date{color:var(--acc);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.date i{color:rgba(255,255,255,.4);font-style:normal}
+.card h3{margin-top:6px;font-size:15px;font-weight:800;line-height:1.35;letter-spacing:.03em;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.place{margin-top:4px;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tag{border:1px solid var(--line2);color:#b9b9be;border-radius:3px;padding:2px 6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.tag.prize{border-color:rgba(255,77,28,.45);background:rgba(255,77,28,.1);color:var(--acc2)}
+.tag.dim{color:var(--muted)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:16px}
+.btn{display:inline-block;border-radius:4px;padding:6px 12px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:.15s}
+.btn-primary{background:var(--acc);color:#000}
+.btn-primary:hover{background:#ff6a3f}
+.btn-ghost{border:1px solid var(--line2);color:#b9b9be}
+.btn-ghost:hover{border-color:rgba(255,77,28,.6);color:var(--acc2)}
+.empty{border:1px dashed var(--line2);border-radius:4px;padding:32px;text-align:center;color:var(--muted);font-size:13px}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:20px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pager button:hover{color:#fff}
+.pager button:disabled{opacity:.3;cursor:default}
+.cal{border:1px solid var(--line);background:#0f0f11;border-radius:4px;margin-top:32px;overflow:hidden}
+.cal-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.cal-head .t{font-family:Oswald,Impact,sans-serif;font-style:italic;font-weight:700;text-transform:uppercase;font-size:18px;letter-spacing:.03em}
+.cal-head button{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cal-head button:hover{color:#fff}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line);text-align:center}
+.cal-dow div{padding:8px 0;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.cell{min-height:92px;border-right:1px solid #1b1b1e;border-bottom:1px solid #1b1b1e;padding:6px}
+.cell.today{background:rgba(255,77,28,.06)}
+.cell .d{display:inline-flex;width:20px;height:20px;align-items:center;justify-content:center;border-radius:50%;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.cell.today .d{background:var(--acc);color:#000}
+.ev-chip{display:block;border-left:2px solid var(--acc);background:rgba(255,77,28,.1);color:#ffb9a3;border-radius:2px;padding:2px 4px;margin-bottom:2px;font-size:10px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev-chip:hover{background:rgba(255,77,28,.2)}
+.more{color:var(--dim);font-size:9px}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:56px;border-top:1px solid var(--line);padding-top:20px;color:var(--dim);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.loading{text-align:center;padding:48px 0;color:var(--muted);font-size:13px}
+.err{border:1px solid rgba(255,77,28,.35);background:rgba(255,77,28,.1);color:#ff9a7a;border-radius:4px;padding:16px;margin-top:32px;font-size:13px}
+.live{display:inline-block;width:6px;height:6px;border-radius:50%;background:#3ad44a;margin-right:6px;vertical-align:middle}
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <p class="kicker">Drone Racing Events · автономная версия</p>
-    <h1>Гонки дронов — ближайшие старты</h1>
-    <p class="sub" id="sub">Агрегатор соревнований из ФГДР и региональных сообществ.</p>
-  </header>
+<div class="wrap">
+  <aside class="side">
+    <div class="logo"><b>Дрон</b><span>Агрегатор</span></div>
+    <nav class="nav">
+      <p>Основное</p>
+      <button id="navList" class="active" onclick="setView('list')"><span>▤</span> Мероприятия</button>
+      <button id="navCal" onclick="setView('calendar')"><span>▦</span> Календарь</button>
+      <p style="padding-top:24px">Скачать</p>
+      <a href="https://github.com/wwaiia/drone-racing" target="_blank" rel="noopener"><span>↓</span> Локальная версия</a>
+    </nav>
+    <div class="ver">v1.0 · 2026</div>
+  </aside>
 
-  <nav>
-    <button id="tab-reg" class="on" onclick="setMode('by_region')">По регионам</button>
-    <button id="tab-nat" onclick="setMode('national')">Общие соревнования</button>
-  </nav>
+  <div class="main">
+    <header class="top">
+      <div class="crumbs"><span class="root">Дрон Рейсинг</span><span class="sep">/</span><span class="cur">Мероприятия</span></div>
+      <div>RU</div>
+    </header>
 
-  <section class="filters">
-    <div>
-      <label class="big">Область / регион</label>
-      <select id="region" onchange="draw()"><option value="">— все регионы —</option></select>
-    </div>
-    <div>
-      <label class="big">Статус</label>
-      <div class="chips" id="status"></div>
-    </div>
-  </section>
+    <main class="content">
+      <h1>Мероприятия</h1>
+      <p class="sub" id="counts">Загрузка…</p>
 
-  <div class="count"><h2 id="title">Все регионы</h2><span id="found"></span></div>
-  <div id="list"></div>
+      <div class="tabs">
+        <button class="tab active" id="tabList" onclick="setView('list')">☰ Список</button>
+        <button class="tab" id="tabCal" onclick="setView('calendar')">▦ Календарь</button>
+      </div>
 
-  <div class="note" id="note" style="display:none"></div>
+      <div class="filters">
+        <div class="modes">
+          <button class="mode active" data-mode="all" onclick="setMode('all')">Все</button>
+          <button class="mode" data-mode="regional" onclick="setMode('regional')">Региональные</button>
+          <button class="mode" data-mode="national" onclick="setMode('national')">Всероссийские</button>
+        </div>
+        <div class="controls">
+          <select class="sel" id="regionSel" onchange="setRegion(this.value)"></select>
+          <select class="sel" id="statusSel" onchange="setStatus(this.value)">
+            <option value="">— все статусы —</option>
+            <option value="registration_open">Регистрация открыта</option>
+            <option value="anons">Анонс</option>
+            <option value="ongoing">Идёт сейчас</option>
+          </select>
+        </div>
+      </div>
 
-  <footer>
-    Информация собирается автоматически из открытых источников (ФГДР, Telegram, VK). Снимок данных:
-    <span id="gen"></span>. Живая версия: <a style="color:#FFC113" href="https://drone-racing-frontend.onrender.com">drone-racing-frontend.onrender.com</a>
-  </footer>
-</main>
+      <div id="alert"></div>
+      <div id="content"><p class="loading">Загрузка…</p></div>
 
-<script>
-const FALLBACK = /*FALLBACK_JSON*/{"generated": "2026-11-08", "stats": {"upcoming_total": 22, "upcoming_regional": 13, "upcoming_national": 9, "regions_with_events": 10, "with_prize": 3}, "regions": [{"id": 43, "name": "Алтайский край", "upcoming_events": 4}, {"id": 12, "name": "Санкт-Петербург", "upcoming_events": 2}, {"id": 19, "name": "Краснодарский край", "upcoming_events": 2}, {"id": 28, "name": "Пермский край", "upcoming_events": 2}, {"id": 14, "name": "Калининградская область", "upcoming_events": 1}, {"id": 18, "name": "Ростовская область", "upcoming_events": 1}, {"id": 22, "name": "Астраханская область", "upcoming_events": 1}, {"id": 45, "name": "Челябинская область", "upcoming_events": 1}, {"id": 72, "name": "Чеченская Республика", "upcoming_events": 1}, {"id": 76, "name": "Забайкальский край", "upcoming_events": 1}], "events": [{"id": 68, "title": "ВНИМАНИЕ участникам, успешно сдавшим зачет на открытых судейских семинарах на судей 3-й и 2-й категории от региона Санкт-Петербург", "organizer": null, "event_date": "2026-11-12", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 12, "region_name": "Санкт-Петербург", "city": "Санкт-Петербург", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://cloud.mail.ru/public/roUe/ndd2yPZ4a", "source_url": "https://cloud.mail.ru/public/roUe/ndd2yPZ4a", "confidence": 0.55, "moderation": "approved"}, {"id": 67, "title": "Участвуйте в захватывающих гонках дронах в двух дисциплинах! 14 ноября 2026 года на площадке ЦЦО «ИнфинITи» Школы №31", "organizer": null, "event_date": "2026-11-14", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 12, "region_name": "Санкт-Петербург", "city": "Санкт-Петербург", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdSPb/1097", "confidence": 0.55, "moderation": "approved"}, {"id": 72, "title": "🔥 14 ноября состоится фестиваль интеллектуально-инновационных видов спорта, посвященный Году единства народов России", "organizer": null, "event_date": "2026-11-14", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 19, "region_name": "Краснодарский край", "city": "Краснодар", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://taplink.cc/igrintellekt", "source_url": "https://taplink.cc/igrintellekt", "confidence": 0.55, "moderation": "approved"}, {"id": 93, "title": "КИБЕРДРОМ 2026! 25-26 ноября 2026 г", "organizer": null, "event_date": "2026-11-25", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 14, "region_name": "Калининградская область", "city": "Калининград", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6ae9b8672c4f896ebeedb6c3/", "source_url": "https://forms.yandex.ru/u/6ae9b8672c4f896ebeedb6c3/", "confidence": 0.65, "moderation": "approved"}, {"id": 53, "title": "«На высоте» — проект для тех, кто хочет покорять новые высоты 🚀 Вместе с Народным фронтом мы запустили масштабный", "organizer": null, "event_date": "2027-01-01", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "registration_open", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": 10.0, "prize_fund_visibility": "amount", "prize_fund_note": "нах. Ставки высоки: призовой фонд — 10 миллионов рублей, а победителей ждут ещё", "registration_url": null, "source_url": "https://t.me/droneracingfederation/5833", "confidence": 0.75, "moderation": "approved"}, {"id": 88, "title": "🌟 Мы искренне гордимся нашими юными спортсменами! 🏅 12 июля прошло первенство и чемпионат СКФО и ЮФО в дисциплине", "organizer": null, "event_date": "2027-07-12", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 72, "region_name": "Чеченская Республика", "city": "Грозный", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/fgdrus30", "source_url": "https://vk.com/fgdrus30", "confidence": 0.55, "moderation": "approved"}, {"id": 114, "title": "Федерация гонок дронов (беспилотных воздушных судов) Ростовской области pinned « 📢 Друзья, напоминаем о наших", "organizer": null, "event_date": "2027-07-14", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "postponed", "region_id": 18, "region_name": "Ростовская область", "city": "Ростов-на-Дону", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdrrostov/774", "confidence": 0.55, "moderation": "approved"}, {"id": 58, "title": "Друзья! Уже менее чем через месяц состоятся очередные соревнования по гонкам дронов - Кубок Пермского края, в классах", "organizer": null, "event_date": "2027-07-19", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 28, "region_name": "Пермский край", "city": "Пермь", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52", "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52", "confidence": 0.55, "moderation": "approved"}, {"id": 56, "title": "🔥 Лучшие пилоты России поборются за место в команде Phoenix Racing! Уже в эти выходные состоится Phoenix Racing Draft —", "organizer": null, "event_date": "2027-08-29", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": 45, "region_name": "Челябинская область", "city": "Челябинск", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://yandex.ru/maps?text=55.215111,61.185111&si=zx0dgzan3dwhvwawtztf4f56m0", "source_url": "https://yandex.ru/maps?text=55.215111,61.185111&si=zx0dgzan3dwhvwawtztf4f56m0", "confidence": 0.55, "moderation": "approved"}, {"id": 77, "title": "Фестиваль небесных видов спорта и высоких технологий, прошедший на нашем аэродроме 4 октября, запомнился многочисленным", "organizer": null, "event_date": "2027-10-04", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/aeroclub43", "source_url": "https://vk.com/aeroclub43", "confidence": 0.55, "moderation": "approved"}, {"id": 97, "title": "🚀 Приглашаем на гонки дронов «АэроДрайв» в рамках ИТ-форума! 9 октября в Барнауле пройдут открытые соревнования по", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "registration_open", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://dpo.edu.asu.ru/course/view.php?id=1878", "source_url": "https://dpo.edu.asu.ru/course/view.php?id=1878", "confidence": 0.65, "moderation": "approved"}, {"id": 98, "title": "🏆 Гонки дронов «АэроДрайв»: благодарим партнёров и ждём вас! Напоминаем, что 9 октября в Барнауле в рамках  IT-форума", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "registration_open", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdraltay/63", "confidence": 0.55, "moderation": "approved"}, {"id": 75, "title": "\"Я познакомился с молодыми инструкторами БПЛА", "organizer": null, "event_date": "2027-10-25", "event_time": null, "date_time_precision": "exact", "event_type": "regional", "status": "anons", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": 10.0, "prize_fund_visibility": "amount", "prize_fund_note": "БУДУЩЕЕ УЖЕ ЗДЕСЬ. Призовой фонд – 10 миллионов рублей и 2 автомобиля. А для ф", "registration_url": null, "source_url": "https://t.me/fgd_to/983", "confidence": 0.55, "moderation": "approved"}, {"id": 73, "title": "🏆 8 ноября стартует третий онлайн этап соревнований по гонкам дронов/компьютерному спорту на призы Федерации гонок", "organizer": null, "event_date": "2026-11-08", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "ongoing", "region_id": 19, "region_name": "Краснодарский край", "city": "Краснодар", "venue": null, "prize_fund_amount": 31500.0, "prize_fund_visibility": "amount", "prize_fund_note": "01 г.р. и старше. 🔥 Призовой фонд первого этапа составит 31500 рублей 🚀 В каждой категории: 👦🏻 Мужские при", "registration_url": "http://fgdkrd.ru/racebot/mycab/event_register.php?token=8a965ed12ecd5628caf6a11571f74097b8df876e825162f1f7fa1ea482da10af", "source_url": "http://fgdkrd.ru/racebot/mycab/event_register.php?token=8a965ed12ecd5628caf6a11571f74097b8df876e825162f1f7fa1ea482da10af", "confidence": 0.65, "moderation": "approved"}, {"id": 87, "title": "🏁 ✨ 30 марта в Астраханской области прошел 2 этап региональных соревнований гонок дронов! Организатором выступила", "organizer": null, "event_date": "2027-03-30", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": 22, "region_name": "Астраханская область", "city": "Астрахань", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/fgdrus30", "source_url": "https://vk.com/fgdrus30", "confidence": 0.55, "moderation": "approved"}, {"id": 106, "title": "➡️ Судейские вебинары продолжаются ⬅️ Хочешь стать спортивным судьей по гонкам дронов или повысить свою категорию?", "organizer": null, "event_date": "2027-05-23", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://vk.com/fgdreferee", "source_url": "https://vk.com/fgdreferee", "confidence": 0.55, "moderation": "approved"}, {"id": 62, "title": "Друзья! Обязательно читайте регламенты! Перед участием в Кубке Пермского края каждый пилот обязан ознакомиться с", "organizer": null, "event_date": "2027-07-19", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": 76, "region_name": "Забайкальский край", "city": "Чита", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52/", "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52/", "confidence": 0.55, "moderation": "approved"}, {"id": 64, "title": "ОТКРЫТА РЕГИСТРАЦИЯ НА ТЕХНИЧЕСКИЙ СИМУЛЯТОР! 🖥 🚁 Друзья! Напоминаем, что в рамках Чемпионата Пермского края по гонкам", "organizer": null, "event_date": "2027-08-04", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "registration_open", "region_id": 28, "region_name": "Пермский край", "city": "Пермь", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://forms.yandex.ru/u/6a705bda49af47070fd5fed0/", "source_url": "https://forms.yandex.ru/u/6a705bda49af47070fd5fed0/", "confidence": 0.65, "moderation": "approved"}, {"id": 100, "title": "🏆 Федерация гонок дронов Алтайского края подводит итоги соревнований «АэроДрайв» 9 октября в Барнауле в рамках", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "finished", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdraltay/66", "confidence": 0.55, "moderation": "approved"}, {"id": 102, "title": "🎬 Смотрите, как это было! Видеоотчёт с гонок дронов «АэроДрайв» Друзья, МедиаHub АлтГУ подготовил для вас видеоотчёт с", "organizer": null, "event_date": "2027-10-09", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "anons", "region_id": 43, "region_name": "Алтайский край", "city": "Барнаул", "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/", "source_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/", "confidence": 0.55, "moderation": "approved"}, {"id": 70, "title": "🚁 Определилась пятёрка сильнейших пилотов регионального этапа проекта «Пилоты Будущего»! 23 октября на площадке", "organizer": null, "event_date": "2027-10-23", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "finished", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgd_fas_sakh/161", "confidence": 0.55, "moderation": "approved"}, {"id": 110, "title": "Смотрите чемпионат России по гонкам дронов 🏆 🏁 25 октября Финал главного турнира года в Сириусе! Восемь сильнейших", "organizer": null, "event_date": "2027-10-25", "event_time": null, "date_time_precision": "exact", "event_type": "national", "status": "registration_open", "region_id": null, "region_name": null, "city": null, "venue": null, "prize_fund_amount": null, "prize_fund_visibility": "hidden", "prize_fund_note": null, "registration_url": null, "source_url": "https://t.me/fgdrrm/115", "confidence": 0.55, "moderation": "approved"}]}/*END*/;
-const statuses = [
-  { v:"", l:"Все статусы" },
-  { v:"registration_open", l:"Регистрация открыта" },
-  { v:"anons", l:"Анонс" },
-  { v:"ongoing", l:"Идёт сейчас" },
-];
-let MODE = "by_region", REGION = "", STATUS = "", DATA = null;
+      <footer>
+        <span id="footLeft">© 2026 Дрон Рейсинг</span>
+        <span id="footRight">Данные собираются автоматически</span>
+      </footer>
+    </main>
+  </div>
+</div>
 
-const $ = id => document.getElementById(id);
-function fmtDate(s){ if(!s) return ""; const [y,m,d] = s.split("-"); return `${d}.${m}.${y}`; }
-function fmtPrize(p){ return p == null ? "" : new Intl.NumberFormat("ru-RU").format(p) + " ₽"; }
-const STATUS_LABEL = { registration_open:"Регистрация открыта", anons:"Анонс", ongoing:"Идёт сейчас", registration_closed:"Регистрация закрыта", finished:"Прошло", postponed:"Перенесено" };
-
-function setMode(m){
-  MODE = m;
-  $("tab-reg").classList.toggle("on", m==="by_region");
-  $("tab-nat").classList.toggle("on", m==="national");
-  draw();
-}
-function draw(){
-  const events = (DATA.events||[])
-    .filter(e => MODE==="national" ? e.event_type!=="regional" : e.event_type==="regional")
-    .filter(e => !REGION || e.region_id == REGION)
-    .filter(e => !STATUS || e.status===STATUS)
-    .sort((a,b)=>a.event_date<b.event_date?-1:1);
-  const names = {};
-  (DATA.regions||[]).forEach(r => names[r.id]=r.name);
-  $("title").textContent = MODE==="national" ? "Все крупные и всероссийские старты"
-      : (REGION ? names[REGION] || "Регион" : "Все регионы");
-  $("found").textContent = "Найдено: " + events.length;
-  STATUS_LABEL.static = null;
-  $("list").innerHTML = events.length ? events.map(card).join("") :
-      `<div class="empty">Пока ничего не найдено. Попробуйте другой регион или статус.</div>`;
-}
-function card(e){
-  const stCls = { registration_open:"st-open", ongoing:"st-ongoing", anons:"st-anons" };
-  const st = STATUS_LABEL[e.status] ? `<span class="status ${stCls[e.status] || "st-closed"}">${STATUS_LABEL[e.status]}</span>` : "";
-  const prize = e.prize_fund_amount ? `<span class="prize">🏆 Призовой фонд ${fmtPrize(e.prize_fund_amount)}</span>`
-      : (e.prize_fund_note && e.prize_fund_visibility==="tbd" ? `<span class="prize">🏆 ${e.prize_fund_note}</span>` : "");
-  const reg = e.registration_url ? `<a class="a-reg" href="${e.registration_url}" target="_blank" rel="noreferrer">Зарегистрироваться</a>` : "";
-  const src = e.source_url ? `<a class="a-src" href="${e.source_url}" target="_blank" rel="noreferrer">Первоисточник ↗</a>` : "";
-  return `<div class="card">
-    <div class="top"><span class="date">${fmtDate(e.event_date)}${e.event_time ? " · " + e.event_time : ""}</span>${st}</div>
-    <h3>${(e.title||"").split("\\n")[0]}</h3>
-    <div class="meta">${e.region_name || "Россия"}${e.city ? " · " + e.city : ""}
-      <span class="chip">уверенность ${Math.round((e.confidence||0)*100)}%</span></div>
-    ${prize}
-    ${(reg||src) ? `<div class="actions">${reg}${src}</div>` : ""}
-  </div>`;
-}
-// init
-statuses.forEach(s=>{
-  const b = document.createElement("button");
-  b.textContent = s.l; b.onclick = () => { STATUS = s.v;
-    document.querySelectorAll("#status button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on"); draw(); };
-  if(!s.v) b.classList.add("on");
-  $("status").appendChild(b);
-});
-$("region").addEventListener("change", e => { REGION = e.target.value; draw(); });
-
-(async () => {
-  const base = "https://drone-racing-backend.onrender.com/api/v1";
-  const use = (data, isLive, msg) => {
-    DATA = data;
-    const rg = DATA.regions || [];
-    $("region").innerHTML = '<option value="">— все регионы (' + DATA.events.length + ') —</option>' +
-        rg.slice().sort((a,b)=>b.upcoming_events-a.upcoming_events)
-          .map(r=>`<option value="${r.id}">${r.name} (${r.upcoming_events})</option>`).join("");
-    $("sub").innerHTML = (DATA.stats && DATA.stats.upcoming_total)
-        ? `Сейчас в базе: <b>${DATA.stats.upcoming_total}</b> предстоящих стартов в <b>${DATA.stats.regions_with_events||0}</b> регионах${isLive ? "" : " (локальный снимок)"}.`
-        : "Данные локального снимка.";
-    $("note").style.display = isLive ? "none" : "block";
-    if (!isLive && msg) $("note").textContent = msg;
-    $("gen").textContent = DATA.generated || "";
-    draw();
-  };
-  const fetchLive = async () => {
-    const [ev, rg, st] = await Promise.all([
-      fetch(base + "/events?mode=all&only_upcoming=true&limit=100", {cache:"no-store"}),
-      fetch(base + "/regions?only_with_events=true", {cache:"no-store"}),
-      fetch(base + "/stats", {cache:"no-store"}),
-    ]);
-    if (!(ev.ok && rg.ok)) return null;
-    return {
-      generated: new Date().toISOString().slice(0,10),
-      events: (await ev.json()).items,
-      regions: await rg.json(),
-      stats: st.ok ? await st.json() : {},
-    };
-  };
-  // сначала мгновенно показываем снимок — картинка на экране всегда есть
-  use(FALLBACK, false, "Загружаются актуальные данные с сервера…");
-  try {
-    const live = await fetchLive();
-    if (live && live.events.length > 0 && live.regions.length > 0) {
-      use(live, true);   // живые данные есть — показываем их
-    } else {
-      // сервер проснулся с пустой БД (обычная повторная сборка) — пробуем ещё раз через 30 сек
-      $("note").textContent = "Сервер обновляет базу данных, показан локальный снимок. Данные подтянутся автоматически…";
-      setTimeout(async () => {
-        try {
-          const live2 = await fetchLive();
-          if (live2 && live2.events.length > 0 && live2.regions.length > 0) use(live2, true);
-          else use(FALLBACK, false, "Облачный сервер временно недоступен — показан локальный снимок базы из последнего сбора.");
-        } catch (e) {
-          use(FALLBACK, false, "Облачный сервер временно недоступен — показан локальный снимок базы из последнего сбора.");
-        }
-      }, 30000);
-    }
-  } catch (e) {
-    use(FALLBACK, false, "Облачный сервер временно недоступен — показан локальный снимок базы из последнего сбора.");
+<script id="snapshot" type="application/json">/*FALLBACK_JSON*/{
+ "generated": "2026-11-09",
+ "stats": {
+  "upcoming_total": 17,
+  "upcoming_regional": 12,
+  "upcoming_national": 5,
+  "regions_with_events": 9,
+  "with_prize": 2
+ },
+ "regions": [
+  {
+   "id": 29,
+   "name": "Башкортостан",
+   "federal_district": "ПФО",
+   "upcoming_events": 3
+  },
+  {
+   "id": 12,
+   "name": "Санкт-Петербург",
+   "federal_district": "СЗФО",
+   "upcoming_events": 2
+  },
+  {
+   "id": 57,
+   "name": "Республика Коми",
+   "federal_district": "СЗФО",
+   "upcoming_events": 2
+  },
+  {
+   "id": 14,
+   "name": "Калининградская область",
+   "federal_district": "СЗФО",
+   "upcoming_events": 1
+  },
+  {
+   "id": 16,
+   "name": "Архангельская область",
+   "federal_district": "СЗФО",
+   "upcoming_events": 1
+  },
+  {
+   "id": 18,
+   "name": "Ростовская область",
+   "federal_district": "ЮФО",
+   "upcoming_events": 1
+  },
+  {
+   "id": 19,
+   "name": "Краснодарский край",
+   "federal_district": "ЮФО",
+   "upcoming_events": 1
+  },
+  {
+   "id": 38,
+   "name": "Кемеровская область",
+   "federal_district": "СФО",
+   "upcoming_events": 1
+  },
+  {
+   "id": 42,
+   "name": "Томская область",
+   "federal_district": "СФО",
+   "upcoming_events": 1
   }
-})();
+ ],
+ "events": [
+  {
+   "id": 43,
+   "title": "Уже завтра 03",
+   "organizer": null,
+   "event_date": "1016-11-03",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 23,
+   "region_name": "Татарстан",
+   "city": "Казань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/FDRT116/451",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 214,
+   "title": "Вести-Орёл🪂Орловские любители неба отмечают День парашютиста Дата выбрана неслучайно – именно 26 июля 1930 года",
+   "organizer": null,
+   "event_date": "1930-07-26",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 52,
+   "region_name": "Орловская область",
+   "city": "Орёл",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vestiorel.ru/novosti/140096.html",
+   "source_url": "https://vestiorel.ru/novosti/140096.html",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 117,
+   "title": "Сегодня в Кабардино-Балкарии - День памяти сотрудников правоохранительных органов, погибших при исполнении служебного долга",
+   "organizer": null,
+   "event_date": "2005-10-13",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 66,
+   "region_name": "Кабардино-Балкарская Республика",
+   "city": "Нальчик",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/rofgdrkbr/754",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 167,
+   "title": "Агентство технологического развитияДрузья, напоминаем, что с 1 марта 2024 года вступили в силу ️НОВЫЕ ПРАВИЛА️",
+   "organizer": null,
+   "event_date": "2024-03-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://www.consultant.ru/document/cons_doc_LAW_98…",
+   "source_url": "https://www.consultant.ru/document/cons_doc_LAW_98…",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 176,
+   "title": "Федерация гонок Дронов ЛНР приняла участие в мероприятии посвященном дню Физкультурника, которое состоялось в г",
+   "organizer": null,
+   "event_date": "2024-08-10",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 62,
+   "region_name": "Луганская Народная Республика",
+   "city": "Луганск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226444109_1",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 36,
+   "title": "В Псковской области пройдет первый чемпионат по гонкам дронов 2 ноября 2024 года пройдет первый Чемпионат Псковской",
+   "organizer": null,
+   "event_date": "2024-11-02",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 55,
+   "region_name": "Псковская область",
+   "city": "Псков",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/gf2cy38lr1-v-pskovskoi-oblasti-proidet-pervii-chemp",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 34,
+   "title": "Турниры Чемпионата, Кубка и Первенства России в дисциплинах технического симулятора пройдут 9 и 10 ноября в онлайн",
+   "organizer": null,
+   "event_date": "2024-11-10",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/rrxbvpjy91-turniri-chempionata-kubka-i-pervenstva-r",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 31,
+   "title": "Лучшие FPV пилоты страны сразятся в Кубке России по гонкам дронов в Сириусе 17 – 20 ноября в п",
+   "organizer": null,
+   "event_date": "2024-11-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/dfjs6ph5i1-luchshie-fpv-piloti-strani-srazyatsya-v",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 32,
+   "title": "В Сириусе пройдет первый Чемпионат России по гонкам дронов Более 100 пилотов квадрокоптеров из 19 регионов России",
+   "organizer": null,
+   "event_date": "2024-11-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/0yz2f07rn1-v-siriuse-proidet-pervii-chempionat-ross",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 33,
+   "title": "Более 70 юниоров и юниорок примут участие в Первенстве России по гонкам дронов в Сириусе Финал Первенства России по",
+   "organizer": null,
+   "event_date": "2024-11-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/nmps7ybrg1-bolee-70-yuniorov-i-yuniorok-primut-ucha",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 35,
+   "title": "Финалы сезона соревнований гонок дронов 2024 года пройдут в Сириусе Финальные состязания сезона соревнований гонок",
+   "organizer": null,
+   "event_date": "2024-11-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/ra2jhxbev1-finali-sezona-sorevnovanii-gonok-dronov",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 198,
+   "title": "25-26 февраля 2025 года состоится первый открытый районный Чемпионат Камешковского района Владимирской области по",
+   "organizer": null,
+   "event_date": "2025-02-25",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 10,
+   "region_name": "Владимирская область",
+   "city": "Владимир",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222627726_48",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 170,
+   "title": "Ты уже слышал?29–30 марта 2025 года в Астрахани пройдет Чемпионат по гонкам дронов! Почему это стоит увидеть: Самые быстрые дроны региона",
+   "organizer": null,
+   "event_date": "2025-03-29",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 22,
+   "region_name": "Астраханская область",
+   "city": "Астрахань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://",
+   "source_url": "https://",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 171,
+   "title": "Ты готов к гонкам?29–30 марта 2025 года в Астрахани пройдет Чемпионат по гонкам дронов! Почему это круто: Соревнования",
+   "organizer": null,
+   "event_date": "2025-03-29",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 22,
+   "region_name": "Астраханская область",
+   "city": "Астрахань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://",
+   "source_url": "https://",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 86,
+   "title": "🏁 ✨ 30 марта в Астраханской области прошел 2 этап региональных соревнований гонок дронов! Организатором выступила",
+   "organizer": null,
+   "event_date": "2025-03-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 22,
+   "region_name": "Астраханская область",
+   "city": "Астрахань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.com/fgdrus30",
+   "source_url": "https://vk.com/fgdrus30",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 30,
+   "title": "В Уфе определят чемпиона Башкортостана по гонкам дронов 18 мая в Уфе состоятся чемпионат и первенство Республики",
+   "organizer": null,
+   "event_date": "2025-05-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 29,
+   "region_name": "Башкортостан",
+   "city": "Уфа",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/rkrsh6i6g1-v-ufe-opredelyat-chempiona-bashkortostan",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 29,
+   "title": "В Амурской области пройдут чемпионат и первенство региона по гонкам дронов 16 июня в городе Белогорск состоится",
+   "organizer": null,
+   "event_date": "2025-06-16",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/gye69i5091-v-amurskoi-oblasti-proidut-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 224,
+   "title": "Впервые в Камчатском крае! Первенство и Чемпионат Камчатского края по гонкам дронов Дисциплина: Технический симулятор",
+   "organizer": null,
+   "event_date": "2025-06-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 35,
+   "region_name": "Камчатский край",
+   "city": "Петропавловск-Камчатский",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6848f98d90fa7b3f540dd62d",
+   "source_url": "https://forms.yandex.ru/u/6848f98d90fa7b3f540dd62d",
+   "confidence": 0.75,
+   "moderation": "approved"
+  },
+  {
+   "id": 28,
+   "title": "В Махачкале впервые пройдет чемпионат Дагестана по гонкам дронов 22 июня в городе Махачкала впервые состоится чемпионат",
+   "organizer": null,
+   "event_date": "2025-06-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 68,
+   "region_name": "Республика Дагестан",
+   "city": "Махачкала",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/k9u3hbfa21-v-mahachkale-vpervie-proidet-chempionat",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 27,
+   "title": "В Сыктывкаре пройдет чемпионат Республики Коми по гонкам дронов 28 июня в городе Сыктывкар пройдет чемпионат Республики",
+   "organizer": null,
+   "event_date": "2025-06-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 57,
+   "region_name": "Республика Коми",
+   "city": "Сыктывкар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/b4z1vccbx1-v-siktivkare-proidet-chempionat-respubli",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 245,
+   "title": "Федерация гонок дронов РоссииОткрываем спортивный сезон в Грозном! Ведь именно здесь пройдет первый отборочный этап на",
+   "organizer": null,
+   "event_date": "2025-07-03",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 72,
+   "region_name": "Чеченская Республика",
+   "city": "Грозный",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222956087_92",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 25,
+   "title": "В Новосибирске состоятся чемпионат и первенство региона по гонкам дронов 5 и 6 июля в Новосибирске состоятся чемпионат",
+   "organizer": null,
+   "event_date": "2025-07-06",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 37,
+   "region_name": "Новосибирская область",
+   "city": "Новосибирск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/egljyv0ux1-v-novosibirske-sostoyatsya-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 26,
+   "title": "В Грозном стартует отбор на чемпионат и первенство России по гонкам дронов С 3 по 7 июля в городе Грозный Чеченской",
+   "organizer": null,
+   "event_date": "2025-07-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 72,
+   "region_name": "Чеченская Республика",
+   "city": "Грозный",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/4l42mloxz1-v-groznom-startuet-otbor-na-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 87,
+   "title": "🌟 Мы искренне гордимся нашими юными спортсменами! 🏅 12 июля прошло первенство и чемпионат СКФО и ЮФО в дисциплине",
+   "organizer": null,
+   "event_date": "2025-07-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 72,
+   "region_name": "Чеченская Республика",
+   "city": "Грозный",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.com/fgdrus30",
+   "source_url": "https://vk.com/fgdrus30",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 24,
+   "title": "В Якутии пройдет второй отборочный этап на чемпионат и первенство России по гонкам дронов В Якутии с 24 по 28 июля",
+   "organizer": null,
+   "event_date": "2025-07-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 36,
+   "region_name": "Якутия",
+   "city": "Якутск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/7u46zjnuv1-v-yakutii-proidet-vtoroi-otborochnii-eta",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 23,
+   "title": "В Иркутске впервые пройдут межрегиональные соревнования по гонкам дронов С 7 по 11 августа в Иркутске впервые пройдут",
+   "organizer": null,
+   "event_date": "2025-08-11",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 40,
+   "region_name": "Иркутская область",
+   "city": "Иркутск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/pvvtutkk11-v-irkutske-vpervie-proidut-mezhregionaln",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 22,
+   "title": "ФГДР проведет первые международные спортивные соревнования по гонкам дронов С 15 по 17 августа в Москве, на территории",
+   "organizer": null,
+   "event_date": "2025-08-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 7,
+   "region_name": "Белгородская область",
+   "city": "Белгород",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/2v50isrvk1-fgdr-provedet-pervie-mezhdunarodnie-spor",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 21,
+   "title": "В Екатеринбурге пройдет четвертый отборочный этап на чемпионат и первенство России по гонкам дронов В период с 14 по 18",
+   "organizer": null,
+   "event_date": "2025-08-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 44,
+   "region_name": "Свердловская область",
+   "city": "Екатеринбург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/5ejn2tal31-v-ekaterinburge-proidet-chetvertii-otbor",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 20,
+   "title": "Чемпионат и первенство Центрального федерального округа состоятся в Москве С 18 по 22 сентября в Москве состоится",
+   "organizer": null,
+   "event_date": "2025-09-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 7,
+   "region_name": "Белгородская область",
+   "city": "Белгород",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/uja4cixp01-chempionat-i-pervenstvo-tsentralnogo-fed",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 19,
+   "title": "В Челябинске пройдет финал регионального сезона гонок дронов 75 класса 27 сентября в Челябинске состоится финал",
+   "organizer": null,
+   "event_date": "2025-09-27",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 45,
+   "region_name": "Челябинская область",
+   "city": "Челябинск",
+   "venue": null,
+   "prize_fund_amount": 100000.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "рдловской областей. Призовой фонд мероприятия составит 100 000 рублей. Организовывает соревнования Федерац",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/8p3dbdm0e1-v-chelyabinske-proidet-final-regionalnog",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 77,
+   "title": "Фестиваль небесных видов спорта и высоких технологий, прошедший на нашем аэродроме 4 октября, запомнился многочисленным",
+   "organizer": null,
+   "event_date": "2025-10-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.com/aeroclub43",
+   "source_url": "https://vk.com/aeroclub43",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 96,
+   "title": "🚀 Приглашаем на гонки дронов «АэроДрайв» в рамках ИТ-форума! 9 октября в Барнауле пройдут открытые соревнования по",
+   "organizer": null,
+   "event_date": "2025-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://dpo.edu.asu.ru/course/view.php?id=1878",
+   "source_url": "https://dpo.edu.asu.ru/course/view.php?id=1878",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 97,
+   "title": "🏆 Гонки дронов «АэроДрайв»: благодарим партнёров и ждём вас! Напоминаем, что 9 октября в Барнауле в рамках IT-форума",
+   "organizer": null,
+   "event_date": "2025-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdraltay/63",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 99,
+   "title": "🏆 Федерация гонок дронов Алтайского края подводит итоги соревнований «АэроДрайв» 9 октября в Барнауле в рамках",
+   "organizer": null,
+   "event_date": "2025-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdraltay/66",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 201,
+   "title": "ТЕЛЕКОМПАНИЯ \"АИСТ\" ИРКУТСК и ИРКУТСКАЯ ОБЛАСТЬГонки дронов. Спортивно-развлекательная программа \"Спорт 38\" от 24.10.202516:425",
+   "organizer": null,
+   "event_date": "2025-10-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 40,
+   "region_name": "Иркутская область",
+   "city": "Иркутск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222829572_77",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 18,
+   "title": "Кубок России по гонкам дронов пройдет в Самаре в рамках XIII Международного спортивного форума «Россия – спортивная",
+   "organizer": null,
+   "event_date": "2025-11-05",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 25,
+   "region_name": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/585b6fzhj1-kubok-rossii-po-gonkam-dronov-proidet-v",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 188,
+   "title": "От инженерных решений до дорожной карты: как прошёл Отраслевой слёт молодёжных инженерных команд в Москве 20 ноября",
+   "organizer": null,
+   "event_date": "2025-11-20",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222956087_104",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 17,
+   "title": "Winline Кубок России в дисциплинах 75 класса состоится в Москве Финальные турниры сезона соревнований 2025 года завершатся в Москве",
+   "organizer": null,
+   "event_date": "2025-12-14",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 25,
+   "region_name": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/hjlue5dpx1-winline-kubok-rossii-v-distsiplinah-75-k",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 151,
+   "title": "20 декабря 2025 года приглашаем всех на IV Фестиваль кибер и фиджитал спорта Псковской области \"Кубок Деда",
+   "organizer": null,
+   "event_date": "2025-12-20",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 55,
+   "region_name": "Псковская область",
+   "city": "Псков",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-145367898_452",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 250,
+   "title": "Уважаемые родители! Федерация гонок дронов Иркутской области с января открывает набор на онлайн тренировки и приглашает",
+   "organizer": null,
+   "event_date": "2026-01-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 40,
+   "region_name": "Иркутская область",
+   "city": "Иркутск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://t.me/+jy9KUUMJWLYxY2Ri",
+   "source_url": "https://t.me/+jy9KUUMJWLYxY2Ri",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 49,
+   "title": "🇷🇺 Региональный этап по компьютерному спорту среди команд общеобразовательных организаций «Всероссийской",
+   "organizer": null,
+   "event_date": "2026-01-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 55,
+   "region_name": "Псковская область",
+   "city": "Псков",
+   "venue": null,
+   "prize_fund_amount": 1500000.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "пяти дисциплинах и призовой фонд в 1 500 000 рублей. К участию приглашаются школьники от",
+   "registration_url": "https://disk.yandex.ru/d/ElGoIqsfhOxFlg",
+   "source_url": "https://disk.yandex.ru/d/ElGoIqsfhOxFlg",
+   "confidence": 0.75,
+   "moderation": "approved"
+  },
+  {
+   "id": 50,
+   "title": "🇷🇺 Регистрация на региональный этап «Всероссийской интеллектуально-киберспортивной лиги 2026» в Псковской области",
+   "organizer": null,
+   "event_date": "2026-01-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 55,
+   "region_name": "Псковская область",
+   "city": "Псков",
+   "venue": null,
+   "prize_fund_amount": 1500000.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "пяти дисциплинах и призовой фонд в 1 500 000 рублей. Желаем удачи всем участникам! 🎮 ✨",
+   "registration_url": null,
+   "source_url": "https://t.me/digital_sports_60/622",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 177,
+   "title": "ЦРКС Республики КрымПОКОРИ КРЫМ 2026: ВЫБЕРИ СВОЙ ФРОНТ! Пришло время доказать, на что ты способен! 31 января 2026 года",
+   "organizer": null,
+   "event_date": "2026-01-31",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 20,
+   "region_name": "Крым",
+   "city": "Симферополь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.cc/cTuwgD",
+   "source_url": "https://vk.cc/cTuwgD",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 172,
+   "title": "Юный спортсмен Георгий Дементьев из Волгограда принял участие в открытых республиканских соревнованиях (Адыгея) «Полёт 1",
+   "organizer": null,
+   "event_date": "2026-02-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 21,
+   "region_name": "Волгоградская область",
+   "city": "Волгоград",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.ru/fgd01",
+   "source_url": "https://vk.ru/fgd01",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 232,
+   "title": "Федерация гонок дронов РоссииНа связи регионы Федерации гонок дронов России: В Самарской области спортсмены",
+   "organizer": null,
+   "event_date": "2026-02-21",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 25,
+   "region_name": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "prize_fund_amount": 100000.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "спублике Татарстан. Призовой фонд турнира 100 000 рублей. Подробности в ТГ-канале ФГД РТ, ссы",
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-224374068_59",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 200,
+   "title": "22 февраля 2026 года при участии компании \"Цифровая лаборатория\" и \"Опора России\" прошло Открытое первенство города",
+   "organizer": null,
+   "event_date": "2026-02-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222829572_85",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 95,
+   "title": "🚁 Беспилотная авиация: воронежские подростки покоряют новые высоты! В эфире программы «От 7 до 17» на ТВ Губерния от 17",
+   "organizer": null,
+   "event_date": "2026-03-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 6,
+   "region_name": "Воронежская область",
+   "city": "Воронеж",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdr_vrn/21",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 51,
+   "title": "🔥 КиберВесна 2026 📌 28-29 марта 2026 года в Киберспорт Арена пройдёт турнир по Counter-Strike 2 в формате 5х5",
+   "organizer": null,
+   "event_date": "2026-03-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/digital_sports_60/625",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 102,
+   "title": "🚁 ЧЕМПИОНАТ АЛТАЙСКОГО КРАЯ ПО КОМПЬЮТЕРНОМУ СПОРТУ — ДИСЦИПЛИНА «ТЕХНИЧЕСКИЙ СИМУЛЯТОР»! Алтайское краевое отделение",
+   "organizer": null,
+   "event_date": "2026-03-29",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdraltay/77",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 103,
+   "title": "🏆 ИТОГИ ЧЕМПИОНАТА АЛТАЙСКОГО КРАЯ ПО КОМПЬЮТЕРНОМУ СПОРТУ — ДИСЦИПЛИНА «ТЕХНИЧЕСКИЙ СИМУЛЯТОР»! 29 марта 2026 года в",
+   "organizer": null,
+   "event_date": "2026-03-29",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdraltay/80",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 195,
+   "title": "ФКС России | Алтайский крайАлтайское краевое отделение ФКС России объявляет о проведении Чемпионате Алтайского края по компьютерному спорту",
+   "organizer": null,
+   "event_date": "2026-03-29",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-231620413_21",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 169,
+   "title": "30 марта в Астраханской области прошел 2 этап региональных соревнований гонок дронов! Организатором выступила Федерация",
+   "organizer": null,
+   "event_date": "2026-03-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 22,
+   "region_name": "Астраханская область",
+   "city": "Астрахань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://",
+   "source_url": "https://",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 125,
+   "title": "Небо зовет: Владимир готовится к масштабным гонкам дронов! 4 апреля 2026 года в нашем городе пройдут Чемпионат и",
+   "organizer": null,
+   "event_date": "2026-04-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 10,
+   "region_name": "Владимирская область",
+   "city": "Владимир",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222627726_58",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 192,
+   "title": "Итоги Чемпионата и Первенства Челябинской области по гонкам дронов (75 класс, личный зачёт) Челябинск | 25 апреля 2026",
+   "organizer": null,
+   "event_date": "2026-04-25",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 45,
+   "region_name": "Челябинская область",
+   "city": "Челябинск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222956654_371",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 186,
+   "title": "Турнир по гонкам дронов \"НЕБО ПОМНИТ\" 9 мая 2026 года в Нальчике состоится турнир по гонкам дронов, приуроченный ко Дню",
+   "organizer": null,
+   "event_date": "2026-05-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 66,
+   "region_name": "Кабардино-Балкарская Республика",
+   "city": "Нальчик",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/69fadefbeb614620ebc76823",
+   "source_url": "https://forms.yandex.ru/u/69fadefbeb614620ebc76823",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 233,
+   "title": "Уважаемый спортсмены! Подведены итоги официального зачета Первенства и Чемпионата Ленинградской области по гонкам",
+   "organizer": null,
+   "event_date": "2026-05-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://disk.yandex.ru/i/7kJ_7TBCXmDVBQ",
+   "source_url": "https://disk.yandex.ru/i/7kJ_7TBCXmDVBQ",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 243,
+   "title": "Федерация компьютерного спорта проводит Чемпионат в нашем любимом симуляторе \"Квадросим\" Покажем как летаю настоящие",
+   "organizer": null,
+   "event_date": "2026-05-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 20,
+   "region_name": "Крым",
+   "city": "Симферополь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222832166_201",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 216,
+   "title": "ЧЕМПИОНАТ И ПЕРВЕНСТВО РЯЗАНСКОЙ ОБЛАСТИ - ТЕХНИЧЕСКИЙ СИМУЛЯТОР 13 мая 2026 года на территории Рязанского колледжа электроники (г",
+   "organizer": null,
+   "event_date": "2026-05-13",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 5,
+   "region_name": "Рязанская область",
+   "city": "Рязань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/cloud/69db5e68d04688658c936248",
+   "source_url": "https://forms.yandex.ru/cloud/69db5e68d04688658c936248",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 134,
+   "title": "Пилоты Московской области покорили Западную Азию! С 15 по 17 мая 2026 года в Ереване (Армения) прошёл Западно-Азиатский",
+   "organizer": null,
+   "event_date": "2026-05-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 1,
+   "region_name": "Москва",
+   "city": "Москва",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-225264500_25",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 105,
+   "title": "➡️ Судейские вебинары продолжаются ⬅️ Хочешь стать спортивным судьей по гонкам дронов или повысить свою категорию",
+   "organizer": null,
+   "event_date": "2026-05-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.com/fgdreferee",
+   "source_url": "https://vk.com/fgdreferee",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 93,
+   "title": "РО ФГДР Смоленской области представляет: Чемпионат Смоленской области по гонкам Дронов 🇷🇺 24 мая 2026г",
+   "organizer": null,
+   "event_date": "2026-05-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 53,
+   "region_name": "Смоленская область",
+   "city": "Смоленск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdr67/50",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 124,
+   "title": "Ловите дрон на вираже! Приглашаем всех, кто горит скоростью, технологиями и адреналином! 30 мая 2026 года во Владимире",
+   "organizer": null,
+   "event_date": "2026-05-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 10,
+   "region_name": "Владимирская область",
+   "city": "Владимир",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222627726_61",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 238,
+   "title": "Внимание! Соревнование! Открыта регистрация на Чемпионат и Первенство Республики Мордовия по гонкам дронов (беспилотных воздушных судов) г",
+   "organizer": null,
+   "event_date": "2026-05-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a0376cb50569050eaf6cb9b",
+   "source_url": "https://forms.yandex.ru/u/6a0376cb50569050eaf6cb9b",
+   "confidence": 0.75,
+   "moderation": "approved"
+  },
+  {
+   "id": 46,
+   "title": "Уважаемые пилоты ! Заявки на это 👆🏼 мероприятие принимаются только от региональных отделений",
+   "organizer": null,
+   "event_date": "2026-05-31",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 24,
+   "region_name": "Нижегородская область",
+   "city": "Нижний Новгород",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/FGDR52/69",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 132,
+   "title": "«Пилоты завтрашнего дня» — праздник науки, техники и спорта для всей семьи!1 июня 2026 года, в Международный день",
+   "organizer": null,
+   "event_date": "2026-06-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-225264500_27",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 147,
+   "title": "Движение Первых | Череповец и ещё 2 автораВсероссийский чемпионат пилотирования дронов «Пилоты будущего» ждёт тебя",
+   "organizer": null,
+   "event_date": "2026-06-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 17,
+   "region_name": "Вологодская область",
+   "city": "Вологда",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-224374068_70",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 133,
+   "title": "Первенство городского округа Королёв по гонкам дронов (беспилотных воздушных судов) «Космос рядом» Формат проведения",
+   "organizer": null,
+   "event_date": "2026-06-03",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 1,
+   "region_name": "Москва",
+   "city": "Москва",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a0c3bb902848f2ef8b8cb16",
+   "source_url": "https://forms.yandex.ru/u/6a0c3bb902848f2ef8b8cb16",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 45,
+   "title": "Первая большая гонка сезона 🚀 Встречаем лето вместе с профессиональными спортсменами в Санкт-Петербурге! 📆 Когда: 6 - 7",
+   "organizer": null,
+   "event_date": "2026-06-06",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 12,
+   "region_name": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/FGDR52/67",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 230,
+   "title": "Подать заявку можно до 10 июля 2026 г",
+   "organizer": null,
+   "event_date": "2026-07-10",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/68e5049d49363935f86dcb51",
+   "source_url": "https://forms.yandex.ru/u/68e5049d49363935f86dcb51",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 168,
+   "title": "Мы искренне гордимся нашими юными спортсменами! 12 июля прошло первенство и чемпионат СКФО и ЮФО в дисциплине",
+   "organizer": null,
+   "event_date": "2026-07-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 72,
+   "region_name": "Чеченская Республика",
+   "city": "Грозный",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://",
+   "source_url": "https://",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 242,
+   "title": "Молодость зовет: стань пилотом FPV в Лиге “Молодость”! Хочешь учиться управлять дронами и превращать увлечение в",
+   "organizer": null,
+   "event_date": "2026-07-13",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 20,
+   "region_name": "Крым",
+   "city": "Симферополь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://formdesigner.ru/form/245488-Vremya-LETAT.html",
+   "source_url": "https://formdesigner.ru/form/245488-Vremya-LETAT.html",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 15,
+   "title": "ЮФО определит сильнейших пилотов в дисциплине технический симулятор 18 июля состоятся чемпионат и первенство Южного",
+   "organizer": null,
+   "event_date": "2026-07-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/11zdz5b8r1-yufo-opredelit-silneishih-pilotov-v-dist",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 229,
+   "title": "ВНИМАНИЕ!!! Встречаемся завтра, 18 июля в 11:00 на Локомотивной 12а!Проведём старты гоночной дисциплины - класс 200 мм",
+   "organizer": null,
+   "event_date": "2026-07-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 33,
+   "region_name": "Хабаровский край",
+   "city": "Хабаровск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-228263278_23",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 16,
+   "title": "«Петровский» примет первый всероссийский турнир по гонкам дронов сезона 2026 18 и 19 июля на стадионе «Петровский» в",
+   "organizer": null,
+   "event_date": "2026-07-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 12,
+   "region_name": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/84dhbfdsd1-petrovskii-primet-pervii-vserossiiskii-t",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 58,
+   "title": "Друзья! Уже менее чем через месяц состоятся очередные соревнования по гонкам дронов - Кубок Пермского края, в классах",
+   "organizer": null,
+   "event_date": "2026-07-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52",
+   "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 59,
+   "title": "Друзья! Кубок Пермского края по гонкам дронов состоится 19 июля 2026 года",
+   "organizer": null,
+   "event_date": "2026-07-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52",
+   "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 60,
+   "title": "Друзья! С радостью сообщаем: Кубок Пермского края по гонкам дронов состоится уже 19 июля 2026 года в Молодёжном центре",
+   "organizer": null,
+   "event_date": "2026-07-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd59/349",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 61,
+   "title": "Друзья! Обязательно читайте регламенты! Перед участием в Кубке Пермского края каждый пилот обязан ознакомиться с",
+   "organizer": null,
+   "event_date": "2026-07-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 76,
+   "region_name": "Забайкальский край",
+   "city": "Чита",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52/",
+   "source_url": "https://forms.yandex.ru/u/6a38cfcaeb614664169c1e52/",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 14,
+   "title": "Ростов-на-Дону впервые примет чемпионат и первенство ЮФО по гонкам дронов С 23 по 27 июля в Ростове-на-Дону состоятся",
+   "organizer": null,
+   "event_date": "2026-07-27",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 18,
+   "region_name": "Ростовская область",
+   "city": "Ростов-на-Дону",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/8ntdakgde1-rostov-na-donu-vpervie-primet-chempionat",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 13,
+   "title": "Чемпионат и первенство СКФО по гонкам дронов пройдут в Махачкале С 30 июля по 3 августа в Республике Дагестан состоятся",
+   "organizer": null,
+   "event_date": "2026-07-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 68,
+   "region_name": "Республика Дагестан",
+   "city": "Махачкала",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/0n8vvsppo1-chempionat-i-pervenstvo-skfo-po-gonkam-d",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 12,
+   "title": "Белогорск впервые примет чемпионат и первенство ДФО по гонкам дронов В Амурской области впервые состоятся официальные",
+   "organizer": null,
+   "event_date": "2026-08-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/hi7vykz7u1-belogorsk-vpervie-primet-chempionat-i-pe",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 223,
+   "title": "Сегодня 2 августа 2026 года состоялась вторая часть онлайн соревнований Чемпионата и первенства ДФО по гонкам дронов в",
+   "organizer": null,
+   "event_date": "2026-08-02",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226093674_96",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 236,
+   "title": "ИТОГИ БИТВЫ ЗА НЕБО! 2 августа на площадке ГАУ ЦСП РБ «Дворец борьбы» прошли соревнования, приуроченные ко Дню ВДВ, в",
+   "organizer": null,
+   "event_date": "2026-08-02",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 29,
+   "region_name": "Башкортостан",
+   "city": "Уфа",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.ru/album-223517647_310439886",
+   "source_url": "https://vk.ru/album-223517647_310439886",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 237,
+   "title": "БРОСАЙ ВЫЗОВ НЕБУ! ЧЕМПИОНАТ РБ ПО ГОНКАМ ДРОНОВ — КО ДНЮ ВДВ! 02 августа 2026 года в Уфе стартуют соревнования,",
+   "organizer": null,
+   "event_date": "2026-08-02",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 29,
+   "region_name": "Башкортостан",
+   "city": "Уфа",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a587be21f1eb528b81aacdf",
+   "source_url": "https://forms.yandex.ru/u/6a587be21f1eb528b81aacdf",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 62,
+   "title": "х. Следите за обновлениями! Для допуска к участию потребуется стандартный пакет документов (паспорт, медсправка,",
+   "organizer": null,
+   "event_date": "2026-08-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd59/357",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 63,
+   "title": "ОТКРЫТА РЕГИСТРАЦИЯ НА ТЕХНИЧЕСКИЙ СИМУЛЯТОР! 🖥 🚁 Друзья! Напоминаем, что в рамках Чемпионата Пермского края по гонкам",
+   "organizer": null,
+   "event_date": "2026-08-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a705bda49af47070fd5fed0/",
+   "source_url": "https://forms.yandex.ru/u/6a705bda49af47070fd5fed0/",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 55,
+   "title": "Поздравляем с присвоением юношеских спортивных разрядов! Федерация гонок дронов (беспилотных воздушных судов)",
+   "organizer": null,
+   "event_date": "2026-08-06",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 45,
+   "region_name": "Челябинская область",
+   "city": "Челябинск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd174/714",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 64,
+   "title": "Подведены итоги квалификационного этапа Чемпионата Пермского края по гонкам дронов (беспилотных воздушных судов) в",
+   "organizer": null,
+   "event_date": "2026-08-06",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd59/361",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 220,
+   "title": "07.08.2026. Фотографии Чемпионата и первенства ДФО по гонкам дронов в дисциплине – класс 75 мм среди мужчин, женщин,",
+   "organizer": null,
+   "event_date": "2026-08-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226093674_103",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 221,
+   "title": "7 августа 2026 года в Физкультурно-оздоровительном комплексе им",
+   "organizer": null,
+   "event_date": "2026-08-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226093674_99",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 11,
+   "title": "В Новосибирске стартуют межрегиональные соревнования Сибирского федерального округа по гонкам дронов Сибирский",
+   "organizer": null,
+   "event_date": "2026-08-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 37,
+   "region_name": "Новосибирская область",
+   "city": "Новосибирск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/hp3p8anyu1-v-novosibirske-startuyut-mezhregionalnie",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 219,
+   "title": "Сегодня 8 августа 2026 года на стадионе \"Амурсельмаш\" состоялись соревнования Чемпионат и первенство ДФО по гонкам",
+   "organizer": null,
+   "event_date": "2026-08-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226093674_105",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 83,
+   "title": "9 августа 2026 года на стадионе \"Амурсельмаш\" состоялись соревнования Чемпионат и первенство ДФО по гонкам дронов в",
+   "organizer": null,
+   "event_date": "2026-08-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdr28/876",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 130,
+   "title": "Чемпионат и Первенство Калужской области по гонкам дронов! 15 августа 2026 года на территории Спортивного комплекса «Анненки» (г",
+   "organizer": null,
+   "event_date": "2026-08-15",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 11,
+   "region_name": "Калужская область",
+   "city": "Калуга",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/cloud/6a76e5c16d2d7361eeffb76d",
+   "source_url": "https://forms.yandex.ru/cloud/6a76e5c16d2d7361eeffb76d",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 65,
+   "title": "ОТКРЫТА РЕГИСТРАЦИЯ НА КЛАСС 75 ММ! Как зарегистрироваться? Заполните форму по ссылке: ✏️ https://forms",
+   "organizer": null,
+   "event_date": "2026-08-16",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 28,
+   "region_name": "Пермский край",
+   "city": "Пермь",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a705c466d2d73002fd270eb/",
+   "source_url": "https://forms.yandex.ru/u/6a705c466d2d73002fd270eb/",
+   "confidence": 0.75,
+   "moderation": "approved"
+  },
+  {
+   "id": 85,
+   "title": "19 августа 2026 года на стадионе \"Локомотив\" состоялся турнир города Белогорск по гонкам дронов (беспилотных воздушных",
+   "organizer": null,
+   "event_date": "2026-08-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdr28/897",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 9,
+   "title": "Приволжский федеральный округ готовится к старту гонок дронов Серия межрегиональных соревнований по гонкам дронов",
+   "organizer": null,
+   "event_date": "2026-08-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 25,
+   "region_name": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/caoy9eeni1-privolzhskii-federalnii-okrug-gotovitsya",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 175,
+   "title": "НЕБО НАЧИНАЕТСЯ С ТРАССЫ: В ЛУГАНСКЕ ПРОШЁЛ «КУБОК ГЛАВЫ ЛНР» ПО ГОНКАМ ДРОНОВ 22 августа в луганском спорткомплексе",
+   "organizer": null,
+   "event_date": "2026-08-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 62,
+   "region_name": "Луганская Народная Республика",
+   "city": "Луганск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226444109_40",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 10,
+   "title": "Свердловская область примет чемпионат и первенство УФО по гонкам дронов Свердловская область примет чемпионат и",
+   "organizer": null,
+   "event_date": "2026-08-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 44,
+   "region_name": "Свердловская область",
+   "city": "Екатеринбург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/b1vrh2bve1-sverdlovskaya-oblast-primet-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 39,
+   "title": "ТРИ СТИХИИ",
+   "organizer": null,
+   "event_date": "2026-08-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 23,
+   "region_name": "Татарстан",
+   "city": "Казань",
+   "venue": null,
+   "prize_fund_amount": 1800000.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "льного дня. 🏆 Общий призовой фонд — 1 800 000 ₽ На Чемпионате можно увидеть технологии",
+   "registration_url": null,
+   "source_url": "https://t.me/FDRT116/444",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 56,
+   "title": "🔥 Лучшие пилоты России поборются за место в команде Phoenix Racing! Уже в эти выходные состоится Phoenix Racing Draft —",
+   "organizer": null,
+   "event_date": "2026-08-29",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 45,
+   "region_name": "Челябинская область",
+   "city": "Челябинск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://yandex.ru/maps?text=55.215111,61.185111&si=zx0dgzan3dwhvwawtztf4f56m0",
+   "source_url": "https://yandex.ru/maps?text=55.215111,61.185111&si=zx0dgzan3dwhvwawtztf4f56m0",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 129,
+   "title": "Кубок города Калуги по гонкам дронов 30 августа 2026 года в Калуге состоятся зрелищные соревнования FPV-дронов",
+   "organizer": null,
+   "event_date": "2026-08-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 11,
+   "region_name": "Калужская область",
+   "city": "Калуга",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/cloud/6a8837dd4936393c25d467bb",
+   "source_url": "https://forms.yandex.ru/cloud/6a8837dd4936393c25d467bb",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 8,
+   "title": "Санкт-Петербург примет сильнейших пилотов Северо-Запада на чемпионате и первенстве округа С 27 по 31 августа в",
+   "organizer": null,
+   "event_date": "2026-08-31",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 12,
+   "region_name": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/b3dbcpu031-sankt-peterburg-primet-silneishih-piloto",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 241,
+   "title": "Старт набора в кружок «Фиджитал спорт",
+   "organizer": null,
+   "event_date": "2026-09-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 60,
+   "region_name": "Республика Адыгея",
+   "city": "Майкоп",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://polaris-adygea.ru/club.php?slug=obrazovatelnaya-programma-fidzhital-sport-pilotirovanie-bespilotnyh-letatelnyh-apparatov",
+   "source_url": "https://polaris-adygea.ru/club.php?slug=obrazovatelnaya-programma-fidzhital-sport-pilotirovanie-bespilotnyh-letatelnyh-apparatov",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 7,
+   "title": "Лучшие пилоты страны встретятся на чемпионате ЦФО по гонкам дронов в Ярославле С 10 по 14 сентября в Ярославле пройдет",
+   "organizer": null,
+   "event_date": "2026-09-14",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 9,
+   "region_name": "Ярославская область",
+   "city": "Ярославль",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/mf8kx6k971-luchshie-piloti-strani-vstretyatsya-na-c",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 113,
+   "title": "Будущее высоких технологий в руках талантливой молодёжи! 🌟 📌 С 16 по 20 сентября 2026 года в Волгоградской области",
+   "organizer": null,
+   "event_date": "2026-09-20",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 21,
+   "region_name": "Волгоградская область",
+   "city": "Волгоград",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdrsk26/19636",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 6,
+   "title": "В Москве пройдет первенство Центрального федерального округа по гонкам дронов С 17 по 21 сентября в Москве, на площадке",
+   "organizer": null,
+   "event_date": "2026-09-21",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 52,
+   "region_name": "Орловская область",
+   "city": "Орёл",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/f2o55c8tm1-v-moskve-proidet-pervenstvo-tsentralnogo",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 207,
+   "title": "23 сентября в «Кванториуме» состоялись открытые городские соревнования управляемых дронов! Сегодня стены Детского",
+   "organizer": null,
+   "event_date": "2026-09-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.ru/away.php?to=https://files.sberdisk.ru/s/RU5F5DXEgYWRjuG&utf=1",
+   "source_url": "https://vk.ru/away.php?to=https://files.sberdisk.ru/s/RU5F5DXEgYWRjuG&utf=1",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 208,
+   "title": "Приглашаем пилотов принять участие в Открытых городских соревнованиях по гонкам дронов 23 сентября 2026 года в г",
+   "organizer": null,
+   "event_date": "2026-09-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 38,
+   "region_name": "Кемеровская область",
+   "city": "Кемерово",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a8e95f54936390495d4667b",
+   "source_url": "https://forms.yandex.ru/u/6a8e95f54936390495d4667b",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 193,
+   "title": "На Ямале прошёл I Региональный кубок по гонкам дронов 26–27 сентября состоялся I Региональный кубок по гонкам дронов",
+   "organizer": null,
+   "event_date": "2026-09-26",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 73,
+   "region_name": "Ямало-Ненецкий АО",
+   "city": "Салехард",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://srnchn-1.wfolio.pro/disk/2026-09-26-kubok-dronov-xgq11d",
+   "source_url": "https://srnchn-1.wfolio.pro/disk/2026-09-26-kubok-dronov-xgq11d",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 5,
+   "title": "ФГДР проведет вебинары для судей 3-й и 2-й категорий 3 и 4 октября Федерация гонок дронов России проведет",
+   "organizer": null,
+   "event_date": "2026-10-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 1,
+   "region_name": "Москва",
+   "city": "Москва",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/y5vmy50zb1-fgdr-provedet-vebinari-dlya-sudei-3-i-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 244,
+   "title": "Академия пилотов АТМОС Поехали! Аэробот покоряет новые высоты! 4 октября в рамках ежегодных всероссийских инженерных",
+   "organizer": null,
+   "event_date": "2026-10-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.ru/album-228182574_310538067",
+   "source_url": "https://vk.ru/album-228182574_310538067",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 101,
+   "title": "🎬 Смотрите, как это было! Видеоотчёт с гонок дронов «АэроДрайв» Друзья, МедиаHub АлтГУ подготовил для вас видеоотчёт с",
+   "organizer": null,
+   "event_date": "2026-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/",
+   "source_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 139,
+   "title": "ОБЛАСТНОЙ ФЕСТИВАЛЬ - ГЕОСКАН - FPV Пилоты и пилотессы квадрокоптеров Геоскан-FPV! Приглашаем вас принять участие в",
+   "organizer": null,
+   "event_date": "2026-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 5,
+   "region_name": "Рязанская область",
+   "city": "Рязань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/cloud/6a99ca7e90fa7b52bb7148fd",
+   "source_url": "https://forms.yandex.ru/cloud/6a99ca7e90fa7b52bb7148fd",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 196,
+   "title": "Видеоотчёт с соревнований по гонкам дронов «АэроДрайв» Друзья, МедиаHub АлтГУ подготовил для вас видеоотчёт с открытых",
+   "organizer": null,
+   "event_date": "2026-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/",
+   "source_url": "https://rutube.ru/video/e33d79e2d2cff9288929f8d6ab1c2b3b/",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 197,
+   "title": "Федерация гонок дронов Алтайского края подводит итоги соревнований «АэроДрайв» 9 октября в Барнауле в рамках",
+   "organizer": null,
+   "event_date": "2026-10-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 43,
+   "region_name": "Алтайский край",
+   "city": "Барнаул",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-231620413_17",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 4,
+   "title": "В Москве пройдет первенство России по гонкам дронов среди юниоров С 8 по 12 октября в Москве на площадке Федерального",
+   "organizer": null,
+   "event_date": "2026-10-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/8gc2668dd1-v-moskve-proidet-pervenstvo-rossii-po-go",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 3,
+   "title": "Серия соревнований первенства России завершится гонкой в симуляторе 17 октября в онлайн-формате пройдет первенство",
+   "organizer": null,
+   "event_date": "2026-10-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/glgp3zv9b1-seriya-sorevnovanii-pervenstva-rossii-za",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 127,
+   "title": "Победа наших пилотов на фестивале «Путь изобретателя»! 17 октября 2026 года в Воронеже на базе МБОУ «СОШ № 104» прошли",
+   "organizer": null,
+   "event_date": "2026-10-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 6,
+   "region_name": "Воронежская область",
+   "city": "Воронеж",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-235029913_39",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 181,
+   "title": "️ 17 октября 2026 года в рамках выставки «Дни города Ростова‑на‑Дону» была представлена региональная экспозиция проекта",
+   "organizer": null,
+   "event_date": "2026-10-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 18,
+   "region_name": "Ростовская область",
+   "city": "Ростов-на-Дону",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-223175962_585",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 89,
+   "title": "Еженедельная тренировка 21",
+   "organizer": null,
+   "event_date": "2026-10-21",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://atmosarena.space/ru/events/c33ee931-13b0-428d-b4b0-e4469ae4c3f2",
+   "source_url": "https://atmosarena.space/ru/events/c33ee931-13b0-428d-b4b0-e4469ae4c3f2",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 191,
+   "title": "Детский технопарк Кванториум | ТюменьВ ДТ «Кванториум» пролетели Гонки дронов! Сегодня состоялись два крупных чемпионта",
+   "organizer": null,
+   "event_date": "2026-10-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 46,
+   "region_name": "Тюменская область",
+   "city": "Тюмень",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-226679252_132",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 2,
+   "title": "Чемпионат России по гонкам дронов 2026 пройдет в Сириусе 23–25 октября на стадионе «Фишт» в Сириусе пройдет Чемпионат",
+   "organizer": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/s066nflhk1-chempionat-rossii-po-gonkam-dronov-2026",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 71,
+   "title": "🚁 Определилась пятёрка сильнейших пилотов регионального этапа проекта «Пилоты Будущего»! 23 октября на площадке",
+   "organizer": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd_fas_sakh/161",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 79,
+   "title": "🏆 ТРЕТИЙ ЧЕМПИОНАТ РОССИИ ПО ГОНКАМ ДРОНОВ 🔥 23–25 октября 2026 года на легендарном олимпийском стадионе «Фишт» в",
+   "organizer": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdlenobl/556",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 122,
+   "title": "Учебный центр Драйв FPV23-25 октября 2026 прошёл ЧЕМПИОНАТ РОССИИ в Сочи",
+   "organizer": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-225907894_162",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 140,
+   "title": "«Пилоты будущего» берут высоту: в Тамбове определили сильнейших юных операторов дронов В Тамбове 23 октября состоялся",
+   "organizer": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 54,
+   "region_name": "Тамбовская область",
+   "city": "Тамбов",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-223193388_477",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 228,
+   "title": "Соревнования по управлению БПЛА: прими вызов! Друзья, открываем регистрацию на номинацию «Соревнования по управлению",
+   "organizer": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 33,
+   "region_name": "Хабаровский край",
+   "city": "Хабаровск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://clck.ru/3WURx4",
+   "source_url": "https://clck.ru/3WURx4",
+   "confidence": 0.75,
+   "moderation": "approved"
+  },
+  {
+   "id": 48,
+   "title": "24 октября 2026 года (суббота) состоится открытая тренировка перед региональным очным этапом Всероссийского чемпионата «Пилоты будущего»",
+   "organizer": null,
+   "event_date": "2026-10-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 24,
+   "region_name": "Нижегородская область",
+   "city": "Нижний Новгород",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6ad5dfce95add50dbbeae26a",
+   "source_url": "https://forms.yandex.ru/u/6ad5dfce95add50dbbeae26a",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 136,
+   "title": "И так дорогие друзья!Анонс нового турнира по гонкам дронов! Открытый Кубок Председателя регионального отделения ДОСААФ",
+   "organizer": null,
+   "event_date": "2026-10-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-224613620_349",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 205,
+   "title": "В Кузбассе впервые прошёл Региональный фестиваль беспилотных авиационных систем «На взлет!» Фестиваль прошел 24 октября",
+   "organizer": null,
+   "event_date": "2026-10-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 38,
+   "region_name": "Кемеровская область",
+   "city": "Кемерово",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-222721566_120",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 109,
+   "title": "ФГДР во ВКонтакте и смотрите гонку онлайн. #чемпионатРоссии2026",
+   "organizer": null,
+   "event_date": "2026-10-25",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdrrm/115",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 41,
+   "title": "🚀 ВНИМАНИЮ УЧАСТНИКОВ СОРЕВНОВАНИЙ! 🏆 Отборочный этап Республики Татарстан на Кубок России по гонкам дронов Уважаемые",
+   "organizer": null,
+   "event_date": "2026-10-26",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 23,
+   "region_name": "Татарстан",
+   "city": "Казань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/FDRT116/446",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 42,
+   "title": "❗ ВАЖНО ❗ ПРОГРАММА СОРЕВНОВАНИЙ - будет опубликована 26.10.2026",
+   "organizer": null,
+   "event_date": "2026-10-26",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/FDRT116/448",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 156,
+   "title": "В ОРЕНБУРГЕ ОПРЕДЕЛИЛИ ФИНАЛИСТОВ «ПИЛОТОВ БУДУЩЕГО»! 27 октября в Политехническом лицее прошёл III (региональный) этап",
+   "organizer": null,
+   "event_date": "2026-10-27",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 30,
+   "region_name": "Оренбургская область",
+   "city": "Оренбург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://disk.yandex.ru/i/vUzJOO7xjyO9EA",
+   "source_url": "https://disk.yandex.ru/i/vUzJOO7xjyO9EA",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 90,
+   "title": "Еженедельная тренировка 28",
+   "organizer": null,
+   "event_date": "2026-10-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://atmosarena.space/ru/events/517a83c0-8f81-4699-82fa-9163ea1a662d",
+   "source_url": "https://atmosarena.space/ru/events/517a83c0-8f81-4699-82fa-9163ea1a662d",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 190,
+   "title": "Региональный этап Фестиваля \"Пилоты будущего\" завершён 28 октября МБОУ ДО «Кетовский детско-юношеский центр» собрал на",
+   "organizer": null,
+   "event_date": "2026-10-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 48,
+   "region_name": "Курганская область",
+   "city": "Курган",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.ru/album-236964730_312254421",
+   "source_url": "https://vk.ru/album-236964730_312254421",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 40,
+   "title": "🏆 **ОТКРЫТ ПРИЁМ ЗАЯВОК НА ОТБОРОЧНЫЙ ЭТАП РЕСПУБЛИКИ ТАТАРСТАН НА КУБОК РОССИИ ПО ГОНКАМ ДРОНОВ !** 🚀 Федерация гонок",
+   "organizer": null,
+   "event_date": "2026-11-02",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 23,
+   "region_name": "Татарстан",
+   "city": "Казань",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSfbwT8_U91eqpYJxaOOKvGVbIabLl8xvXj4As_BJ5XyGIuUTw/viewform",
+   "source_url": "https://docs.google.com/forms/d/e/1FAIpQLSfbwT8_U91eqpYJxaOOKvGVbIabLl8xvXj4As_BJ5XyGIuUTw/viewform",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 70,
+   "title": "Открыт набор на обучение операторов БПЛА 🚀 Приглашаем на профессиональное обучение по программе «Оператор беспилотных",
+   "organizer": null,
+   "event_date": "2026-11-02",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 34,
+   "region_name": "Сахалинская область",
+   "city": "Южно-Сахалинск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd_fas_sakh/159",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 120,
+   "title": "Федерация гонок дронов РоссииДумали, чемпионат России прошел и все? Гонки закончились? А вот и нет! Продолжаем",
+   "organizer": null,
+   "event_date": "2026-11-03",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 25,
+   "region_name": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "prize_fund_amount": 3000000.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "ИИ ПО ГОНКАМ ДРОНОВ Призовой фонд - 3 000 000 рублей На стадионе «Солидарность Самара Аре",
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-223002919_67",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 202,
+   "title": "Более 40 пилотов встретились на открытых соревнованиях по гонкам дронов! 4 ноября в Новокузнецке, в павильоне №6 ВК",
+   "organizer": null,
+   "event_date": "2026-11-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 38,
+   "region_name": "Кемеровская область",
+   "city": "Кемерово",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://disk.yandex.ru/d/lFdlck7uOC-dGg",
+   "source_url": "https://disk.yandex.ru/d/lFdlck7uOC-dGg",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 203,
+   "title": "В последний день школьных каникул",
+   "organizer": null,
+   "event_date": "2026-11-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 38,
+   "region_name": "Кемеровская область",
+   "city": "Кемерово",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSdpI_D8-G3bN1uPogNSDWVRlkJ9dKY0FSz7t8vswyvLQ9uYkQ/viewform?usp=publish-editor",
+   "source_url": "https://docs.google.com/forms/d/e/1FAIpQLSdpI_D8-G3bN1uPogNSDWVRlkJ9dKY0FSz7t8vswyvLQ9uYkQ/viewform?usp=publish-editor",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 91,
+   "title": "Уважаемые спортсмены! Подведены итоги официального зачета Первенства и Чемпионата Калининградской области по гонкам",
+   "organizer": null,
+   "event_date": "2026-11-06",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 14,
+   "region_name": "Калининградская область",
+   "city": "Калининград",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://disk.yandex.ru/i/hjN4p7ojy1hZfg",
+   "source_url": "https://disk.yandex.ru/i/hjN4p7ojy1hZfg",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 1,
+   "title": "7 ноября определятся чемпионы России по техническому симулятору 7 ноября состоится заключительная дисциплина чемпионата",
+   "organizer": null,
+   "event_date": "2026-11-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/fukpj5fe41-7-noyabrya-opredelyatsya-chempioni-rossi",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "id": 74,
+   "title": "🏆 7 ноября 2026 года пройдёт Чемпионат России по гонкам дронов в техническом симуляторе «Квадросим»",
+   "organizer": null,
+   "event_date": "2026-11-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 75,
+   "region_name": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd_krd/2233",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 152,
+   "title": "КУБОК ПАРМЫ: КАК СТАТЬ УЧАСТНИКОМ Первый этап пройдёт со 2 по 7 ноября",
+   "organizer": null,
+   "event_date": "2026-11-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 57,
+   "region_name": "Республика Коми",
+   "city": "Сыктывкар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://atmosarena.space/ru/events/aea55f84-b461-48a6-a2fd-2a620abc207dЗарегистрируйся",
+   "source_url": "https://atmosarena.space/ru/events/aea55f84-b461-48a6-a2fd-2a620abc207dЗарегистрируйся",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 73,
+   "title": "🏆 8 ноября стартует третий онлайн этап соревнований по гонкам дронов/компьютерному спорту на призы Федерации гонок",
+   "organizer": null,
+   "event_date": "2026-11-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": 31500.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "01 г.р. и старше. 🔥 Призовой фонд первого этапа составит 31500 рублей 🚀 В каждой категории: 👦🏻 Мужские при",
+   "registration_url": "http://fgdkrd.ru/racebot/mycab/event_register.php?token=8a965ed12ecd5628caf6a11571f74097b8df876e825162f1f7fa1ea482da10af",
+   "source_url": "http://fgdkrd.ru/racebot/mycab/event_register.php?token=8a965ed12ecd5628caf6a11571f74097b8df876e825162f1f7fa1ea482da10af",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 75,
+   "title": "📆 08 ноября 2026 состоялся третий онлайн-этап соревнований по гонкам дронов/компьютерному спорту на призы Федерации",
+   "organizer": null,
+   "event_date": "2026-11-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgd_krd/2239",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 173,
+   "title": "08 ноября 2026 состоялся третий онлайн-этап соревнований по гонкам дронов/компьютерному спорту на призы Федерации гонок",
+   "organizer": null,
+   "event_date": "2026-11-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-231364521_731",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 179,
+   "title": "️ 8 ноября в ТЦ «Мега» прошел Кубок Аксайского района",
+   "organizer": null,
+   "event_date": "2026-11-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "finished",
+   "region_id": 18,
+   "region_name": "Ростовская область",
+   "city": "Ростов-на-Дону",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.ru/album-223175962_312216847",
+   "source_url": "https://vk.ru/album-223175962_312216847",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 80,
+   "title": "🚁 Знакомимся с миром беспилотников! Открываем серию образовательных вебинаров Открытого чемпионата ИТМО x ГУАП",
+   "organizer": null,
+   "event_date": "2026-11-09",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "ongoing",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://vk.cc/d3HwLR",
+   "source_url": "https://vk.cc/d3HwLR",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 67,
+   "title": "ВНИМАНИЕ участникам, успешно сдавшим зачет на открытых судейских семинарах на судей 3-й и 2-й категории от региона Санкт-Петербург",
+   "organizer": null,
+   "event_date": "2026-11-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 12,
+   "region_name": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://cloud.mail.ru/public/roUe/ndd2yPZ4a",
+   "source_url": "https://cloud.mail.ru/public/roUe/ndd2yPZ4a",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 66,
+   "title": "Участвуйте в захватывающих гонках дронах в двух дисциплинах! 14 ноября 2026 года на площадке ЦЦО «ИнфинITи» Школы №31",
+   "organizer": null,
+   "event_date": "2026-11-14",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 12,
+   "region_name": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://t.me/fgdSPb/1097",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 174,
+   "title": "14 ноября состоится фестиваль интеллектуально-инновационных видов спорта, посвященный Году единства народов России",
+   "organizer": null,
+   "event_date": "2026-11-14",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 19,
+   "region_name": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://clck.ru/3QEpwh",
+   "source_url": "https://clck.ru/3QEpwh",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 153,
+   "title": "Пульт в руках, взгляд в экран, и каждая сотая секунды на счету",
+   "organizer": null,
+   "event_date": "2026-11-15",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 57,
+   "region_name": "Республика Коми",
+   "city": "Сыктывкар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://atmosarena.space/ru/events/aea55f84-b461-48a6-a2fd-2a620abc207dЛетать",
+   "source_url": "https://atmosarena.space/ru/events/aea55f84-b461-48a6-a2fd-2a620abc207dЛетать",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 154,
+   "title": "КУБОК ПАРМЫ ПРОДЛЕВАЕМ ДО 15 НОЯБРЯ! Первый этап продолжается: летать можно до 15 ноября включительно",
+   "organizer": null,
+   "event_date": "2026-11-15",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "registration_open",
+   "region_id": 57,
+   "region_name": "Республика Коми",
+   "city": "Сыктывкар",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://atmosarena.space/ru/events/aea55f84-b461-48a6-a2fd-2a620abc207dВыбери",
+   "source_url": "https://atmosarena.space/ru/events/aea55f84-b461-48a6-a2fd-2a620abc207dВыбери",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 158,
+   "title": "Школа Дрон-рейсинга НЕБО ЗОВЁТ! Открытые соревнования по дрон-рейсингу «Пилоты будущего», реализуемого при поддержке",
+   "organizer": null,
+   "event_date": "2026-11-15",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 29,
+   "region_name": "Башкортостан",
+   "city": "Уфа",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://blagotvori.ucoz.net/publ/trendy_i_novinki/1-1-0-30",
+   "source_url": "https://blagotvori.ucoz.net/publ/trendy_i_novinki/1-1-0-30",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 217,
+   "title": "Любители и профессионалы в гонках дронов !15 ноября состоится Первенство г",
+   "organizer": null,
+   "event_date": "2026-11-15",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 42,
+   "region_name": "Томская область",
+   "city": "Томск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6a7ad0a9d04688b98d8c4b93",
+   "source_url": "https://forms.yandex.ru/u/6a7ad0a9d04688b98d8c4b93",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 143,
+   "title": "Лучшие пилоты Поморья! Завершился региональный этап Всероссийского чемпионата «Пилоты будущего» и вот имена тех, кто",
+   "organizer": null,
+   "event_date": "2026-11-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 16,
+   "region_name": "Архангельская область",
+   "city": "Архангельск",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-217965928_18491",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 160,
+   "title": "Движение Первых | Республика Башкортостан и ещё 2 автора️День, который запомнится яркими полётами и громкими победами",
+   "organizer": null,
+   "event_date": "2026-11-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "anons",
+   "region_id": 29,
+   "region_name": "Башкортостан",
+   "city": "Уфа",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://max.ru/mypervie02",
+   "source_url": "https://max.ru/mypervie02",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 161,
+   "title": "️День, который запомнится яркими полётами и громкими победами! Региональный этап Всероссийского чемпионата",
+   "organizer": null,
+   "event_date": "2026-11-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "anons",
+   "region_id": 29,
+   "region_name": "Башкортостан",
+   "city": "Уфа",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://max.ru/mypervie02",
+   "source_url": "https://max.ru/mypervie02",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 183,
+   "title": "️ В Ростовской области завершился региональный этап чемпионата по пилотированию FPV-дронов «Пилоты Будущего»",
+   "organizer": null,
+   "event_date": "2026-11-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "finished",
+   "region_id": 18,
+   "region_name": "Ростовская область",
+   "city": "Ростов-на-Дону",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-223175962_575",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 148,
+   "title": "Гонки дронов | Кронверкские барсы | ИТМО РЕГИСТРАЦИЯ Первый пост был информационным, а теперь — пора действовать Мы",
+   "organizer": null,
+   "event_date": "2026-11-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://racebind.ru/events/championship-itmo-x-guap-2026/overview",
+   "source_url": "https://racebind.ru/events/championship-itmo-x-guap-2026/overview",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "id": 204,
+   "title": "Яркое событие осени: Гонки дронов в Жемчужине Кузбасса! Приглашаем всех спортсменов принять участие в Открытых",
+   "organizer": null,
+   "event_date": "2026-11-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 38,
+   "region_name": "Кемеровская область",
+   "city": "Кемерово",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://docs.google.com/forms/d/e/1FAIpQLSeFBWGgbMS_LskDRtLKnBAyQBxtw5Ow0gc5dD_j_y7TPCki9Q/viewform?usp=publish-editor",
+   "source_url": "https://docs.google.com/forms/d/e/1FAIpQLSeFBWGgbMS_LskDRtLKnBAyQBxtw5Ow0gc5dD_j_y7TPCki9Q/viewform?usp=publish-editor",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 92,
+   "title": "КИБЕРДРОМ 2026! 25-26 ноября 2026 г",
+   "organizer": null,
+   "event_date": "2026-11-25",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "anons",
+   "region_id": 14,
+   "region_name": "Калининградская область",
+   "city": "Калининград",
+   "venue": null,
+   "prize_fund_amount": null,
+   "prize_fund_visibility": "hidden",
+   "prize_fund_note": null,
+   "registration_url": "https://forms.yandex.ru/u/6ae9b8672c4f896ebeedb6c3/",
+   "source_url": "https://forms.yandex.ru/u/6ae9b8672c4f896ebeedb6c3/",
+   "confidence": 0.65,
+   "moderation": "approved"
+  },
+  {
+   "id": 53,
+   "title": "«На высоте» — проект для тех, кто хочет покорять новые высоты 🚀 Вместе с Народным фронтом мы запустили масштабный",
+   "organizer": null,
+   "event_date": "2027-01-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "regional",
+   "status": "registration_open",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": 10.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "нах. Ставки высоки: призовой фонд — 10 миллионов рублей, а победителей ждут ещё",
+   "registration_url": null,
+   "source_url": "https://t.me/droneracingfederation/5833",
+   "confidence": 0.75,
+   "moderation": "approved"
+  },
+  {
+   "id": 121,
+   "title": "Федерация гонок дронов России«На высоте!» — проект для тех, кто хочет покорять новые высоты! Вместе с Народным фронтом",
+   "organizer": null,
+   "event_date": "2027-01-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "event_type": "national",
+   "status": "registration_open",
+   "region_id": null,
+   "region_name": null,
+   "city": null,
+   "venue": null,
+   "prize_fund_amount": 10.0,
+   "prize_fund_visibility": "amount",
+   "prize_fund_note": "нах. Ставки высоки: призовой фонд — 10 миллионов рублей, а победителей ждут ещё",
+   "registration_url": null,
+   "source_url": "https://vk.com/wall-225907894_163",
+   "confidence": 0.75,
+   "moderation": "approved"
+  }
+ ]
+}/*END*/</script>
+<script>
+const MONTHS=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+const MONTHS_UP=["ЯНВАРЬ","ФЕВРАЛЬ","МАРТ","АПРЕЛЬ","МАЙ","ИЮНЬ","ИЮЛЬ","АВГУСТ","СЕНТЯБРЬ","ОКТЯБРЬ","НОЯБРЬ","ДЕКАБРЬ"];
+const WEEK=["ПН","ВТ","СР","ЧТ","ПТ","СБ","ВС"];
+const STATUS={anons:["АНОНС","b-anons"],registration_open:["РЕГИСТРАЦИЯ","b-reg"],registration_closed:["ЗАКРЫТА","b-anons"],ongoing:["ИДЁТ","b-ongoing"],finished:["ЗАВЕРШЕНО","b-finished"],postponed:["ПЕРЕНЕСЕНО","b-postponed"],cancelled:["ОТМЕНЕНО","b-cancelled"]};
+const PAGE_SIZE=9;
+let DATA=(()=>{const raw=document.getElementById("snapshot").textContent
+  .replace("/*FALLBACK_JSON*/","").replace("/*END*/","").trim();
+  try{return JSON.parse(raw);}catch(e){return {generated:"",stats:{},regions:[],events:[]};}})();
+let state={mode:"all",region:"",status:"",view:"list",page:1,month:null,live:false};
+
+function iso(d){const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());}
+function today(){return iso(new Date());}
+function fmtDate(s){const [y,m,d]=s.split("-").map(Number);return d+" "+(MONTHS[m-1]||"")+" "+y;}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function money(v){return new Intl.NumberFormat("ru-RU").format(v)+" ₽";}
+
+function filtered(){
+  const ev=DATA.events||[];
+  return ev.filter(e=>{
+    if(state.mode!=="all" && e.event_type!==state.mode) return false;
+    if(state.region && String(e.region_id||"")!==state.region) return false;
+    if(state.status && e.status!==state.status) return false;
+    return true;
+  });
+}
+
+function split(){
+  const t=today();
+  const ev=filtered().slice().sort((a,b)=>a.event_date<b.event_date?-1:1);
+  const ongoing=ev.filter(e=>e.status==="ongoing"||(e.event_date===t&&e.status!=="finished"));
+  const ids=new Set(ongoing.map(e=>e.id));
+  const upcoming=ev.filter(e=>e.event_date>=t&&e.status!=="finished"&&!ids.has(e.id));
+  const past=ev.filter(e=>e.event_date<t||e.status==="finished").sort((a,b)=>a.event_date>b.event_date?-1:1);
+  return {ongoing,upcoming,past};
+}
+
+function card(e){
+  const st=STATUS[e.status]||STATUS.anons;
+  const prize=(e.prize_fund_visibility==="amount"&&e.prize_fund_amount)?'<span class="tag prize">'+esc(money(e.prize_fund_amount))+'</span>':"";
+  const tbd=e.prize_fund_visibility==="tbd"?'<span class="tag dim">Фонд уточняется</span>':"";
+  const place=[e.city,e.venue].filter(Boolean).join(", ")||e.region_name||"Место уточняется";
+  const nat=e.event_type==="national"?'<span class="tag-nat">Всероссийское</span>':"";
+  const time=e.event_time?" · "+esc(e.event_time):"";
+  const approx=e.date_time_precision==="approx"?' <i>· дата уточняется</i>':"";
+  return '<article class="card"><div class="art"><span class="badge '+st[1]+'">'+st[0]+'</span>'+nat+'</div>'+
+    '<div class="body"><p class="date">'+fmtDate(e.event_date)+time+approx+'</p>'+
+    '<h3>'+esc(e.title)+'</h3><p class="place">'+esc(place)+'</p>'+
+    '<div class="tags">'+(e.region_name?'<span class="tag">'+esc(e.region_name)+'</span>':"")+
+    (e.organizer?'<span class="tag">'+esc(e.organizer)+'</span>':"")+prize+tbd+'</div>'+
+    '<div class="actions">'+(e.registration_url?'<a class="btn btn-primary" target="_blank" rel="noopener" href="'+esc(e.registration_url)+'">Регистрация</a>':"")+
+    '<a class="btn btn-ghost" target="_blank" rel="noopener" href="'+esc(e.source_url||"#")+'">Источник</a></div></div></article>';
+}
+
+function grid(items){return '<div class="grid">'+items.map(card).join("")+'</div>';}
+function section(title,count,inner){return '<section class="section"><div class="sec-head"><h2>'+title+'</h2><span>'+count+'</span></div>'+inner+'</section>';}
+
+function renderList(){
+  const {ongoing,upcoming,past}=split();
+  const pages=Math.max(1,Math.ceil(past.length/PAGE_SIZE));
+  if(state.page>pages)state.page=pages;
+  const slice=past.slice((state.page-1)*PAGE_SIZE,state.page*PAGE_SIZE);
+  let html="";
+  html+=section("Идут сейчас",ongoing.length,ongoing.length?grid(ongoing):'<div class="empty">Сейчас активных мероприятий нет.</div>');
+  html+=section("Предстоящие",upcoming.length,upcoming.length?grid(upcoming):'<div class="empty">Пока нет предстоящих мероприятий — попробуйте другой регион или тип.</div>');
+  let pastInner=past.length?grid(slice):'<div class="empty">Архив пуст.</div>';
+  if(past.length&&pages>1){
+    pastInner+='<div class="pager"><button '+(state.page<=1?"disabled":"")+' onclick="setPage('+(state.page-1)+')">← Назад</button>'+
+      '<span>Стр. '+state.page+' из '+pages+'</span>'+
+      '<button '+(state.page>=pages?"disabled":"")+' onclick="setPage('+(state.page+1)+')">Вперёд →</button></div>';
+  }
+  html+=section("Прошедшие",past.length,pastInner);
+  return html;
+}
+
+function renderCalendar(){
+  const now=new Date();
+  if(!state.month)state.month={y:now.getFullYear(),m:now.getMonth()};
+  const {y,m}=state.month;
+  const first=new Date(y,m,1);
+  const days=new Date(y,m+1,0).getDate();
+  const off=(first.getDay()+6)%7;
+  const byDate={};
+  filtered().forEach(e=>{(byDate[e.event_date]=byDate[e.event_date]||[]).push(e);});
+  let cells="";
+  for(let i=0;i<off;i++)cells+='<div class="cell"></div>';
+  for(let d=1;d<=days;d++){
+    const key=iso(new Date(y,m,d));
+    const evs=(byDate[key]||[]).sort((a,b)=>a.title<b.title?-1:1);
+    const cls=key===today()?"cell today":"cell";
+    let inner='<span class="d">'+d+'</span>';
+    evs.slice(0,2).forEach(e=>{inner+='<a class="ev-chip" target="_blank" rel="noopener" title="'+esc(e.title)+'" href="'+esc(e.source_url||"#")+'">'+esc(e.title)+'</a>';});
+    if(evs.length>2)inner+='<span class="more">+'+(evs.length-2)+'</span>';
+    cells+='<div class="'+cls+'">'+inner+'</div>';
+  }
+  const pad=(7-(off+days)%7)%7;
+  for(let i=0;i<pad;i++)cells+='<div class="cell"></div>';
+  return '<div class="cal"><div class="cal-head"><button onclick="shiftMonth(-1)">←</button>'+
+    '<span class="t">'+MONTHS_UP[m]+' '+y+'</span>'+
+    '<button onclick="shiftMonth(1)">→</button></div>'+
+    '<div class="cal-dow">'+WEEK.map(w=>'<div>'+w+'</div>').join("")+'</div>'+
+    '<div class="cal-grid">'+cells+'</div></div>';
+}
+
+function render(){
+  const host=document.getElementById("content");
+  host.innerHTML=state.view==="list"?renderList():renderCalendar();
+  const {ongoing,upcoming,past}=split();
+  document.getElementById("counts").innerHTML='<b>'+(ongoing.length+upcoming.length)+'</b> предстоящих · <b>'+past.length+'</b> в архиве'+
+    (state.live?' <span class="live"></span><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase">live</span>':"");
+  document.getElementById("footRight").textContent="Данные собираются автоматически · "+fmtDate(today());
+  const r=DATA.regions.find(x=>String(x.id)===state.region);
+  document.getElementById("footLeft").textContent="© 2026 Дрон Рейсинг"+(r?" · "+r.name:"");
+  document.getElementById("navList").classList.toggle("active",state.view==="list");
+  document.getElementById("navCal").classList.toggle("active",state.view==="calendar");
+  document.getElementById("tabList").classList.toggle("active",state.view==="list");
+  document.getElementById("tabCal").classList.toggle("active",state.view==="calendar");
+  document.querySelectorAll(".mode").forEach(b=>b.classList.toggle("active",b.dataset.mode===state.mode));
+}
+
+function fillRegions(){
+  const groups={};
+  DATA.regions.forEach(r=>{(groups[r.federal_district||"—"]=groups[r.federal_district||"—"]||[]).push(r);});
+  let html='<option value="">— все регионы —</option>';
+  Object.keys(groups).sort().forEach(g=>{
+    html+='<optgroup label="'+esc(g)+'">';
+    groups[g].sort((a,b)=>a.name<b.name?-1:1).forEach(r=>{
+      html+='<option value="'+r.id+'">'+esc(r.name)+(r.upcoming_events?" ("+r.upcoming_events+")":"")+'</option>';
+    });
+    html+='</optgroup>';
+  });
+  const sel=document.getElementById("regionSel");
+  sel.innerHTML=html;
+  sel.value=state.region;
+}
+
+function setView(v){state.view=v;state.page=1;render();window.scrollTo({top:0});}
+function setMode(m){state.mode=m;state.page=1;render();}
+function setRegion(v){state.region=v;state.page=1;render();}
+function setStatus(v){state.status=v;state.page=1;render();}
+function setPage(p){state.page=p;render();window.scrollTo({top:0});}
+function shiftMonth(d){state.month.m+=d;if(state.month.m<0){state.month.m=11;state.month.y--;}if(state.month.m>11){state.month.m=0;state.month.y++;}render();}
+
+async function refreshLive(){
+  try{
+    const base="https://drone-racing-backend.onrender.com/api/v1";
+    const ctl=new AbortController();
+    const t=setTimeout(()=>ctl.abort(),12000);
+    const r=await fetch(base+"/events?mode=all&only_upcoming=false&limit=100&page=1",{signal:ctl.signal});
+    clearTimeout(t);
+    if(!r.ok)return;
+    const p=await r.json();
+    if(!p.items||!p.items.length)return;
+    let all=[...p.items];
+    const pages=Math.ceil((p.total||0)/100);
+    for(let i=2;i<=Math.min(pages,5);i++){
+      const r2=await fetch(base+"/events?mode=all&only_upcoming=false&limit=100&page="+i);
+      if(!r2.ok)break;
+      const p2=await r2.json();
+      all=all.concat(p2.items||[]);
+    }
+    const map={};all.forEach(e=>map[e.id]=e);
+    const regs=await (await fetch(base+"/regions?only_with_events=false")).json();
+    DATA.events=Object.values(map);
+    DATA.regions=regs.map(x=>({id:x.id,name:x.name,federal_district:x.federal_district||"—",upcoming_events:x.upcoming_events}));
+    DATA.live=true;
+    state.live=true;
+    fillRegions();
+    render();
+  }catch(e){}
+}
+
+function boot(){
+  fillRegions();
+  render();
+  refreshLive();
+  setInterval(refreshLive,300000);
+}
+boot();
 </script>
 </body>
 </html>
