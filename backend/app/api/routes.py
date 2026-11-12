@@ -315,22 +315,56 @@ def admin_clean_titles(db: Session = Depends(get_db), x_admin_token: str = Heade
 @router.post("/admin/fix_past_tense")
 def admin_fix_past_tense(db: Session = Depends(get_db), x_admin_token: str = Header("")):
     """Events dated in the future but described in past tense are archive posts
-    that got their year bumped by the extractor. Pull them back to this year."""
+    that got their year bumped by the extractor. Such noise is deleted."""
     if x_admin_token != settings.admin_token:
         raise HTTPException(401, "Invalid admin token")
     today = date.today()
-    changed = 0
-    for evt in db.query(Event).filter(Event.event_date >= today).all():
-        if not PAST_TENSE_RE.search(evt.title or ""):
-            continue
-        try:
-            evt.event_date = evt.event_date.replace(year=today.year)
-        except ValueError:
-            continue
-        evt.status = "finished"
-        changed += 1
+    doomed = [
+        evt for evt in db.query(Event).filter(Event.event_date >= today).all()
+        if PAST_TENSE_RE.search(evt.title or "")
+    ]
+    for evt in doomed:
+        db.delete(evt)
     db.commit()
-    return {"changed": changed}
+    return {"deleted": len(doomed)}
+
+
+@router.get("/admin/backup")
+def admin_backup(db: Session = Depends(get_db), x_admin_token: str = Header("")):
+    """Full JSON snapshot (regions + sources + events) for off-site storage."""
+    if x_admin_token != settings.admin_token:
+        raise HTTPException(401, "Invalid admin token")
+    from datetime import datetime as _dt
+
+    return {
+        "generated": _dt.now().isoformat(),
+        "regions": [
+            {"name": r.name, "federal_district": r.federal_district,
+             "center_city": r.center_city, "slug": r.slug, "keywords": r.keywords}
+            for r in db.query(Region).all()
+        ],
+        "sources": [
+            {"platform": s.platform, "external_id": s.external_id, "title": s.title,
+             "url": s.url, "tier": s.tier, "is_active": s.is_active,
+             "region": s.region.name if s.region else None}
+            for s in db.query(Source).all()
+        ],
+        "events": [
+            {"title": e.title, "norm_title": e.norm_title, "organizer": e.organizer,
+             "description": e.description, "event_date": e.event_date.isoformat(),
+             "event_time": e.event_time.isoformat() if e.event_time else None,
+             "date_time_precision": e.date_time_precision,
+             "region": e.region.name if e.region else None,
+             "city": e.city, "venue": e.venue, "event_type": e.event_type,
+             "discipline": e.discipline, "status": e.status, "auto_status": e.auto_status,
+             "prize_fund_amount": float(e.prize_fund_amount) if e.prize_fund_amount else None,
+             "prize_fund_note": e.prize_fund_note,
+             "prize_fund_visibility": e.prize_fund_visibility,
+             "registration_url": e.registration_url, "source_url": e.source_url,
+             "confidence": e.confidence, "moderation": e.moderation}
+            for e in db.query(Event).all()
+        ],
+    }
 
 
 @router.post("/admin/drop_far_vk")

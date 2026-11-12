@@ -148,6 +148,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-
           <button class="mode" data-mode="national" onclick="setMode('national')">Всероссийские</button>
         </div>
         <div class="controls">
+          <input class="sel" id="qInput" placeholder="Поиск: название, город…" oninput="onSearch(this.value)" style="min-width:200px;text-transform:none">
           <select class="sel" id="regionSel" onchange="setRegion(this.value)"></select>
           <select class="sel" id="statusSel" onchange="setStatus(this.value)">
             <option value="">— все статусы —</option>
@@ -3753,7 +3754,7 @@ const PAGE_SIZE=9;
 let DATA=(()=>{const raw=document.getElementById("snapshot").textContent
   .replace("/*FALLBACK_JSON*/","").replace("/*END*/","").trim();
   try{return JSON.parse(raw);}catch(e){return {generated:"",stats:{},regions:[],events:[]};}})();
-let state={mode:"all",region:"",status:"",view:"list",page:1,month:null,live:false};
+let state={mode:"all",region:"",status:"",q:"",view:"list",page:1,month:null,live:false};
 
 function iso(d){const p=n=>String(n).padStart(2,"0");return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());}
 function today(){return iso(new Date());}
@@ -3763,10 +3764,15 @@ function money(v){return new Intl.NumberFormat("ru-RU").format(v)+" ₽";}
 
 function filtered(){
   const ev=DATA.events||[];
+  const q=(state.q||"").toLowerCase();
   return ev.filter(e=>{
     if(state.mode!=="all" && e.event_type!==state.mode) return false;
     if(state.region && String(e.region_id||"")!==state.region) return false;
     if(state.status && e.status!==state.status) return false;
+    if(q){
+      const hay=[e.title,e.city,e.venue,e.organizer,e.region_name].filter(Boolean).join(" ").toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
     return true;
   });
 }
@@ -3883,6 +3889,8 @@ function fillRegions(){
 function setView(v){state.view=v;state.page=1;render();window.scrollTo({top:0});}
 function setMode(m){state.mode=m;state.page=1;render();}
 function setRegion(v){state.region=v;state.page=1;render();}
+let qTimer=null;
+function onSearch(v){clearTimeout(qTimer);qTimer=setTimeout(()=>{state.q=v.trim();state.page=1;render();},400);}
 function setStatus(v){state.status=v;state.page=1;render();}
 function setPage(p){state.page=p;render();window.scrollTo({top:0});}
 function shiftMonth(d){state.month.m+=d;if(state.month.m<0){state.month.m=11;state.month.y--;}if(state.month.m>11){state.month.m=0;state.month.y++;}render();}

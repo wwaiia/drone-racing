@@ -33,6 +33,14 @@ def _bootstrap_data() -> None:
     def run():
         try:
             from .database import SessionLocal as S2
+            from .restore import restore_from_url
+            with S2() as s2:
+                res = restore_from_url(s2)
+            print(f"BOOTSTRAP restore: {res}", flush=True)
+        except Exception as exc:
+            print(f"BOOTSTRAP restore FAILED: {exc}", flush=True)
+        try:
+            from .database import SessionLocal as S2
             from .collectors.runner import run_all
             with S2() as s2:
                 report = run_all(s2, limit=40)

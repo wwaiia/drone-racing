@@ -39,6 +39,8 @@ export default function Home() {
   const [regions, setRegions] = useState<RegionItem[]>([]);
   const [regionId, setRegionId] = useState<number | null>(null);
   const [status, setStatus] = useState("");
+  const [qInput, setQInput] = useState("");
+  const [q, setQ] = useState("");
   const [upcomingItems, setUpcomingItems] = useState<EventItem[]>([]);
   const [archiveItems, setArchiveItems] = useState<EventItem[]>([]);
   const [archiveTotal, setArchiveTotal] = useState(0);
@@ -56,13 +58,13 @@ export default function Home() {
   }, []);
 
   const today = iso(new Date());
-  const yesterday = useMemo(() => {
-    const d = new Date();
-    d.setDate(d.getDate() - 1);
-    return iso(d);
-  }, []);
 
-  const filterKey = `${mode}|${regionId ?? ""}|${status}`;
+  useEffect(() => {
+    const t = setTimeout(() => setQ(qInput.trim()), 400);
+    return () => clearTimeout(t);
+  }, [qInput]);
+
+  const filterKey = `${mode}|${regionId ?? ""}|${status}|${q}`;
 
   useEffect(() => {
     setLoading(true);
@@ -73,6 +75,7 @@ export default function Home() {
         mode,
         region_id: regionId ?? undefined,
         status: status || undefined,
+        q: q || undefined,
         only_upcoming: true,
         limit: 100,
       })
@@ -87,6 +90,7 @@ export default function Home() {
         mode,
         region_id: regionId ?? undefined,
         status: status || undefined,
+        q: q || undefined,
         only_upcoming: false,
         limit: 100,
       })
@@ -100,8 +104,9 @@ export default function Home() {
         mode,
         region_id: regionId ?? undefined,
         status: status || undefined,
+        q: q || undefined,
         only_upcoming: false,
-        date_to: yesterday,
+        date_to: today,
         limit: 9,
         page: pastPage,
       })
@@ -110,7 +115,7 @@ export default function Home() {
         setArchiveTotal(p.total);
       })
       .catch(() => {});
-  }, [filterKey, pastPage, yesterday]);
+  }, [filterKey, pastPage, today]);
 
   const { ongoing, upcoming } = useMemo(() => {
     const sorted = [...upcomingItems].sort((a, b) => (a.event_date < b.event_date ? -1 : 1));
@@ -255,6 +260,12 @@ export default function Home() {
               ))}
             </div>
             <div className="ml-auto flex flex-wrap items-center gap-2">
+              <input
+                value={qInput}
+                onChange={(e) => setQInput(e.target.value)}
+                placeholder="Поиск: название, город…"
+                className="h-9 w-[200px] rounded-[4px] border border-[#2e2e33] bg-[#0f0f11] px-3 text-[12px] font-semibold uppercase tracking-wide text-[#d6d6da] placeholder:text-[#5a5a60] outline-none transition hover:border-[#3d3d44] focus:border-[#ff4d1c]/70"
+              />
               <RegionPicker regions={regions} value={regionId} onChange={setRegionId} />
               <select
                 value={status}
