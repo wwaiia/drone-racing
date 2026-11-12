@@ -1,0 +1,2425 @@
+{
+ "generated": "2026-11-12T20:29:44.680521",
+ "regions": [
+  {
+   "name": "Москва",
+   "federal_district": "ЦФО",
+   "center_city": "Москва",
+   "slug": "moskva",
+   "keywords": [
+    "москва",
+    "московск"
+   ]
+  },
+  {
+   "name": "Московская область",
+   "federal_district": "ЦФО",
+   "center_city": "Красногорск",
+   "slug": "moskovskaya-oblast",
+   "keywords": [
+    "подольск",
+    "люберцы",
+    "красногорск",
+    "жуковск",
+    "мытищ",
+    "балалайк",
+    "дмитров"
+   ]
+  },
+  {
+   "name": "Липецкая область",
+   "federal_district": "ЦФО",
+   "center_city": "Липецк",
+   "slug": "lipetskaya-oblast",
+   "keywords": [
+    "липецк"
+   ]
+  },
+  {
+   "name": "Тульская область",
+   "federal_district": "ЦФО",
+   "center_city": "Тула",
+   "slug": "tulskaya-oblast",
+   "keywords": [
+    "тул",
+    "новомосковск"
+   ]
+  },
+  {
+   "name": "Рязанская область",
+   "federal_district": "ЦФО",
+   "center_city": "Рязань",
+   "slug": "ryazanskaya-oblast",
+   "keywords": [
+    "рязан"
+   ]
+  },
+  {
+   "name": "Воронежская область",
+   "federal_district": "ЦФО",
+   "center_city": "Воронеж",
+   "slug": "voronezhskaya-oblast",
+   "keywords": [
+    "воронеж"
+   ]
+  },
+  {
+   "name": "Белгородская область",
+   "federal_district": "ЦФО",
+   "center_city": "Белгород",
+   "slug": "belgorodskaya-oblast",
+   "keywords": [
+    "белгород"
+   ]
+  },
+  {
+   "name": "Тверская область",
+   "federal_district": "ЦФО",
+   "center_city": "Тверь",
+   "slug": "tverskaya-oblast",
+   "keywords": [
+    "твер"
+   ]
+  },
+  {
+   "name": "Ярославская область",
+   "federal_district": "ЦФО",
+   "center_city": "Ярославль",
+   "slug": "yaroslavskaya-oblast",
+   "keywords": [
+    "ярославл",
+    "рыбинск"
+   ]
+  },
+  {
+   "name": "Владимирская область",
+   "federal_district": "ЦФО",
+   "center_city": "Владимир",
+   "slug": "vladimirskaya-oblast",
+   "keywords": [
+    "владимир",
+    "ковров",
+    "муром"
+   ]
+  },
+  {
+   "name": "Калужская область",
+   "federal_district": "ЦФО",
+   "center_city": "Калуга",
+   "slug": "kaluzhskaya-oblast",
+   "keywords": [
+    "калуг"
+   ]
+  },
+  {
+   "name": "Санкт-Петербург",
+   "federal_district": "СЗФО",
+   "center_city": "Санкт-Петербург",
+   "slug": "sankt-peterburg",
+   "keywords": [
+    "санкт-петербург",
+    "спб",
+    "питер",
+    "петербург"
+   ]
+  },
+  {
+   "name": "Ленинградская область",
+   "federal_district": "СЗФО",
+   "center_city": "Гатчина",
+   "slug": "leningradskaya-oblast",
+   "keywords": [
+    "выборг",
+    "гатчин",
+    "всеволожск",
+    "кирш"
+   ]
+  },
+  {
+   "name": "Калининградская область",
+   "federal_district": "СЗФО",
+   "center_city": "Калининград",
+   "slug": "kaliningradskaya-oblast",
+   "keywords": [
+    "калининград"
+   ]
+  },
+  {
+   "name": "Республика Карелия",
+   "federal_district": "СЗФО",
+   "center_city": "Петрозаводск",
+   "slug": "kareliya",
+   "keywords": [
+    "карели",
+    "петрозаводск"
+   ]
+  },
+  {
+   "name": "Архангельская область",
+   "federal_district": "СЗФО",
+   "center_city": "Архангельск",
+   "slug": "arhangelskaya-oblast",
+   "keywords": [
+    "архангельск",
+    "северодвинск"
+   ]
+  },
+  {
+   "name": "Вологодская область",
+   "federal_district": "СЗФО",
+   "center_city": "Вологда",
+   "slug": "vologodskaya-oblast",
+   "keywords": [
+    "вологда",
+    "череповец"
+   ]
+  },
+  {
+   "name": "Ростовская область",
+   "federal_district": "ЮФО",
+   "center_city": "Ростов-на-Дону",
+   "slug": "rostovskaya-oblast",
+   "keywords": [
+    "ростов",
+    "таганрог",
+    "батайск",
+    "волжск"
+   ]
+  },
+  {
+   "name": "Краснодарский край",
+   "federal_district": "ЮФО",
+   "center_city": "Краснодар",
+   "slug": "krasnodarskiy-kray",
+   "keywords": [
+    "краснодар",
+    "сочи",
+    "анап",
+    "геленджик",
+    "кубань"
+   ]
+  },
+  {
+   "name": "Крым",
+   "federal_district": "ЮФО",
+   "center_city": "Симферополь",
+   "slug": "krym",
+   "keywords": [
+    "крым",
+    "симферополь",
+    "севастополь",
+    "ялт"
+   ]
+  },
+  {
+   "name": "Волгоградская область",
+   "federal_district": "ЮФО",
+   "center_city": "Волгоград",
+   "slug": "volgogradskaya-oblast",
+   "keywords": [
+    "волгоград",
+    "волжский"
+   ]
+  },
+  {
+   "name": "Астраханская область",
+   "federal_district": "ЮФО",
+   "center_city": "Астрахань",
+   "slug": "astrahanskaya-oblast",
+   "keywords": [
+    "астрахан"
+   ]
+  },
+  {
+   "name": "Татарстан",
+   "federal_district": "ПФО",
+   "center_city": "Казань",
+   "slug": "tatarstan",
+   "keywords": [
+    "татарстан",
+    "казан",
+    "набережн"
+   ]
+  },
+  {
+   "name": "Нижегородская область",
+   "federal_district": "ПФО",
+   "center_city": "Нижний Новгород",
+   "slug": "nizhegorodskaya-oblast",
+   "keywords": [
+    "нижегород",
+    "нижний новгород",
+    "дзержинск"
+   ]
+  },
+  {
+   "name": "Самарская область",
+   "federal_district": "ПФО",
+   "center_city": "Самара",
+   "slug": "samarskaya-oblast",
+   "keywords": [
+    "самар",
+    "тольятти"
+   ]
+  },
+  {
+   "name": "Саратовская область",
+   "federal_district": "ПФО",
+   "center_city": "Саратов",
+   "slug": "saratovskaya-oblast",
+   "keywords": [
+    "саратов",
+    "энгельс"
+   ]
+  },
+  {
+   "name": "Удмуртская Республика",
+   "federal_district": "ПФО",
+   "center_city": "Ижевск",
+   "slug": "udmurtsky",
+   "keywords": [
+    "ижевск",
+    "удмурти"
+   ]
+  },
+  {
+   "name": "Пермский край",
+   "federal_district": "ПФО",
+   "center_city": "Пермь",
+   "slug": "permskiy-kray",
+   "keywords": [
+    "перм"
+   ]
+  },
+  {
+   "name": "Башкортостан",
+   "federal_district": "ПФО",
+   "center_city": "Уфа",
+   "slug": "bashkortostan",
+   "keywords": [
+    "уф",
+    "башкортостан",
+    "стерлитамак"
+   ]
+  },
+  {
+   "name": "Оренбургская область",
+   "federal_district": "ПФО",
+   "center_city": "Оренбург",
+   "slug": "orenburgskaya-oblast",
+   "keywords": [
+    "оренбург"
+   ]
+  },
+  {
+   "name": "Республика Бурятия",
+   "federal_district": "ДФО",
+   "center_city": "Улан-Удэ",
+   "slug": "buratiya",
+   "keywords": [
+    "буряти",
+    "улан-удэ"
+   ]
+  },
+  {
+   "name": "Приморский край",
+   "federal_district": "ДФО",
+   "center_city": "Владивосток",
+   "slug": "primorskiy-kray",
+   "keywords": [
+    "владивосток",
+    "уссурийск",
+    "примор"
+   ]
+  },
+  {
+   "name": "Хабаровский край",
+   "federal_district": "ДФО",
+   "center_city": "Хабаровск",
+   "slug": "habarovskiy-kray",
+   "keywords": [
+    "хабаровск"
+   ]
+  },
+  {
+   "name": "Сахалинская область",
+   "federal_district": "ДФО",
+   "center_city": "Южно-Сахалинск",
+   "slug": "sahalinskaya-oblast",
+   "keywords": [
+    "сахалин",
+    "южно-сахалинск"
+   ]
+  },
+  {
+   "name": "Камчатский край",
+   "federal_district": "ДФО",
+   "center_city": "Петропавловск-Камчатский",
+   "slug": "kamchatskiy",
+   "keywords": [
+    "камчатк",
+    "петропавловск"
+   ]
+  },
+  {
+   "name": "Якутия",
+   "federal_district": "ДФО",
+   "center_city": "Якутск",
+   "slug": "yakutiya",
+   "keywords": [
+    "якути",
+    "якутск"
+   ]
+  },
+  {
+   "name": "Новосибирская область",
+   "federal_district": "СФО",
+   "center_city": "Новосибирск",
+   "slug": "novosibirskaya-oblast",
+   "keywords": [
+    "новосибирск",
+    "бердск"
+   ]
+  },
+  {
+   "name": "Кемеровская область",
+   "federal_district": "СФО",
+   "center_city": "Кемерово",
+   "slug": "kemerovskaya-oblast",
+   "keywords": [
+    "кемерово",
+    "кузбасс",
+    "новокузнецк"
+   ]
+  },
+  {
+   "name": "Красноярский край",
+   "federal_district": "СФО",
+   "center_city": "Красноярск",
+   "slug": "krasnoyarskiy-kray",
+   "keywords": [
+    "красноярск",
+    "норильск"
+   ]
+  },
+  {
+   "name": "Иркутская область",
+   "federal_district": "СФО",
+   "center_city": "Иркутск",
+   "slug": "irkutskaya-oblast",
+   "keywords": [
+    "иркутск",
+    "анкгар"
+   ]
+  },
+  {
+   "name": "Омская область",
+   "federal_district": "СФО",
+   "center_city": "Омск",
+   "slug": "omskaya-oblast",
+   "keywords": [
+    "омск"
+   ]
+  },
+  {
+   "name": "Томская область",
+   "federal_district": "СФО",
+   "center_city": "Томск",
+   "slug": "tomskaya-oblast",
+   "keywords": [
+    "томск"
+   ]
+  },
+  {
+   "name": "Алтайский край",
+   "federal_district": "СФО",
+   "center_city": "Барнаул",
+   "slug": "altayskiy-kray",
+   "keywords": [
+    "барнаул",
+    "бийск",
+    "алтай"
+   ]
+  },
+  {
+   "name": "Свердловская область",
+   "federal_district": "УФО",
+   "center_city": "Екатеринбург",
+   "slug": "sverdlovskaya-oblast",
+   "keywords": [
+    "екатеринбург",
+    "нижний тагил",
+    "свердлов"
+   ]
+  },
+  {
+   "name": "Челябинская область",
+   "federal_district": "УФО",
+   "center_city": "Челябинск",
+   "slug": "chelyabinskaya-oblast",
+   "keywords": [
+    "челябинск",
+    "магнитогорск"
+   ]
+  },
+  {
+   "name": "Тюменская область",
+   "federal_district": "УФО",
+   "center_city": "Тюмень",
+   "slug": "tyumenskaya-oblast",
+   "keywords": [
+    "тюмен"
+   ]
+  },
+  {
+   "name": "Ханты-Мансийский АО",
+   "federal_district": "УФО",
+   "center_city": "Ханты-Мансийск",
+   "slug": "hanty-mansiyskiy",
+   "keywords": [
+    "ханты-мансийск",
+    "сургут",
+    "нижневартовск"
+   ]
+  },
+  {
+   "name": "Курганская область",
+   "federal_district": "УФО",
+   "center_city": "Курган",
+   "slug": "kurganskaya-oblast",
+   "keywords": [
+    "куурган",
+    "курган"
+   ]
+  },
+  {
+   "name": "Брянская область",
+   "federal_district": "ЦФО",
+   "center_city": "Брянск",
+   "slug": "bryanskaya-oblast",
+   "keywords": [
+    "брянск",
+    "новозыбков"
+   ]
+  },
+  {
+   "name": "Костромская область",
+   "federal_district": "ЦФО",
+   "center_city": "Кострома",
+   "slug": "kostromskaya-oblast",
+   "keywords": [
+    "кострома"
+   ]
+  },
+  {
+   "name": "Курская область",
+   "federal_district": "ЦФО",
+   "center_city": "Курск",
+   "slug": "kurskaya-oblast",
+   "keywords": [
+    "курск",
+    "курчатов",
+    "железногорск"
+   ]
+  },
+  {
+   "name": "Орловская область",
+   "federal_district": "ЦФО",
+   "center_city": "Орёл",
+   "slug": "orlovskaya-oblast",
+   "keywords": [
+    "орел",
+    "орлов"
+   ]
+  },
+  {
+   "name": "Смоленская область",
+   "federal_district": "ЦФО",
+   "center_city": "Смоленск",
+   "slug": "smolenskaya-oblast",
+   "keywords": [
+    "смоленск",
+    "вязьма"
+   ]
+  },
+  {
+   "name": "Тамбовская область",
+   "federal_district": "ЦФО",
+   "center_city": "Тамбов",
+   "slug": "tambovskaya-oblast",
+   "keywords": [
+    "тамбов",
+    "мичуринск"
+   ]
+  },
+  {
+   "name": "Псковская область",
+   "federal_district": "СЗФО",
+   "center_city": "Псков",
+   "slug": "pskovskaya-oblast",
+   "keywords": [
+    "псков",
+    "великие луки"
+   ]
+  },
+  {
+   "name": "Ненецкий АО",
+   "federal_district": "СЗФО",
+   "center_city": "Нарьян-Мар",
+   "slug": "nenetskiy-ao",
+   "keywords": [
+    "ненецк",
+    "нарььян-мар",
+    "нарян"
+   ]
+  },
+  {
+   "name": "Республика Коми",
+   "federal_district": "СЗФО",
+   "center_city": "Сыктывкар",
+   "slug": "resp-blie-komi",
+   "keywords": [
+    "коми",
+    "сыктывкар",
+    "усинск",
+    "воркута",
+    "усть-сысольск"
+   ]
+  },
+  {
+   "name": "Кировская область",
+   "federal_district": "ПФО",
+   "center_city": "Киров",
+   "slug": "kirovskaya-oblast",
+   "keywords": [
+    "кировская",
+    "киров "
+   ]
+  },
+  {
+   "name": "Ульяновская область",
+   "federal_district": "ПФО",
+   "center_city": "Ульяновск",
+   "slug": "ulyanovskaya-oblast",
+   "keywords": [
+    "ульяновск",
+    "димитровград"
+   ]
+  },
+  {
+   "name": "Республика Адыгея",
+   "federal_district": "ЮФО",
+   "center_city": "Майкоп",
+   "slug": "adygeya",
+   "keywords": [
+    "адыге",
+    "майкоп"
+   ]
+  },
+  {
+   "name": "Донецкая Народная Республика",
+   "federal_district": "ЮФО",
+   "center_city": "Донецк",
+   "slug": "dnr",
+   "keywords": [
+    "донецк",
+    "днр",
+    "макеевка",
+    "горловка"
+   ]
+  },
+  {
+   "name": "Луганская Народная Республика",
+   "federal_district": "ЮФО",
+   "center_city": "Луганск",
+   "slug": "lnr",
+   "keywords": [
+    "луганск",
+    "лнр"
+   ]
+  },
+  {
+   "name": "Херсонская область",
+   "federal_district": "ЮФО",
+   "center_city": "Херсон",
+   "slug": "hersonskaya-oblast",
+   "keywords": [
+    "херсон",
+    "новая каховка"
+   ]
+  },
+  {
+   "name": "Запорожская область",
+   "federal_district": "ЮФО",
+   "center_city": "Запорожье",
+   "slug": "zaporozhskaya-oblast",
+   "keywords": [
+    "запорож",
+    "мелитополь"
+   ]
+  },
+  {
+   "name": "Севастополь",
+   "federal_district": "ЮФО",
+   "center_city": "Севастополь",
+   "slug": "sevastopol",
+   "keywords": [
+    "севастополь"
+   ]
+  },
+  {
+   "name": "Кабардино-Балкарская Республика",
+   "federal_district": "СКФО",
+   "center_city": "Нальчик",
+   "slug": "kabardino-balkariya",
+   "keywords": [
+    "кбр",
+    "кабардино",
+    "нальчик",
+    "баксан"
+   ]
+  },
+  {
+   "name": "Карачаево-Черкесская Республика",
+   "federal_district": "СКФО",
+   "center_city": "Черкесск",
+   "slug": "karachaevo-cherkesiya",
+   "keywords": [
+    "кчр",
+    "карача",
+    "черкесск"
+   ]
+  },
+  {
+   "name": "Республика Дагестан",
+   "federal_district": "СКФО",
+   "center_city": "Махачкала",
+   "slug": "dagestan",
+   "keywords": [
+    "дагестан",
+    "махачкал",
+    "каспийск",
+    "хасавюрт"
+   ]
+  },
+  {
+   "name": "Республика Ингушетия",
+   "federal_district": "СКФО",
+   "center_city": "Магас",
+   "slug": "ingushetia",
+   "keywords": [
+    "ингуш",
+    "магас",
+    "назрань"
+   ]
+  },
+  {
+   "name": "Республика Северная Осетия-Алания",
+   "federal_district": "СКФО",
+   "center_city": "Владикавказ",
+   "slug": "osetia-alania",
+   "keywords": [
+    "осет",
+    "алании",
+    "владикавказ",
+    "беслан"
+   ]
+  },
+  {
+   "name": "Ставропольский край",
+   "federal_district": "СКФО",
+   "center_city": "Ставрополь",
+   "slug": "stavropolskiy-kray",
+   "keywords": [
+    "ставрополь",
+    "невинномысск",
+    "пятигорск",
+    "кисловодск"
+   ]
+  },
+  {
+   "name": "Чеченская Республика",
+   "federal_district": "СКФО",
+   "center_city": "Грозный",
+   "slug": "chechnya",
+   "keywords": [
+    "чечн",
+    "грозн",
+    "гудермес"
+   ]
+  },
+  {
+   "name": "Ямало-Ненецкий АО",
+   "federal_district": "УФО",
+   "center_city": "Салехард",
+   "slug": "yamalo-nenetskiy",
+   "keywords": [
+    "янао",
+    "ямал",
+    "новый уренгой",
+    "салехард",
+    "надым",
+    "нойбрьск"
+   ]
+  },
+  {
+   "name": "Республика Хакасия",
+   "federal_district": "СФО",
+   "center_city": "Абакан",
+   "slug": "hakasiya",
+   "keywords": [
+    "хакас",
+    "абакан",
+    "черногорск",
+    "саяногорск"
+   ]
+  },
+  {
+   "name": "Амурская область",
+   "federal_district": "ДФО",
+   "center_city": "Благовещенск",
+   "slug": "amurskaya-oblast",
+   "keywords": [
+    "амур",
+    "благовещенск",
+    "белогорск"
+   ]
+  },
+  {
+   "name": "Забайкальский край",
+   "federal_district": "ДФО",
+   "center_city": "Чита",
+   "slug": "zabaykalskiy-kray",
+   "keywords": [
+    "забайкал",
+    "чита",
+    "борз"
+   ]
+  },
+  {
+   "name": "Чукотский автономный округ",
+   "federal_district": "ДФО",
+   "center_city": "Анадырь",
+   "slug": "chukotskiy-ao",
+   "keywords": [
+    "чукотк",
+    "анадырь"
+   ]
+  },
+  {
+   "name": "Республика Саха (Якутия)",
+   "federal_district": "ДФО",
+   "center_city": "Якутск",
+   "slug": "saha-yakutiya",
+   "keywords": [
+    "саха",
+    "якути",
+    "якутск",
+    "мирный",
+    "нерюнгри"
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "platform": "telegram_web",
+   "external_id": "droneracingfederation",
+   "title": "ФГДР — официальный канал",
+   "url": "https://t.me/droneracingfederation",
+   "tier": "federal",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "web",
+   "external_id": "fgdr_announcement",
+   "title": "ФГДР — сайт, лента «Анонсы»",
+   "url": "https://fgdr.ru/news/announcement",
+   "tier": "federal",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdbel",
+   "title": "ФГДР Белгородская область (VK)",
+   "url": "https://vk.com/fgdbel",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "droneracing_32",
+   "title": "ФГДР Брянская область (VK)",
+   "url": "https://vk.com/droneracing_32",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_vladimir",
+   "title": "ФГДР Владимирская область (VK)",
+   "url": "https://vk.com/fgdr_vladimir",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdr_vrn",
+   "title": "ФГДР Воронежская область",
+   "url": "https://t.me/fgdr_vrn",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_vrn",
+   "title": "ФГДР Воронежская область (VK)",
+   "url": "https://vk.com/fgdr_vrn",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrobn",
+   "title": "ФГДР Калужская область",
+   "url": "https://t.me/fgdrobn",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrobn",
+   "title": "ФГДР Калужская область (VK)",
+   "url": "https://vk.com/fgdrobn",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgd48",
+   "title": "ФГДР Липецкая область (VK)",
+   "url": "https://vk.com/fgd48",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrmochat",
+   "title": "ФГДР Московская область",
+   "url": "https://t.me/fgdrmochat",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrmo",
+   "title": "ФГДР Московская область (VK)",
+   "url": "https://vk.com/fgdrmo",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "droneracing_57",
+   "title": "ФГДР Орловская область (VK)",
+   "url": "https://vk.com/droneracing_57",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "dronrzn62",
+   "title": "ФГДР Рязанская область (VK)",
+   "url": "https://vk.com/dronrzn62",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdr67",
+   "title": "ФГДР Смоленская область",
+   "url": "https://t.me/fgdr67",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr67",
+   "title": "ФГДР Смоленская область (VK)",
+   "url": "https://vk.com/fgdr67",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd_to",
+   "title": "ФГДР Тамбовская область",
+   "url": "https://t.me/fgd_to",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdtambov",
+   "title": "ФГДР Тамбовская область (VK)",
+   "url": "https://vk.com/fgdtambov",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdyar",
+   "title": "ФГДР Ярославская область (VK)",
+   "url": "https://vk.com/fgdyar",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "pilotdrona29",
+   "title": "ФГДР Архангельская область (VK)",
+   "url": "https://vk.com/pilotdrona29",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr35",
+   "title": "ФГДР Вологодская область (VK)",
+   "url": "https://vk.com/fgdr35",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdr39",
+   "title": "ФГДР Калининградская область",
+   "url": "https://t.me/fgdr39",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr39",
+   "title": "ФГДР Калининградская область (VK)",
+   "url": "https://vk.com/fgdr39",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdlenobl",
+   "title": "ФГДР Ленинградская область",
+   "url": "https://t.me/fgdlenobl",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdlenobl",
+   "title": "ФГДР Ленинградская область (VK)",
+   "url": "https://vk.com/fgdlenobl",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "club232136192",
+   "title": "ФГДР Ненецкий АО (VK)",
+   "url": "https://vk.com/club232136192",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "digital_sports_60",
+   "title": "ФГДР Псковская область",
+   "url": "https://t.me/digital_sports_60",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdpskov",
+   "title": "ФГДР Псковская область (VK)",
+   "url": "https://vk.com/fgdpskov",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "ptz_fpv",
+   "title": "ФГДР Республика Карелия",
+   "url": "https://t.me/ptz_fpv",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrus10",
+   "title": "ФГДР Республика Карелия (VK)",
+   "url": "https://vk.com/fgdrus10",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdSPb",
+   "title": "ФГДР Санкт-Петербург",
+   "url": "https://t.me/fgdSPb",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdspb",
+   "title": "ФГДР Санкт-Петербург (VK)",
+   "url": "https://vk.com/fgdspb",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "droneracing11",
+   "title": "ФГДР Республика Коми (VK)",
+   "url": "https://vk.com/droneracing11",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdko",
+   "title": "ФГДР Кировская область",
+   "url": "https://t.me/fgdko",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr43",
+   "title": "ФГДР Кировская область (VK)",
+   "url": "https://vk.com/fgdr43",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "FGDR52",
+   "title": "ФГДР Нижегородская область",
+   "url": "https://t.me/FGDR52",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "nebo056",
+   "title": "ФГДР Оренбургская область",
+   "url": "https://t.me/nebo056",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "rusnebo",
+   "title": "ФГДР Оренбургская область (VK)",
+   "url": "https://vk.com/rusnebo",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrpenza",
+   "title": "ФГДР Пензенская область",
+   "url": "https://t.me/fgdrpenza",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrpenza",
+   "title": "ФГДР Пензенская область (VK)",
+   "url": "https://vk.com/fgdrpenza",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd59",
+   "title": "ФГДР Пермский край",
+   "url": "https://t.me/fgd59",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgd59",
+   "title": "ФГДР Пермский край (VK)",
+   "url": "https://vk.com/fgd59",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "club223517647",
+   "title": "ФГДР Республика Башкортостан (VK)",
+   "url": "https://vk.com/club223517647",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrrm",
+   "title": "ФГДР Республика Мордовия",
+   "url": "https://t.me/fgdrrm",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrrm",
+   "title": "ФГДР Республика Мордовия (VK)",
+   "url": "https://vk.com/fgdrrm",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "FDRT116",
+   "title": "ФГДР Республика Татарстан",
+   "url": "https://t.me/FDRT116",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "club225210731",
+   "title": "ФГДР Республика Татарстан (VK)",
+   "url": "https://vk.com/club225210731",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd_smr",
+   "title": "ФГДР Самарская область",
+   "url": "https://t.me/fgd_smr",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgd_smr",
+   "title": "ФГДР Самарская область (VK)",
+   "url": "https://vk.com/fgd_smr",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr64",
+   "title": "ФГДР Саратовская область (VK)",
+   "url": "https://vk.com/fgdr64",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr73",
+   "title": "ФГДР Ульяновская область (VK)",
+   "url": "https://vk.com/fgdr73",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdr30",
+   "title": "ФГДР Астраханская область",
+   "url": "https://t.me/fgdr30",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrus30",
+   "title": "ФГДР Астраханская область (VK)",
+   "url": "https://vk.com/fgdrus30",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_vlg",
+   "title": "ФГДР Волгоградская область (VK)",
+   "url": "https://vk.com/fgdr_vlg",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrdpr",
+   "title": "ФГДР Донецкая Народная Республика",
+   "url": "https://t.me/fgdrdpr",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd_krd",
+   "title": "ФГДР Краснодарский край",
+   "url": "https://t.me/fgd_krd",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgd_krd",
+   "title": "ФГДР Краснодарский край (VK)",
+   "url": "https://vk.com/fgd_krd",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "rfcoolnr",
+   "title": "ФГДР Луганская Народная Республика",
+   "url": "https://t.me/rfcoolnr",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_lugansk",
+   "title": "ФГДР Луганская Народная Республика (VK)",
+   "url": "https://vk.com/fgdr_lugansk",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd_01",
+   "title": "ФГДР Республика Адыгея",
+   "url": "https://t.me/fgd_01",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgd01",
+   "title": "ФГДР Республика Адыгея (VK)",
+   "url": "https://vk.com/fgd01",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdr_rk",
+   "title": "ФГДР Республика Крым",
+   "url": "https://t.me/fgdr_rk",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrrk",
+   "title": "ФГДР Республика Крым (VK)",
+   "url": "https://vk.com/fgdrrk",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrrostov",
+   "title": "ФГДР Ростовская область",
+   "url": "https://t.me/fgdrrostov",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrostov",
+   "title": "ФГДР Ростовская область (VK)",
+   "url": "https://vk.com/fgdrostov",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "club224762166",
+   "title": "ФГДР Севастополь (VK)",
+   "url": "https://vk.com/club224762166",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "rofgdrkbr",
+   "title": "ФГДР Кабардино-Балкарская Республика",
+   "url": "https://t.me/rofgdrkbr",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "07rofgdrkbr",
+   "title": "ФГДР Кабардино-Балкарская Республика (VK)",
+   "url": "https://vk.com/07rofgdrkbr",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "gonkiRD",
+   "title": "ФГДР Республика Дагестан",
+   "url": "https://t.me/gonkiRD",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrrd05",
+   "title": "ФГДР Республика Дагестан (VK)",
+   "url": "https://vk.com/fgdrrd05",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrsk26",
+   "title": "ФГДР Ставропольский край",
+   "url": "https://t.me/fgdrsk26",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "grozdron",
+   "title": "ФГДР Чеченская Республика",
+   "url": "https://t.me/grozdron",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "grozdron",
+   "title": "ФГДР Чеченская Республика (VK)",
+   "url": "https://vk.com/grozdron",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "gonki_dronov_45",
+   "title": "ФГДР Курганская область (VK)",
+   "url": "https://vk.com/gonki_dronov_45",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrso",
+   "title": "ФГДР Свердловская область",
+   "url": "https://t.me/fgdrso",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_ekb",
+   "title": "ФГДР Свердловская область (VK)",
+   "url": "https://vk.com/fgdr_ekb",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr72",
+   "title": "ФГДР Тюменская область (VK)",
+   "url": "https://vk.com/fgdr72",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_hmao",
+   "title": "ФГДР Ханты-Мансийский АО (VK)",
+   "url": "https://vk.com/fgdr_hmao",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd174",
+   "title": "ФГДР Челябинская область",
+   "url": "https://t.me/fgd174",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrus74",
+   "title": "ФГДР Челябинская область (VK)",
+   "url": "https://vk.com/fgdrus74",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_yanao",
+   "title": "ФГДР Ямало-Ненецкий АО (VK)",
+   "url": "https://vk.com/fgdr_yanao",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdraltay",
+   "title": "ФГДР Алтайский край",
+   "url": "https://t.me/fgdraltay",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdraltay",
+   "title": "ФГДР Алтайский край (VK)",
+   "url": "https://vk.com/fgdraltay",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdirkutsk",
+   "title": "ФГДР Иркутская область (VK)",
+   "url": "https://vk.com/fgdirkutsk",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd42",
+   "title": "ФГДР Кемеровская область",
+   "url": "https://t.me/fgd42",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgd42",
+   "title": "ФГДР Кемеровская область (VK)",
+   "url": "https://vk.com/fgd42",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "club222343619",
+   "title": "ФГДР Красноярский край (VK)",
+   "url": "https://vk.com/club222343619",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdnso",
+   "title": "ФГДР Новосибирская область",
+   "url": "https://t.me/fgdnso",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdnso",
+   "title": "ФГДР Новосибирская область (VK)",
+   "url": "https://vk.com/fgdnso",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdomsk",
+   "title": "ФГДР Омская область (VK)",
+   "url": "https://vk.com/fgdomsk",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr_rh_19",
+   "title": "ФГДР Республика Хакасия (VK)",
+   "url": "https://vk.com/fgdr_rh_19",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdrto",
+   "title": "ФГДР Томская область",
+   "url": "https://t.me/fgdrto",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr70",
+   "title": "ФГДР Томская область (VK)",
+   "url": "https://vk.com/fgdr70",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgdr28",
+   "title": "ФГДР Амурская область",
+   "url": "https://t.me/fgdr28",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr28",
+   "title": "ФГДР Амурская область (VK)",
+   "url": "https://vk.com/fgdr28",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr41",
+   "title": "ФГДР Камчатский край (VK)",
+   "url": "https://vk.com/fgdr41",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd_sakha14",
+   "title": "ФГДР Республика Саха (Якутия)",
+   "url": "https://t.me/fgd_sakha14",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdrus14",
+   "title": "ФГДР Республика Саха (Якутия) (VK)",
+   "url": "https://vk.com/fgdrus14",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "fgd_fas_sakh",
+   "title": "ФГДР Сахалинская область",
+   "url": "https://t.me/fgd_fas_sakh",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "fgdr27",
+   "title": "ФГДР Хабаровский край (VK)",
+   "url": "https://vk.com/fgdr27",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "vk_web",
+   "external_id": "nffront",
+   "title": "Народный фронт (VK)",
+   "url": "https://vk.com/nffront",
+   "tier": "federal",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "telegram_web",
+   "external_id": "onf_front",
+   "title": "Народный фронт — Telegram",
+   "url": "https://t.me/onf_front",
+   "tier": "federal",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "max_web",
+   "external_id": "nf_front",
+   "title": "Народный фронт — MAX",
+   "url": "https://max.ru/nf_front",
+   "tier": "federal",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "web",
+   "external_id": "onf_tournament",
+   "title": "На высоте! — сайт соревнований",
+   "url": "https://onf.ru/tournament",
+   "tier": "federal",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "max_web",
+   "external_id": "-73536285583430",
+   "title": "ФГД Краснодарского края — чат MAX",
+   "url": "https://web.max.ru/-73536285583430",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  },
+  {
+   "platform": "web",
+   "external_id": "web:fgdr.ru",
+   "title": "web:fgdr.ru",
+   "url": "https://fgdr.ru/tpost/fukpj5fe41-7-noyabrya-opredelyatsya-chempioni-rossi",
+   "tier": "regional",
+   "is_active": true,
+   "region": null
+  }
+ ],
+ "events": [
+  {
+   "title": "7 ноября определятся чемпионы России по техническому симулятору 7 ноября состоится заключительная дисциплина чемпионата",
+   "norm_title": "7 ноября определятся чемпионы россии по техническому симулятору 7 ноября состоится заключительная дисциплина чемпионата",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-11-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": null,
+   "city": null,
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/fukpj5fe41-7-noyabrya-opredelyatsya-chempioni-rossi",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Чемпионат России по гонкам дронов 2026 пройдет в Сириусе 23–25 октября на стадионе «Фишт» в Сириусе пройдет Чемпионат",
+   "norm_title": "россии по гонкам дронов 2026 пройдет в сириусе 23 25 октября на стадионе фишт в сириусе пройдет",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-10-23",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/s066nflhk1-chempionat-rossii-po-gonkam-dronov-2026",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Серия соревнований первенства России завершится гонкой в симуляторе 17 октября в онлайн-формате пройдет первенство",
+   "norm_title": "серия соревнований первенства россии завершится гонкой в симуляторе 17 октября в онлайн формате пройдет первенство",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-10-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": null,
+   "city": null,
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "finished",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/glgp3zv9b1-seriya-sorevnovanii-pervenstva-rossii-za",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Москве пройдет первенство России по гонкам дронов среди юниоров С 8 по 12 октября в Москве на площадке Федерального",
+   "norm_title": "в москве пройдет первенство россии по гонкам дронов среди юниоров с 8 по 12 октября в москве на площадке федерального",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-10-12",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "finished",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/8gc2668dd1-v-moskve-proidet-pervenstvo-rossii-po-go",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "title": "ФГДР проведет вебинары для судей 3-й и 2-й категорий 3 и 4 октября Федерация гонок дронов России проведет",
+   "norm_title": "проведет вебинары для судей 3 й и 2 й категорий 3 и 4 октября федерация гонок дронов россии проведет",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-10-04",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Москва",
+   "city": "Москва",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/y5vmy50zb1-fgdr-provedet-vebinari-dlya-sudei-3-i-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Москве пройдет первенство Центрального федерального округа по гонкам дронов С 17 по 21 сентября в Москве, на площадке",
+   "norm_title": "в москве пройдет первенство центрального федерального округа по гонкам дронов с 17 по 21 сентября в москве на площадке",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-09-21",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Орловская область",
+   "city": "Орёл",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/f2o55c8tm1-v-moskve-proidet-pervenstvo-tsentralnogo",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Лучшие пилоты страны встретятся на чемпионате ЦФО по гонкам дронов в Ярославле С 10 по 14 сентября в Ярославле пройдет",
+   "norm_title": "лучшие пилоты страны встретятся на чемпионате цфо по гонкам дронов в ярославле с 10 по 14 сентября в ярославле пройдет",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-09-14",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Ярославская область",
+   "city": "Ярославль",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/mf8kx6k971-luchshie-piloti-strani-vstretyatsya-na-c",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Санкт-Петербург примет сильнейших пилотов Северо-Запада на чемпионате и первенстве округа С 27 по 31 августа в",
+   "norm_title": "санкт петербург примет сильнейших пилотов северо запада на чемпионате и первенстве округа с 27 по 31 августа в",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-08-31",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/b3dbcpu031-sankt-peterburg-primet-silneishih-piloto",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Приволжский федеральный округ готовится к старту гонок дронов Серия межрегиональных соревнований по гонкам дронов",
+   "norm_title": "приволжский федеральный округ готовится к старту гонок дронов серия межрегиональных соревнований по гонкам дронов",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-08-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/caoy9eeni1-privolzhskii-federalnii-okrug-gotovitsya",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Свердловская область примет чемпионат и первенство УФО по гонкам дронов Свердловская область примет чемпионат и",
+   "norm_title": "свердловская область примет и первенство уфо по гонкам дронов свердловская область примет и",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-08-24",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Свердловская область",
+   "city": "Екатеринбург",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/b1vrh2bve1-sverdlovskaya-oblast-primet-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Новосибирске стартуют межрегиональные соревнования Сибирского федерального округа по гонкам дронов Сибирский",
+   "norm_title": "в новосибирске стартуют сибирского федерального округа по гонкам дронов сибирский",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-08-08",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Новосибирская область",
+   "city": "Новосибирск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/hp3p8anyu1-v-novosibirske-startuyut-mezhregionalnie",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Белогорск впервые примет чемпионат и первенство ДФО по гонкам дронов В Амурской области впервые состоятся официальные",
+   "norm_title": "белогорск впервые примет и первенство дфо по гонкам дронов в амурской области впервые состоятся официальные",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-08-01",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Амурская область",
+   "city": "Благовещенск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/hi7vykz7u1-belogorsk-vpervie-primet-chempionat-i-pe",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Чемпионат и первенство СКФО по гонкам дронов пройдут в Махачкале С 30 июля по 3 августа в Республике Дагестан состоятся",
+   "norm_title": "и первенство скфо по гонкам дронов пройдут в махачкале с 30 июля по 3 августа в республике дагестан состоятся",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-07-30",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Республика Дагестан",
+   "city": "Махачкала",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/0n8vvsppo1-chempionat-i-pervenstvo-skfo-po-gonkam-d",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Ростов-на-Дону впервые примет чемпионат и первенство ЮФО по гонкам дронов С 23 по 27 июля в Ростове-на-Дону состоятся",
+   "norm_title": "ростов на дону впервые примет и первенство юфо по гонкам дронов с 23 по 27 июля в ростове на дону состоятся",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-07-27",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Ростовская область",
+   "city": "Ростов-на-Дону",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/8ntdakgde1-rostov-na-donu-vpervie-primet-chempionat",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "ЮФО определит сильнейших пилотов в дисциплине технический симулятор 18 июля состоятся чемпионат и первенство Южного",
+   "norm_title": "юфо определит сильнейших пилотов в дисциплине технический симулятор 18 июля состоятся и первенство южного",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-07-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Краснодарский край",
+   "city": "Краснодар",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/11zdz5b8r1-yufo-opredelit-silneishih-pilotov-v-dist",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "«Петровский» примет первый всероссийский турнир по гонкам дронов сезона 2026 18 и 19 июля на стадионе «Петровский» в",
+   "norm_title": "петровский примет первый всероссийский турнир по гонкам дронов сезона 2026 18 и 19 июля на стадионе петровский в",
+   "organizer": null,
+   "description": null,
+   "event_date": "2026-07-19",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Санкт-Петербург",
+   "city": "Санкт-Петербург",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/84dhbfdsd1-petrovskii-primet-pervii-vserossiiskii-t",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Winline Кубок России в дисциплинах 75 класса состоится в Москве Финальные турниры сезона соревнований 2025 года завершатся в Москве",
+   "norm_title": "winline россии в дисциплинах 75 класса состоится в москве финальные турниры сезона соревнований 2025 года завершатся в москве",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-12-14",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/hjlue5dpx1-winline-kubok-rossii-v-distsiplinah-75-k",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "Кубок России по гонкам дронов пройдет в Самаре в рамках XIII Международного спортивного форума «Россия – спортивная",
+   "norm_title": "россии по гонкам дронов пройдет в самаре в рамках xiii международного спортивного форума россия спортивная",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-11-05",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Самарская область",
+   "city": "Самара",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/585b6fzhj1-kubok-rossii-po-gonkam-dronov-proidet-v",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Челябинске пройдет финал регионального сезона гонок дронов 75 класса 27 сентября в Челябинске состоится финал",
+   "norm_title": "в челябинске пройдет финал регионального сезона гонок дронов 75 класса 27 сентября в челябинске состоится финал",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-09-27",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Челябинская область",
+   "city": "Челябинск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": 100000.0,
+   "prize_fund_note": "рдловской областей. Призовой фонд мероприятия составит 100 000 рублей. Организовывает соревнования Федерац",
+   "prize_fund_visibility": "amount",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/8p3dbdm0e1-v-chelyabinske-proidet-final-regionalnog",
+   "confidence": 0.55,
+   "moderation": "approved"
+  },
+  {
+   "title": "Чемпионат и первенство Центрального федерального округа состоятся в Москве С 18 по 22 сентября в Москве состоится",
+   "norm_title": "и первенство центрального федерального округа состоятся в москве с 18 по 22 сентября в москве состоится",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-09-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Белгородская область",
+   "city": "Белгород",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/uja4cixp01-chempionat-i-pervenstvo-tsentralnogo-fed",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Екатеринбурге пройдет четвертый отборочный этап на чемпионат и первенство России по гонкам дронов В период с 14 по 18",
+   "norm_title": "в екатеринбурге пройдет четвертый отборочный на и первенство россии по гонкам дронов в период с 14 по 18",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-08-18",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Свердловская область",
+   "city": "Екатеринбург",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/5ejn2tal31-v-ekaterinburge-proidet-chetvertii-otbor",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "ФГДР проведет первые международные спортивные соревнования по гонкам дронов С 15 по 17 августа в Москве, на территории",
+   "norm_title": "проведет первые международные спортивные по гонкам дронов с 15 по 17 августа в москве на территории",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-08-17",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Белгородская область",
+   "city": "Белгород",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/2v50isrvk1-fgdr-provedet-pervie-mezhdunarodnie-spor",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Иркутске впервые пройдут межрегиональные соревнования по гонкам дронов С 7 по 11 августа в Иркутске впервые пройдут",
+   "norm_title": "в иркутске впервые пройдут по гонкам дронов с 7 по 11 августа в иркутске впервые пройдут",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-08-11",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Иркутская область",
+   "city": "Иркутск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/pvvtutkk11-v-irkutske-vpervie-proidut-mezhregionaln",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Якутии пройдет второй отборочный этап на чемпионат и первенство России по гонкам дронов В Якутии с 24 по 28 июля",
+   "norm_title": "в якутии пройдет второй отборочный на и первенство россии по гонкам дронов в якутии с 24 по 28 июля",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-07-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Якутия",
+   "city": "Якутск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/7u46zjnuv1-v-yakutii-proidet-vtoroi-otborochnii-eta",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Новосибирске состоятся чемпионат и первенство региона по гонкам дронов 5 и 6 июля в Новосибирске состоятся чемпионат",
+   "norm_title": "в новосибирске состоятся и первенство региона по гонкам дронов 5 и 6 июля в новосибирске состоятся",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-07-06",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Новосибирская область",
+   "city": "Новосибирск",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/egljyv0ux1-v-novosibirske-sostoyatsya-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Грозном стартует отбор на чемпионат и первенство России по гонкам дронов С 3 по 7 июля в городе Грозный Чеченской",
+   "norm_title": "в грозном стартует отбор на и первенство россии по гонкам дронов с 3 по 7 июля в городе грозный чеченской",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-07-07",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Чеченская Республика",
+   "city": "Грозный",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/4l42mloxz1-v-groznom-startuet-otbor-na-chempionat-i",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Сыктывкаре пройдет чемпионат Республики Коми по гонкам дронов 28 июня в городе Сыктывкар пройдет чемпионат Республики",
+   "norm_title": "в сыктывкаре пройдет республики коми по гонкам дронов 28 июня в городе сыктывкар пройдет республики",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-06-28",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Республика Коми",
+   "city": "Сыктывкар",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/b4z1vccbx1-v-siktivkare-proidet-chempionat-respubli",
+   "confidence": 0.45,
+   "moderation": "approved"
+  },
+  {
+   "title": "В Махачкале впервые пройдет чемпионат Дагестана по гонкам дронов 22 июня в городе Махачкала впервые состоится чемпионат",
+   "norm_title": "в махачкале впервые пройдет дагестана по гонкам дронов 22 июня в городе махачкала впервые состоится",
+   "organizer": null,
+   "description": null,
+   "event_date": "2025-06-22",
+   "event_time": null,
+   "date_time_precision": "exact",
+   "region": "Республика Дагестан",
+   "city": "Махачкала",
+   "venue": null,
+   "event_type": "national",
+   "discipline": "fpv-race",
+   "status": "anons",
+   "auto_status": true,
+   "prize_fund_amount": null,
+   "prize_fund_note": null,
+   "prize_fund_visibility": "hidden",
+   "registration_url": null,
+   "source_url": "https://fgdr.ru/tpost/k9u3hbfa21-v-mahachkale-vpervie-proidet-chempionat",
+   "confidence": 0.45,
+   "moderation": "approved"
+  }
+ ]
+}
