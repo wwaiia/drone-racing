@@ -54,9 +54,18 @@ jobs:
       - name: Backup DB into repo
         run: |
           mkdir -p backend/backup
-          curl -sS "https://drone-racing-backend.onrender.com/api/v1/admin/backup" \
-            -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
-            -o backend/backup/backup.json
+          ok=0
+          for i in $(seq 1 15); do
+            curl -sS "https://drone-racing-backend.onrender.com/api/v1/admin/backup" \
+              -H "X-Admin-Token: ${{ secrets.ADMIN_TOKEN }}" \
+              -o backend/backup/backup.json || true
+            if python -c "import json;d=json.load(open('backend/backup/backup.json'));assert 'events' in d" 2>/dev/null; then
+              ok=1; break
+            fi
+            echo "attempt $i: invalid response (service waking?)"
+            sleep 15
+          done
+          [ "$ok" = "1" ] || { echo "BACKUP FAILED"; exit 1; }
           python -c "import json;d=json.load(open('backend/backup/backup.json'));print('backup ok:',len(d['events']),'events,',len(d['sources']),'sources')"
           git config user.name "wwaiia"
           git config user.email "wwaiia@users.noreply.github.com"
