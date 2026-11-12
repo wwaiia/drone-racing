@@ -336,6 +336,7 @@ def admin_backup(db: Session = Depends(get_db), x_admin_token: str = Header(""))
         raise HTTPException(401, "Invalid admin token")
     from datetime import datetime as _dt
 
+    region_names = {r.id: r.name for r in db.query(Region).all()}
     return {
         "generated": _dt.now().isoformat(),
         "regions": [
@@ -346,7 +347,7 @@ def admin_backup(db: Session = Depends(get_db), x_admin_token: str = Header(""))
         "sources": [
             {"platform": s.platform, "external_id": s.external_id, "title": s.title,
              "url": s.url, "tier": s.tier, "is_active": s.is_active,
-             "region": s.region.name if s.region else None}
+             "region": region_names.get(s.region_id)}
             for s in db.query(Source).all()
         ],
         "events": [
@@ -354,7 +355,7 @@ def admin_backup(db: Session = Depends(get_db), x_admin_token: str = Header(""))
              "description": e.description, "event_date": e.event_date.isoformat(),
              "event_time": e.event_time.isoformat() if e.event_time else None,
              "date_time_precision": e.date_time_precision,
-             "region": e.region.name if e.region else None,
+             "region": region_names.get(e.region_id),
              "city": e.city, "venue": e.venue, "event_type": e.event_type,
              "discipline": e.discipline, "status": e.status, "auto_status": e.auto_status,
              "prize_fund_amount": float(e.prize_fund_amount) if e.prize_fund_amount else None,
